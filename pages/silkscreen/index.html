@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en" data-layer="both">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — silkscreen</title>
+<meta name="description" content="A personal page laid out as a printed circuit board, with layers you can turn off.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b231c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230e3127'/%3E%3Cpath d='M6 24V12h8V6' stroke='%23d8a63a' stroke-width='2.4' fill='none'/%3E%3Ccircle cx='6' cy='24' r='3' fill='%23d8a63a'/%3E%3Ccircle cx='14' cy='6' r='3' fill='%23d8a63a'/%3E%3Cpath d='M20 8v16' stroke='%23d8a63a' stroke-width='2.4'/%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'IBMPlexMono';src:url('../../fonts/IBMPlexMono-latin.woff2') format('woff2');font-weight:100 700;font-display:swap;}
+  @font-face{font-family:'Archivo';src:url('../../fonts/Archivo-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+
+  :root{
+    --mask:#0e3127; --mask-hi:#14402f; --board-edge:#082019;
+    --copper:#d8a63a; --copper-dim:#8a6c2c; --silk:#f0f4f1; --silk-dim:#8fa69b;
+    --ink:#f0f4f1; --soft:#c3d3ca; --quiet:#a3b8ac; --pad:#e8c777;
+    --ease:cubic-bezier(.2,.75,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'IBMPlexMono',ui-monospace,monospace; color:var(--ink); line-height:1.6;
+    min-height:100svh; padding:clamp(10px,2.5vw,36px); overflow-x:hidden;
+    background:#061611;
+  }
+  ::selection{background:var(--copper);color:#1a1205;}
+
+  /* ---- outside the board: the inside of an instrument case ---- */
+  .case{position:fixed;inset:0;z-index:0;pointer-events:none;}
+  .case::before{
+    content:'';position:absolute;inset:-18%;
+    background:
+      radial-gradient(50% 40% at 22% 10%, rgba(216,166,58,.10), transparent 65%),
+      radial-gradient(45% 40% at 80% 85%, rgba(95,200,150,.08), transparent 68%);
+    animation:case-drift 44s ease-in-out infinite alternate;
+  }
+  @keyframes case-drift{from{transform:translate3d(-3%,-2%,0)}to{transform:translate3d(4%,3%,0)}}
+
+  /* ---- the board ---- */
+  .board{
+    position:relative;z-index:1;max-width:980px;margin:0 auto;
+    background:
+      radial-gradient(120% 80% at 50% 0%, var(--mask-hi), var(--mask) 55%);
+    border:2px solid var(--board-edge);
+    border-radius:10px;
+    padding:clamp(20px,3.6vw,38px) clamp(16px,3.4vw,36px);
+    box-shadow:0 1px 0 rgba(255,255,255,.08) inset, 0 30px 64px -34px rgba(0,0,0,.9);
+    animation:seat .5s var(--ease) both;
+  }
+  @keyframes seat{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+  /* mounting holes, one per corner, like every board ever made */
+  .board::before,.board::after{
+    content:'';position:absolute;width:13px;height:13px;border-radius:50%;
+    background:#061611;box-shadow:0 0 0 3px var(--copper-dim);
+  }
+  .board::before{top:12px;left:12px;}
+  .board::after{bottom:12px;right:12px;}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;
+         flex-wrap:wrap;margin-bottom:26px;padding-left:22px;}
+  h1{font-family:'Archivo',sans-serif;font-weight:700;letter-spacing:-.035em;
+     font-size:clamp(34px,6.4vw,58px);line-height:.95;color:var(--silk);}
+  .rev{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--silk-dim);
+       text-align:right;line-height:1.7;}
+
+  .layers{display:flex;gap:6px;margin:0 0 22px 22px;flex-wrap:wrap;}
+  .layers button{
+    font:inherit;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;
+    color:var(--quiet);background:rgba(0,0,0,.28);border:1px solid #2c5347;border-radius:6px;
+    padding:6px 12px;transition:color 120ms ease,border-color 120ms ease,transform 60ms ease;
+  }
+  .layers button:hover{color:var(--ink);border-color:#43776a;}
+  .layers button:active{transform:translateY(1px);}
+  .layers button[aria-pressed="true"]{color:#1a1205;background:var(--copper);border-color:var(--copper);}
+
+  .blurb{max-width:62ch;color:var(--soft);font-size:14.5px;margin:0 0 30px 22px;text-wrap:pretty;}
+  .blurb strong{color:var(--ink);font-weight:600;}
+
+  /* ---- the bus and the components hanging off it ---- */
+  .nets{position:relative;padding-left:22px;}
+  .nets::before{                      /* the trunk trace */
+    content:'';position:absolute;left:5px;top:10px;bottom:10px;width:3px;border-radius:2px;
+    background:var(--copper-dim);
+  }
+  .part{position:relative;padding:14px 0 14px 26px;}
+  .part + .part{border-top:1px dashed #2c5347;}
+  .part::before{                       /* the stub trace out to the pad */
+    content:'';position:absolute;left:-17px;top:27px;width:40px;height:3px;border-radius:2px;
+    background:var(--copper-dim);transition:background 160ms ease;
+  }
+  .part::after{                        /* the pad itself */
+    content:'';position:absolute;left:-11px;top:23px;width:11px;height:11px;border-radius:50%;
+    background:#061611;box-shadow:0 0 0 3px var(--copper-dim);transition:box-shadow 160ms ease;
+  }
+  .part:hover::before,.part:focus-within::before{background:var(--copper);}
+  .part:hover::after,.part:focus-within::after{box-shadow:0 0 0 3px var(--pad), 0 0 14px rgba(232,199,119,.65);}
+
+  .des{display:inline-block;font-size:11px;letter-spacing:.1em;color:var(--silk-dim);
+       border:1px solid currentColor;border-radius:3px;padding:0 5px;margin-right:9px;
+       vertical-align:2px;}
+  .part h2{display:inline;font-family:'Archivo',sans-serif;font-size:16.5px;font-weight:600;
+           letter-spacing:-.01em;color:var(--silk);}
+  .part .yr{float:right;font-size:12px;color:var(--quiet);font-variant-numeric:tabular-nums;}
+  .part p{clear:both;margin-top:5px;font-size:14px;color:var(--soft);max-width:58ch;text-wrap:pretty;}
+  @media (max-width:560px){
+    .part .yr{float:none;display:block;margin-top:3px;}
+  }
+
+  .bom{margin:30px 0 0 22px;}
+  .bom h2{font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--silk-dim);
+          margin-bottom:10px;}
+  .bom table{border-collapse:collapse;width:100%;font-size:13px;}
+  .bom th,.bom td{text-align:left;padding:7px 10px 7px 0;border-bottom:1px solid #26473c;
+                  color:var(--soft);}
+  .bom th{color:var(--silk-dim);font-weight:400;font-size:11px;letter-spacing:.08em;
+          text-transform:uppercase;}
+  .bom td:first-child{color:var(--copper);width:4.5em;font-variant-numeric:tabular-nums;}
+
+  footer{margin:28px 0 0 22px;font-size:11px;letter-spacing:.07em;color:var(--silk-dim);
+         text-transform:uppercase;}
+
+  :focus-visible{outline:2px solid var(--copper);outline-offset:3px;border-radius:4px;}
+
+  /* ---- layers, which genuinely change what is drawn ----
+     This is the one control on the page, and it does what the same control does in a CAD tool:
+     hides a layer rather than restyling it.                                                   */
+  :root[data-layer="silkscreen"] .nets::before,
+  :root[data-layer="silkscreen"] .part::before,
+  :root[data-layer="silkscreen"] .part::after{opacity:.1;}
+  :root[data-layer="silkscreen"] .bom td:first-child{color:var(--silk-dim);}
+
+  :root[data-layer="copper"] .des,
+  :root[data-layer="copper"] .rev,
+  :root[data-layer="copper"] footer{opacity:.18;}
+  :root[data-layer="copper"] h1,
+  :root[data-layer="copper"] .part h2{color:var(--copper);}
+  :root[data-layer="copper"] .nets::before,
+  :root[data-layer="copper"] .part::before{background:var(--copper);}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+    .case::before{transform:translate3d(1%,1%,0);}
+  }
+</style>
+</head>
+<body>
+<div class="case" aria-hidden="true"></div>
+
+<main class="board">
+  <header>
+    <h1>Aedin Lai</h1>
+    <p class="rev">ECE &middot; instrumentation<br>rev C &middot; 2026</p>
+  </header>
+
+  <div class="layers" role="group" aria-label="Layers">
+    <button type="button" data-layer="both" aria-pressed="true">Both</button>
+    <button type="button" data-layer="silkscreen" aria-pressed="false">Silkscreen</button>
+    <button type="button" data-layer="copper" aria-pressed="false">Copper</button>
+  </div>
+
+  <p class="blurb">I build the measuring end of things — <strong>instrumentation that has to be
+    right</strong>, and the software that makes sense of what it reads. Below is the board: each part
+    is something I have actually done, hung off one trunk trace. Turn a layer off to see what is
+    holding it together.</p>
+
+  <div class="nets">
+    <section class="part">
+      <span class="des">U1</span><h2>Data Center Infrastructure Intern</h2>
+      <span class="yr">2025</span>
+      <p>SingleStore. Scaled a private cloud platform from 160 virtual machines to over 300, and
+        wrote the tooling that made that growth survivable rather than merely possible.</p>
+    </section>
+
+    <section class="part">
+      <span class="des">U2</span><h2>Research published in JAMA</h2>
+      <span class="yr">2025</span>
+      <p>Yale School of Medicine and the PEACE Foundation. Research hardware for a neurology study,
+        where the requirement was not cleverness but that a reading taken in a clinic be the reading
+        that actually happened.</p>
+    </section>
+
+    <section class="part">
+      <span class="des">J1</span><h2>USA Fencing A25, All-American</h2>
+      <span class="yr">2021–25</span>
+      <p>Épée at national level — #103 national, #122 global. The rating letter is the ceiling of
+        what you have beaten, not what you believe you could beat.</p>
+    </section>
+
+    <section class="part">
+      <span class="des">SW1</span><h2>Captain, Northeastern Club Fencing</h2>
+      <span class="yr">2026</span>
+      <p>Leading the team into the national championship, which is mostly logistics and occasionally
+        fencing.</p>
+    </section>
+  </div>
+
+  <div class="bom">
+    <h2>Bill of materials</h2>
+    <table>
+      <thead><tr><th scope="col">Qty</th><th scope="col">Part</th><th scope="col">Value</th></tr></thead>
+      <tbody>
+        <tr><td>6</td><td>Languages</td><td>Python, Java, C#, SQL, MATLAB, JavaScript</td></tr>
+        <tr><td>4</td><td>Hardware</td><td>Raspberry Pi, embedded systems, sensor integration, SolidWorks</td></tr>
+        <tr><td>4</td><td>Tooling</td><td>Git, Linux, Pandas, VS Code</td></tr>
+        <tr><td>1</td><td>Weapon</td><td>Épée — both lights may come on at once</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>Not for manufacture &middot; every link on this board is inert</footer>
+</main>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  for (const b of document.querySelectorAll('.layers button')) {
+    b.addEventListener('click', () => {
+      root.dataset.layer = b.dataset.layer;
+      for (const o of document.querySelectorAll('.layers button'))
+        o.setAttribute('aria-pressed', String(o === b));
+    });
+  }
+})();
+</script>
+</body>
+</html>

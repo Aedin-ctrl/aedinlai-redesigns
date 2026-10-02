@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — scope</title>
+<meta name="description" content="A personal page laid out as a bench oscilloscope.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#14181c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23141a16'/%3E%3Cpath d='M3 16q5-10 8 0t8 0 8-6' stroke='%235fe0a0' stroke-width='2.4' fill='none'/%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'IBMPlexMono';src:url('../../fonts/IBMPlexMono-latin.woff2') format('woff2');font-weight:100 700;font-display:swap;}
+  @font-face{font-family:'SpaceGrotesk';src:url('../../fonts/SpaceGrotesk-latin.woff2') format('woff2');font-weight:300 700;font-display:swap;}
+
+  :root{
+    --case:#14181c; --case-hi:#232a30; --panel:#1b2127; --screen:#0a1410;
+    --ink:#eef2f4; --soft:#c3ccd3; --quiet:#a4aeb7; --rule:#333c45;
+    --trace:#5fe0a0; --warn:#f0a85c;
+    --t-fast:120ms; --t-slow:420ms;
+    --ease:linear(0,.33 6%,.74 13%,1.02 20%,1.09 25%,1.04 33%,.99 44%,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'SpaceGrotesk',system-ui,sans-serif; color:var(--ink); line-height:1.55;
+    min-height:100svh; padding:clamp(10px,2.5vw,30px); overflow-x:hidden;
+    /* the bench: a brushed field that is never quite flat */
+    background:
+      radial-gradient(130% 90% at 50% -10%, #272f36, transparent 60%),
+      repeating-linear-gradient(94deg, #15191d 0 3px, #171c20 3px 6px),
+      #14181c;
+  }
+  ::selection{background:var(--trace);color:#06130d;}
+
+  /* ---- the instrument ---- */
+  .instrument{
+    max-width:1060px; margin:0 auto; border-radius:16px; overflow:hidden;
+    background:linear-gradient(176deg, var(--case-hi), var(--case) 36%);
+    border:1px solid #39434c;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.1) inset,
+      0 -1px 0 rgba(0,0,0,.6) inset,
+      0 36px 70px -34px rgba(0,0,0,.85);
+    animation:power-on var(--t-slow) var(--ease) both;
+  }
+  @keyframes power-on{from{opacity:0;transform:translateY(10px) scale(.992)}to{opacity:1;transform:none}}
+
+  .brand{
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+    padding:13px 18px;border-bottom:1px solid var(--rule);
+  }
+  .brand h1{font-size:19px;font-weight:600;letter-spacing:-.02em;}
+  .brand .model{
+    font-family:'IBMPlexMono',monospace;font-size:11px;color:var(--quiet);
+    letter-spacing:.09em;text-transform:uppercase;
+  }
+
+  .deck{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:0;}
+  @media (max-width:820px){.deck{grid-template-columns:1fr;}}
+
+  /* ---- screen ---- */
+  .screen-wrap{padding:18px;border-right:1px solid var(--rule);}
+  @media (max-width:820px){.screen-wrap{border-right:0;border-bottom:1px solid var(--rule);}}
+  .screen{
+    position:relative;border-radius:10px;overflow:hidden;background:var(--screen);
+    border:1px solid #0d1b15;
+    box-shadow:0 0 0 1px #2c353d, 0 10px 26px -16px rgba(95,224,160,.4) ,
+               0 0 60px -10px rgba(95,224,160,.08) inset;
+    aspect-ratio:8/5;
+  }
+  .screen canvas{display:block;width:100%;height:100%;}
+  /* the phosphor breathes very slightly; it is the only unprompted motion here */
+  .screen::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(70% 60% at 50% 50%, rgba(95,224,160,.09), transparent 72%);
+    animation:breathe 9s ease-in-out infinite alternate;
+  }
+  @keyframes breathe{from{opacity:.55}to{opacity:1}}
+  .screen::before{
+    content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:repeating-linear-gradient(to bottom, rgba(0,0,0,.18) 0 1px, transparent 1px 3px);
+    opacity:.5;
+  }
+
+  .readout{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(86px,1fr));gap:8px;margin-top:12px;
+    font-family:'IBMPlexMono',monospace;font-variant-numeric:tabular-nums slashed-zero;
+  }
+  .readout div{background:var(--panel);border:1px solid var(--rule);border-radius:7px;padding:7px 10px;}
+  .readout dt{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--quiet);}
+  .readout dd{font-size:15px;color:var(--trace);margin-top:1px;}
+
+  /* ---- controls ---- */
+  .controls{padding:18px;display:flex;flex-direction:column;gap:18px;}
+  .ctl h2{
+    font-family:'IBMPlexMono',monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--quiet);margin-bottom:8px;
+  }
+  .sources{display:flex;flex-direction:column;gap:6px;}
+  .src{
+    display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;
+    font:inherit;font-size:14px;color:var(--soft);
+    background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:9px 12px;
+    transition:border-color var(--t-fast) ease, color var(--t-fast) ease, transform 60ms ease;
+  }
+  .src:hover{border-color:#4b5862;color:var(--ink);}
+  .src:active{transform:translateY(1px);}
+  .src[aria-pressed="true"]{border-color:var(--trace);color:var(--ink);}
+  .src .pip{width:9px;height:9px;border-radius:2px;background:var(--rule);flex:none;
+            transition:background var(--t-fast) ease;}
+  .src[aria-pressed="true"] .pip{background:var(--trace);box-shadow:0 0 10px rgba(95,224,160,.8);}
+  .src .tag{margin-left:auto;font-family:'IBMPlexMono',monospace;font-size:10.5px;color:var(--quiet);}
+
+  .knobs{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .knob label{display:block;font-family:'IBMPlexMono',monospace;font-size:10.5px;
+              letter-spacing:.08em;text-transform:uppercase;color:var(--quiet);margin-bottom:6px;}
+  .knob input{width:100%;accent-color:var(--trace);}
+
+  /* ---- the words ---- */
+  .copy{padding:20px clamp(18px,3vw,26px) 26px;border-top:1px solid var(--rule);}
+  .copy h2{font-size:15px;font-weight:600;margin-bottom:10px;letter-spacing:-.01em;}
+  .copy p{color:var(--soft);font-size:14.5px;max-width:68ch;margin-bottom:11px;text-wrap:pretty;}
+  .copy strong{color:var(--ink);font-weight:600;}
+  .chans{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;
+    background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-top:16px;
+  }
+  .chan{background:var(--panel);padding:13px 15px;}
+  .chan .yr{font-family:'IBMPlexMono',monospace;font-size:11px;color:var(--trace);
+            font-variant-numeric:tabular-nums;}
+  .chan .what{font-size:14.5px;font-weight:600;margin:3px 0 2px;}
+  .chan .where{font-size:13px;color:var(--quiet);}
+
+  :focus-visible{outline:2px solid var(--trace);outline-offset:3px;border-radius:6px;}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+    /* the phosphor glow is kept, simply held still — the screen should not go dead */
+    .screen::after{opacity:.8;}
+  }
+</style>
+</head>
+<body>
+
+<div class="instrument">
+  <div class="brand">
+    <h1>Aedin Lai</h1>
+    <span class="model">ECE · instrumentation · épée</span>
+  </div>
+
+  <div class="deck">
+    <div class="screen-wrap">
+      <div class="screen">
+        <canvas id="cvs" width="800" height="500" role="img"
+                aria-label="An oscilloscope trace of the selected signal."></canvas>
+      </div>
+      <dl class="readout">
+        <div><dt>Source</dt><dd id="rSrc">RC</dd></div>
+        <div><dt>Vpp</dt><dd id="rVpp">—</dd></div>
+        <div><dt>Period</dt><dd id="rPer">—</dd></div>
+        <div><dt>Time/div</dt><dd id="rTime">—</dd></div>
+      </dl>
+    </div>
+
+    <div class="controls">
+      <div class="ctl">
+        <h2>Source</h2>
+        <div class="sources" id="sources" role="group" aria-label="Signal source">
+          <button type="button" class="src" data-sig="rc" aria-pressed="true">
+            <span class="pip" aria-hidden="true"></span>RC step<span class="tag">τ = RC</span></button>
+          <button type="button" class="src" data-sig="pwm" aria-pressed="false">
+            <span class="pip" aria-hidden="true"></span>PWM<span class="tag">duty</span></button>
+          <button type="button" class="src" data-sig="ring" aria-pressed="false">
+            <span class="pip" aria-hidden="true"></span>Damped ring<span class="tag">overshoot</span></button>
+          <button type="button" class="src" data-sig="i2c" aria-pressed="false">
+            <span class="pip" aria-hidden="true"></span>I²C burst<span class="tag">SDA</span></button>
+        </div>
+      </div>
+
+      <div class="ctl">
+        <h2>Horizontal / vertical</h2>
+        <div class="knobs">
+          <div class="knob">
+            <label for="tb">Time/div</label>
+            <input type="range" id="tb" min="1" max="12" value="6" step="1">
+          </div>
+          <div class="knob">
+            <label for="gn">Volts/div</label>
+            <input type="range" id="gn" min="3" max="14" value="9" step="1">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="copy">
+    <h2>What the trace is for</h2>
+    <p>I build the measuring end of things — <strong>instrumentation that has to be right</strong>, and
+      the software that makes sense of what it reads. If a number on a screen is wrong, everything
+      downstream of it is wrong and nobody can tell. That is most of the job.</p>
+    <p>Recent work runs from data centre infrastructure to research hardware for a neurology study,
+      by way of an arcade machine built from nothing. I fence épée, the one weapon where both lights
+      can come on at once.</p>
+
+    <div class="chans">
+      <div class="chan"><div class="yr">2025</div>
+        <div class="what">Data Center Infrastructure Intern</div>
+        <div class="where">SingleStore — scaled a private cloud from 160 to over 300 VMs</div></div>
+      <div class="chan"><div class="yr">2025</div>
+        <div class="what">Co-authored research published in JAMA</div>
+        <div class="where">Yale School of Medicine, PEACE Foundation</div></div>
+      <div class="chan"><div class="yr">2021–25</div>
+        <div class="what">USA Fencing A25, All-American</div>
+        <div class="where">#103 national, #122 global</div></div>
+      <div class="chan"><div class="yr">2026</div>
+        <div class="what">Captain, Northeastern Club Fencing</div>
+        <div class="where">Leading the team into the national championship</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const cvs = document.getElementById('cvs');
+  const ctx = cvs.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const W = cvs.width, H = cvs.height;
+
+  // Four signals anyone who has used a scope would recognise. Each returns volts at time t
+  // (seconds), and carries the numbers the readout quotes so the panel never lies about the trace.
+  const SIGNALS = {
+    rc:  { name: 'RC step', period: 0.02, vpp: '3.3 V',
+           f: (t) => { const p = (t % 0.02) / 0.02;
+                       return p < 0.5 ? 3.3 * (1 - Math.exp(-p * 9)) : 3.3 * Math.exp(-(p - 0.5) * 9); } },
+    pwm: { name: 'PWM 35%', period: 0.004, vpp: '5.0 V',
+           f: (t) => ((t % 0.004) / 0.004 < 0.35 ? 5 : 0) },
+    ring:{ name: 'Damped ring', period: 0.01, vpp: '4.1 V',
+           f: (t) => { const p = t % 0.01;
+                       return 4.1 * Math.exp(-p * 420) * Math.cos(p * 2 * Math.PI * 640) + 1.2; } },
+    i2c: { name: 'I²C burst', period: 0.008, vpp: '3.3 V',
+           f: (t) => { const p = (t % 0.008) / 0.008;
+                       if (p < 0.06) return 3.3;                 // idle high
+                       if (p < 0.10) return 0;                   // start condition
+                       const bit = Math.floor((p - 0.10) / 0.09);
+                       return bit >= 0 && bit < 9 && (0b10110100 >> (7 - bit) & 1) ? 3.3 : 0; } },
+  };
+
+  let sig = 'rc', t0 = performance.now(), raf = 0, running = false;
+  const tb = document.getElementById('tb'), gn = document.getElementById('gn');
+
+  function grid() {
+    ctx.fillStyle = '#0a1410';
+    ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(95,224,160,.10)';
+    ctx.lineWidth = 1;
+    for (let i = 1; i < 10; i++) { const x = (W / 10) * i;
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+    for (let i = 1; i < 8; i++) { const y = (H / 8) * i;
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+    // centre cross, slightly brighter, as on a real graticule
+    ctx.strokeStyle = 'rgba(95,224,160,.22)';
+    ctx.beginPath(); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2);
+    ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); ctx.stroke();
+  }
+
+  function draw(now) {
+    const s = SIGNALS[sig];
+    const span = s.period * (+tb.value / 6);          // seconds across the screen
+    const volts = 16 - +gn.value;                      // volts across the screen
+    const phase = reduce.matches ? 0 : ((now - t0) / 1000) * span * 0.18;
+
+    grid();
+    ctx.lineWidth = 2.4;
+    ctx.lineJoin = 'round';
+    ctx.shadowColor = 'rgba(95,224,160,.55)';
+    ctx.shadowBlur = 9;
+    ctx.strokeStyle = '#5fe0a0';
+    ctx.beginPath();
+    for (let px = 0; px <= W; px++) {
+      const t = phase + (px / W) * span;
+      const v = s.f(t);
+      const y = H - ((v / volts) * H * 0.78 + H * 0.11);
+      px ? ctx.lineTo(px, y) : ctx.moveTo(px, y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    document.getElementById('rTime').textContent = (span * 1000 / 10).toFixed(2) + ' ms';
+    if (running) raf = requestAnimationFrame(draw);
+  }
+
+  function start() {
+    if (running || reduce.matches || document.hidden) return;
+    running = true; t0 = performance.now(); raf = requestAnimationFrame(draw);
+  }
+  function stop() { running = false; cancelAnimationFrame(raf); }
+
+  function select(key) {
+    sig = key;
+    const s = SIGNALS[key];
+    for (const b of document.querySelectorAll('.src'))
+      b.setAttribute('aria-pressed', String(b.dataset.sig === key));
+    document.getElementById('rSrc').textContent = s.name;
+    document.getElementById('rVpp').textContent = s.vpp;
+    document.getElementById('rPer').textContent = (s.period * 1000).toFixed(1) + ' ms';
+    draw(performance.now());
+  }
+
+  for (const b of document.querySelectorAll('.src')) b.addEventListener('click', () => select(b.dataset.sig));
+  for (const k of [tb, gn]) k.addEventListener('input', () => { if (!running) draw(performance.now()); });
+
+  // A trace nobody is looking at is a trace nobody needs to pay for.
+  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+  reduce.addEventListener('change', () => (reduce.matches ? (stop(), draw(performance.now())) : start()));
+
+  select('rc');
+  start();
+})();
+</script>
+</body>
+</html>

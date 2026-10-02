@@ -27,8 +27,136 @@
     "a11yDetail": [],
     "errorDetail": [],
     "bytes": 11995,
-    "nearest": 99,
+    "nearest": 22,
     "fit": true,
     "score": 81
+  },
+  {
+    "slug": "silkscreen",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 12,
+      "keyframes": 2,
+      "transitions": 4,
+      "mediaQueries": 2,
+      "interactive": 3,
+      "landmarks": 3,
+      "headings": 6,
+      "svg": 0,
+      "canvas": 0,
+      "textChars": 1425
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 11052,
+    "nearest": 190,
+    "fit": true,
+    "score": 81
+  },
+  {
+    "slug": "scope",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 13,
+      "keyframes": 2,
+      "transitions": 3,
+      "mediaQueries": 2,
+      "interactive": 6,
+      "landmarks": 0,
+      "headings": 4,
+      "svg": 0,
+      "canvas": 1,
+      "textChars": 1019
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 14832,
+    "nearest": 25,
+    "fit": true,
+    "score": 79
+  },
+  {
+    "slug": "wall-label",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 9,
+      "keyframes": 1,
+      "transitions": 2,
+      "mediaQueries": 1,
+      "interactive": 3,
+      "landmarks": 0,
+      "headings": 6,
+      "svg": 5,
+      "canvas": 0,
+      "textChars": 1720
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 13980,
+    "nearest": 99,
+    "fit": true,
+    "score": 79
+  },
+  {
+    "slug": "notebook",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 11,
+      "keyframes": 3,
+      "transitions": 4,
+      "mediaQueries": 2,
+      "interactive": 0,
+      "landmarks": 0,
+      "headings": 3,
+      "svg": 1,
+      "canvas": 0,
+      "textChars": 1205
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 11635,
+    "nearest": 117,
+    "fit": true,
+    "score": 78
   }
 ]

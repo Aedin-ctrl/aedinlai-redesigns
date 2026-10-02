@@ -1,3 +1,7 @@
 [
-  { "slug": "piste", "name": "Piste", "idea": "An épée scoring box you can actually set off — both lamps, with the real 40ms lockout." }
+  { "slug": "piste",      "name": "Piste",      "idea": "An épée scoring box you can set off — both lamps, with the real 40ms lockout." },
+  { "slug": "scope",      "name": "Scope",      "idea": "A bench oscilloscope. Four real signals, a timebase and a gain that do what they say." },
+  { "slug": "notebook",   "name": "Notebook",   "idea": "A bound lab notebook on a desk: ruled paper, dated entries, one open at a time." },
+  { "slug": "silkscreen", "name": "Silkscreen", "idea": "A circuit board with layers you can turn off, the way a CAD tool does it." },
+  { "slug": "wall-label", "name": "Wall label", "idea": "An exhibition hung sideways — one object to a wall, with its label." }
 ]

@@ -430,5 +430,53 @@
     "name": "Bare metal",
     "note": "No finish at all, just the material",
     "tone": "light"
+  },
+  {
+    "id": "hangar",
+    "name": "Hangar",
+    "note": "A big shed with the doors open",
+    "tone": "dark"
+  },
+  {
+    "id": "litmus",
+    "name": "Litmus",
+    "note": "Paper that changes its mind",
+    "tone": "light"
+  },
+  {
+    "id": "spool",
+    "name": "Spool",
+    "note": "Filament, and a print that took nine hours",
+    "tone": "dark"
+  },
+  {
+    "id": "tram",
+    "name": "Tram",
+    "note": "Painted livery and a worn handrail",
+    "tone": "dark"
+  },
+  {
+    "id": "marble",
+    "name": "Marble",
+    "note": "Cut stone, and a vein that was always there",
+    "tone": "light"
+  },
+  {
+    "id": "bitmap",
+    "name": "Bitmap",
+    "note": "One bit per pixel and no apologies",
+    "tone": "light"
+  },
+  {
+    "id": "deep-water",
+    "name": "Deep water",
+    "note": "Past the point where the light gets",
+    "tone": "dark"
+  },
+  {
+    "id": "brass-rule",
+    "name": "Brass rule",
+    "note": "A straightedge that has been used for years",
+    "tone": "light"
   }
 ]

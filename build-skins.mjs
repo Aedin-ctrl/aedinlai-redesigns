@@ -414,6 +414,48 @@ const SKINS = [
     sigA:'#8c3a00', sigB:'#15616d', radius:'0px', layout:'stacked', density:'compact',
     display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.025em' },
 
+
+  { id:'hangar', name:'Hangar', note:'A big shed with the doors open',
+    ground:'#1d2124', bezel:'#262b2f', panel:'#2e343a', ink:'#eff2f4', scheme:'dark',
+    soft:'#b4bbc0', quiet:'#949ba2', rule:'#363d44', ruleFirm:'#495159',
+    sigA:'#ffc145', sigB:'#5bc0eb', radius:'5px', layout:'stacked', density:'spacious' },
+
+  { id:'litmus', name:'Litmus', note:'Paper that changes its mind',
+    ground:'#f0e8ef', bezel:'#f7f2f6', panel:'#fcfafc', ink:'#1a141a', scheme:'light',
+    soft:'#473f47', quiet:'#675d67', rule:'#ded2dc', ruleFirm:'#b9a9b6',
+    sigA:'#a81e5a', sigB:'#1b6b7a', radius:'7px', density:'spacious' },
+
+  { id:'spool', name:'Spool', note:'Filament, and a print that took nine hours',
+    ground:'#101a16', bezel:'#17241f', panel:'#1d2d27', ink:'#e9f5f0', scheme:'dark',
+    soft:'#a9ccc0', quiet:'#89afa3', rule:'#243a33', ruleFirm:'#325146',
+    sigA:'#ff8fab', sigB:'#9ae6b4', radius:'13px', frame:'raised' },
+
+  { id:'tram', name:'Tram', note:'Painted livery and a worn handrail',
+    ground:'#14343a', bezel:'#1b4249', panel:'#215058', ink:'#eaf6f8', scheme:'dark',
+    soft:'#a9ced5', quiet:'#89b4bd', rule:'#2a626c', ruleFirm:'#377d89',
+    sigA:'#ffd166', sigB:'#f08a5d', radius:'4px', layout:'mirrored', density:'compact' },
+
+  { id:'marble', name:'Marble', note:'Cut stone, and a vein that was always there',
+    ground:'#e8e6e3', bezel:'#f2f1ef', panel:'#f9f8f7', ink:'#15151a', scheme:'light',
+    soft:'#45454c', quiet:'#64646d', rule:'#d7d5d2', ruleFirm:'#b0aeab',
+    sigA:'#5a3e86', sigB:'#2f6b52', radius:'11px', density:'spacious', frame:'etched' },
+
+  { id:'bitmap', name:'Bitmap', note:'One bit per pixel and no apologies',
+    ground:'#ffffff', bezel:'#ffffff', panel:'#ffffff', ink:'#000000', scheme:'light',
+    soft:'#2b2b2b', quiet:'#4f4f4f', rule:'#c9c9c9', ruleFirm:'#8a8a8a',
+    sigA:'#000000', sigB:'#595959', radius:'0px', density:'compact', layout:'stacked',
+    display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.03em' },
+
+  { id:'deep-water', name:'Deep water', note:'Past the point where the light gets',
+    ground:'#030a12', bezel:'#07141f', panel:'#0a1d2b', ink:'#dff0fa', scheme:'dark',
+    soft:'#9dc0d4', quiet:'#7ba1b8', rule:'#0f2f44', ruleFirm:'#17475f',
+    sigA:'#4fd1c5', sigB:'#f6ad55', radius:'20px', frame:'raised', layout:'stacked' },
+
+  { id:'brass-rule', name:'Brass rule', note:'A straightedge that has been used for years',
+    ground:'#e4ded0', bezel:'#efe9dd', panel:'#f7f3ea', ink:'#1b1913', scheme:'light',
+    soft:'#484334', quiet:'#67624f', rule:'#d3cab4', ruleFirm:'#b0a488',
+    sigA:'#8a6a1f', sigB:'#2f5a6b', radius:'2px', layout:'mirrored', frame:'etched' },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });

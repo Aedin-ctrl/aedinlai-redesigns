@@ -1,6 +1,6 @@
 # aedinlai.com — design variations
 
-Seventy-two skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
+Eighty skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
 a place to look at directions, not a working copy of the site.
 
 **Live:** https://www.aedinlai.com/aedinlai-redesigns/
@@ -49,7 +49,7 @@ manifest, so there is no code to change.
 
 **The build enforces contrast so you cannot get it wrong.** Each skin names three surfaces and three
 text greys, and the generator walks each grey until it clears WCAG AA against the *worst* of the
-three. Twenty-two of the sixty-four needed correcting. This is deliberate: the same mistake — a grey that passes
+three. Over a third of the eighty needed correcting. This is deliberate: the same mistake — a grey that passes
 against the panel and fails against the page behind it — was made three times by eye in a single day
 before the build started checking it.
 
@@ -82,7 +82,7 @@ width, with no overflow and no script errors.
 ## Checked
 
 Every skin is checked against WCAG 2.0/2.1 A and AA at desktop and phone widths, with no horizontal
-overflow and no script errors — 192 combinations at the time of writing (Chrome desktop and phone, WebKit phone), and the check is re-run
+overflow and no script errors — 240 combinations at the time of writing (Chrome desktop and phone, WebKit phone), and the check is re-run
 whenever skins are added.
 
 Switching uses the **View Transitions API** where the browser has it, and falls back to an instant

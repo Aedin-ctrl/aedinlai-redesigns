@@ -15,10 +15,12 @@ for (const s of skins) {
   const page = await b.newPage({ viewport: { width: 1200, height: 820 } });
   await page.goto(`${BASE}/?skin=${s.id}`, { waitUntil: 'load' });
   await page.waitForTimeout(700);
-  // hide the picker so the thumbnail shows the design, not the chrome around it
-  await page.evaluate(() => { const p = document.getElementById('picker'); if (p) p.style.visibility = 'hidden'; });
-  await page.waitForTimeout(120);
-  const png = await page.screenshot({ clip: { x: 0, y: 150, width: 1200, height: 670 } });
+  // Clip to the device itself. A fixed pixel clip cropped the design in half — the picker's height
+  // changes with the number of skins, so the frame is not where you guess it is.
+  await page.evaluate(() => { const p = document.getElementById('picker'); if (p) p.style.display = 'none'; });
+  await page.waitForTimeout(150);
+  const el = await page.$('.device');
+  const png = await el.screenshot();
   await sharp(png).resize(560).webp({ quality: 72 }).toFile(join(HERE, 'thumbs', `${s.id}.webp`));
   await page.close();
 }

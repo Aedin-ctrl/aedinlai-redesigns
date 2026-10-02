@@ -44,7 +44,7 @@
   }
   .card:hover,.card:focus-visible{border-color:currentColor;}
   .card img{
-    width:100%; aspect-ratio:1200/670; object-fit:cover; object-position:top;
+    width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; object-position:top;
     display:block; border-bottom:1px solid var(--line); background:var(--bg);
   }
   .meta{padding:10px 13px 12px;}
@@ -88,7 +88,7 @@
     a.href = `./?skin=${encodeURIComponent(s.id)}`;
     a.dataset.tone = s.tone;
     a.innerHTML = `
-      <img src="thumbs/${s.id}.webp" alt="" width="560" height="313"
+      <img src="thumbs/${s.id}.webp" alt="" width="560" height="350"
            loading="${i < 6 ? 'eager' : 'lazy'}" decoding="async">
       <div class="meta">
         <div class="name">${s.name}<span class="tone">${s.tone}</span></div>

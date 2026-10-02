@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — datasheet</title>
+<meta name="description" content="A personal page set as a component datasheet, pin map and all.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Crect x='9' y='7' width='14' height='18' rx='1.5' fill='%23202227'/%3E%3Cg fill='%23202227'%3E%3Crect x='4' y='10' width='5' height='2'/%3E%3Crect x='4' y='15' width='5' height='2'/%3E%3Crect x='4' y='20' width='5' height='2'/%3E%3Crect x='23' y='10' width='5' height='2'/%3E%3Crect x='23' y='15' width='5' height='2'/%3E%3Crect x='23' y='20' width='5' height='2'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'IBMPlexMono';src:url('../../fonts/IBMPlexMono-latin.woff2') format('woff2');font-weight:100 700;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('../../fonts/Inter-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+
+  :root{
+    --paper:#fff; --field:#f6f7f9; --ink:#1a1c21; --soft:#3c414a; --quiet:#555b66;
+    --faint:#666d79; --rule:#c9cfd8; --hair:#e3e7ec; --mark:#0f5fa8; --warn:#9a4a12;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;color:var(--ink);line-height:1.55;
+    background:#dfe3e8;padding:clamp(8px,2.5vw,34px);overflow-x:hidden;
+    /* the flat grey of a photocopier bed, lit from one side */
+    background-image:radial-gradient(90% 60% at 30% 0%, #eceff3, transparent 70%);
+    background-attachment:fixed;
+  }
+  ::selection{background:var(--mark);color:#fff;}
+
+  .sheet{
+    max-width:1000px;margin:0 auto;background:var(--paper);
+    border:1px solid var(--rule);
+    box-shadow:0 20px 46px -30px rgba(26,28,33,.55);
+    animation:lay-down .42s cubic-bezier(.2,.8,.3,1) both;
+  }
+  @keyframes lay-down{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* ---- title block, as on a drawing ---- */
+  .title-block{
+    display:grid;grid-template-columns:1fr auto;border-bottom:2px solid var(--ink);
+  }
+  .title-block .left{padding:clamp(16px,3vw,26px);}
+  .title-block h1{font-size:clamp(26px,4.6vw,42px);font-weight:700;letter-spacing:-.034em;line-height:1;}
+  .title-block .desc{font-size:14.5px;color:var(--soft);margin-top:7px;max-width:46ch;text-wrap:pretty;}
+  .title-block .right{
+    border-left:1px solid var(--rule);display:grid;grid-template-columns:auto auto;
+    align-content:start;font-family:'IBMPlexMono',monospace;font-size:11.5px;
+  }
+  .title-block .right dt{padding:6px 10px;color:var(--faint);border-bottom:1px solid var(--hair);
+                         letter-spacing:.05em;text-transform:uppercase;font-size:10px;}
+  .title-block .right dd{padding:6px 12px 6px 0;border-bottom:1px solid var(--hair);
+                         text-align:right;font-variant-numeric:tabular-nums;}
+  @media (max-width:640px){
+    .title-block{grid-template-columns:1fr;}
+    .title-block .right{border-left:0;border-top:1px solid var(--rule);}
+  }
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;}
+  @media (max-width:760px){.cols{grid-template-columns:1fr;}}
+  .cols > *{padding:clamp(16px,2.6vw,24px);}
+  .cols > *:first-child{border-right:1px solid var(--hair);}
+  @media (max-width:760px){
+    .cols > *:first-child{border-right:0;border-bottom:1px solid var(--hair);}
+  }
+
+  h2{
+    font-family:'IBMPlexMono',monospace;font-size:10.5px;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--faint);padding-bottom:5px;
+    border-bottom:1px solid var(--rule);margin-bottom:11px;
+  }
+  .feat{list-style:none;font-size:14px;color:var(--soft);}
+  .feat li{padding:4px 0 4px 15px;position:relative;text-wrap:pretty;}
+  .feat li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:2px;background:var(--ink);}
+  .feat b{color:var(--ink);font-weight:600;}
+
+  /* ---- pin configuration: the one thing on here you can poke ---- */
+  .pinout{display:grid;grid-template-columns:1fr;gap:12px;}
+  .pkg{display:grid;place-items:center;}
+  .pkg svg{width:100%;max-width:330px;height:auto;}
+  .body-rect{fill:#202227;}
+  .lead{fill:#9aa3ae;transition:fill 140ms ease;}
+  .pin-hit{cursor:pointer;fill:transparent;}
+  .pin-num{font-family:'IBMPlexMono',monospace;font-size:9px;fill:#fff;}
+  .pin-lbl{font-family:'IBMPlexMono',monospace;font-size:9.5px;fill:#555b66;transition:fill 140ms ease;}
+  .pin[data-on="true"] .lead{fill:var(--mark);}
+  .pin[data-on="true"] .pin-lbl{fill:var(--mark);font-weight:600;}
+  .pin:hover .lead{fill:var(--mark);}
+
+  .pin-desc{
+    background:var(--field);border:1px solid var(--hair);border-radius:7px;padding:11px 13px;
+    font-size:13.5px;color:var(--soft);min-height:76px;
+  }
+  .pin-desc b{font-family:'IBMPlexMono',monospace;color:var(--ink);font-size:12.5px;
+              display:block;margin-bottom:3px;letter-spacing:.03em;}
+
+  /* ---- tables ---- */
+  .tbl{width:100%;border-collapse:collapse;font-size:13px;}
+  .tbl caption{text-align:left;font-size:12px;color:var(--faint);padding-bottom:7px;}
+  .tbl th,.tbl td{border:1px solid var(--hair);padding:6px 9px;text-align:left;vertical-align:top;}
+  .tbl thead th{
+    background:var(--field);font-family:'IBMPlexMono',monospace;font-size:10px;
+    letter-spacing:.07em;text-transform:uppercase;color:var(--faint);font-weight:400;
+  }
+  .tbl td.num{font-family:'IBMPlexMono',monospace;font-variant-numeric:tabular-nums slashed-zero;
+              text-align:right;white-space:nowrap;}
+  .tbl tbody tr:nth-child(even) td{background:#fbfcfd;}
+  .wide{padding:clamp(16px,2.6vw,24px);border-top:1px solid var(--hair);}
+  .tbl-wrap{overflow-x:auto;}
+  .note{font-size:12px;color:var(--faint);margin-top:9px;}
+
+  footer{
+    border-top:2px solid var(--ink);padding:11px clamp(16px,2.6vw,24px);
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    font-family:'IBMPlexMono',monospace;font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--faint);
+  }
+  :focus-visible{outline:2px solid var(--mark);outline-offset:2px;}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .sheet{border:0;box-shadow:none;max-width:none;}
+  }
+</style>
+</head>
+<body>
+
+<article class="sheet">
+  <div class="title-block">
+    <div class="left">
+      <h1>Aedin Lai</h1>
+      <p class="desc">Electrical and computer engineering. Instrumentation that has to be right, and
+        the software that makes sense of what it reads.</p>
+    </div>
+    <dl class="right">
+      <dt>Part</dt><dd>AL&#8209;2026</dd>
+      <dt>Package</dt><dd>Boston, MA</dd>
+      <dt>Rev</dt><dd>C</dd>
+      <dt>Status</dt><dd>Active</dd>
+    </dl>
+  </div>
+
+  <div class="cols">
+    <section>
+      <h2>Features</h2>
+      <ul class="feat">
+        <li>Private cloud scaled from <b>160 to 300+ virtual machines</b> — SingleStore, 2025</li>
+        <li>Research hardware for a neurology study, <b>co-authored and published in JAMA</b> —
+          Yale School of Medicine and the PEACE Foundation, 2025</li>
+        <li><b>USA Fencing A25, All-American.</b> #103 national, #122 global, 2021–2025</li>
+        <li><b>Captain</b>, Northeastern Club Fencing, into the national championship, 2026</li>
+        <li>An arcade machine built from nothing, including the cabinet</li>
+      </ul>
+
+      <h2 style="margin-top:22px">Description</h2>
+      <p style="font-size:14px;color:var(--soft);text-wrap:pretty;">Takes a physical quantity in and
+        gives a trustworthy number out. A reading that is quietly wrong is worse than no reading,
+        because everything downstream of it is wrong too and nobody can tell. Fences épée, which is
+        the only weapon where both outputs may assert simultaneously.</p>
+    </section>
+
+    <section>
+      <h2>Pin configuration</h2>
+      <div class="pinout">
+        <div class="pkg">
+          <svg viewBox="0 0 330 200" role="group" aria-label="Pin map. Each pin is a control.">
+            <rect class="body-rect" x="95" y="18" width="140" height="164" rx="7"/>
+            <circle cx="112" cy="36" r="5" fill="#4c525c"/>
+            <g id="pins"></g>
+          </svg>
+        </div>
+        <p class="pin-desc" id="pinDesc" role="status">
+          <b>Hover or focus a pin</b>Each one is something I actually do.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <div class="wide">
+    <h2>Absolute maximum ratings</h2>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Absolute maximum ratings table">
+    <table class="tbl">
+      <caption>Stresses beyond these are where the interesting failures live.</caption>
+      <thead>
+        <tr><th scope="col">Parameter</th><th scope="col">Symbol</th><th scope="col">Min</th>
+            <th scope="col">Typ</th><th scope="col">Max</th><th scope="col">Unit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Épée lockout window</td><td>t<sub>LO</sub></td>
+            <td class="num">—</td><td class="num">40</td><td class="num">45</td><td>ms</td></tr>
+        <tr><td>Piste length</td><td>L<sub>P</sub></td>
+            <td class="num">14.0</td><td class="num">14.0</td><td class="num">14.0</td><td>m</td></tr>
+        <tr><td>Virtual machines under management</td><td>N<sub>VM</sub></td>
+            <td class="num">160</td><td class="num">—</td><td class="num">300+</td><td>—</td></tr>
+        <tr><td>National ranking</td><td>R<sub>US</sub></td>
+            <td class="num">—</td><td class="num">103</td><td class="num">—</td><td>—</td></tr>
+        <tr><td>Languages held simultaneously</td><td>N<sub>L</sub></td>
+            <td class="num">—</td><td class="num">6</td><td class="num">—</td><td>—</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">Operating range: Python, Java, C#, SQL, MATLAB, JavaScript. Raspberry Pi,
+      embedded systems, sensor integration, SolidWorks, AutoCAD. Git, Linux, Pandas.</p>
+  </div>
+
+  <footer>
+    <span>AL&#8209;2026 &middot; Rev C</span>
+    <span>Every link on this sheet is inert</span>
+  </footer>
+</article>
+
+<script>
+(() => {
+  // The pins are the content. Building them from data keeps the drawing and the descriptions from
+  // ever disagreeing, which on a real datasheet is the mistake that costs somebody a board spin.
+  const PINS = [
+    { n: 1, name: 'VDD',  side: 'l', text: 'Electrical and computer engineering at Northeastern. The supply everything else runs off.' },
+    { n: 2, name: 'SENSE',side: 'l', text: 'Instrumentation. Sensor integration, embedded systems, Raspberry Pi — the end of the chain that touches the physical world.' },
+    { n: 3, name: 'SDA',  side: 'l', text: 'Data out. Python, SQL, Pandas, MATLAB. Making a measurement mean something once you have it.' },
+    { n: 4, name: 'GND',  side: 'l', text: 'Reference. Git, Linux, and the habit of writing down what you actually did.' },
+    { n: 5, name: 'SCL',  side: 'r', text: 'Timing. 2025 at SingleStore: a private cloud from 160 virtual machines to over 300, and the tooling that made that survivable.' },
+    { n: 6, name: 'OUT',  side: 'r', text: 'Published. Research hardware with the Yale School of Medicine and the PEACE Foundation; co-authored in JAMA, 2025.' },
+    { n: 7, name: 'LAMP', side: 'r', text: 'Épée. USA Fencing A25, All-American, #103 national. The one weapon where both lamps may light at once.' },
+    { n: 8, name: 'EN',   side: 'r', text: 'Captain, Northeastern Club Fencing, 2026 — leading the team into the national championship.' },
+  ];
+
+  const g = document.getElementById('pins');
+  const desc = document.getElementById('pinDesc');
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (t, a) => { const e = document.createElementNS(NS, t);
+    for (const k in a) e.setAttribute(k, a[k]); return e; };
+
+  PINS.forEach((p, i) => {
+    const row = i % 4;
+    const y = 44 + row * 36;
+    const left = p.side === 'l';
+    const grp = el('g', { class: 'pin', tabindex: '0', role: 'button',
+      'aria-label': `Pin ${p.n}, ${p.name}` });
+
+    grp.append(el('rect', { class: 'lead', x: left ? 60 : 235, y: y - 5, width: 35, height: 10, rx: 2 }));
+    const num = el('text', { class: 'pin-num', x: left ? 104 : 226, y: y + 3,
+      'text-anchor': left ? 'start' : 'end' });
+    num.textContent = p.n;
+    grp.append(num);
+    const lbl = el('text', { class: 'pin-lbl', x: left ? 54 : 241, y: y + 3,
+      'text-anchor': left ? 'end' : 'start' });
+    lbl.textContent = p.name;
+    grp.append(lbl);
+    grp.append(el('rect', { class: 'pin-hit', x: left ? 0 : 235, y: y - 16, width: 95, height: 32 }));
+
+    const show = () => {
+      for (const o of g.children) o.dataset.on = 'false';
+      grp.dataset.on = 'true';
+      desc.innerHTML = '<b></b>';
+      desc.firstChild.textContent = `${p.n}  ${p.name}`;
+      desc.append(document.createTextNode(p.text));
+    };
+    grp.addEventListener('pointerenter', show);
+    grp.addEventListener('focus', show);
+    grp.addEventListener('click', show);
+    grp.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(); } });
+    g.append(grp);
+  });
+})();
+</script>
+</body>
+</html>

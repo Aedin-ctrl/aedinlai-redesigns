@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — drift</title>
+<meta name="description" content="A screen suspended in a slowly moving space, its edges fading into it.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#e9ecf1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23dfe4ec'/%3E%3Crect x='7' y='9' width='18' height='14' rx='2.5' fill='%23fff' stroke='%236b7686'/%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'BricolageGrotesque';src:url('../../fonts/BricolageGrotesque-latin.woff2') format('woff2');font-weight:200 800;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('../../fonts/Inter-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+
+  :root{
+    --space:#e9ecf1; --glass:#fdfdfe; --ink:#14171d; --soft:#3f4650;
+    --quiet:#555d69; --rule:#dde2e9; --edge:#b9c1cc;
+    --a:#3d5a8c; --b:#2f7a63; --c:#8a5a3c;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;color:var(--ink);line-height:1.6;
+    background:var(--space);min-height:100svh;overflow-x:hidden;
+    display:grid;place-items:center;padding:clamp(14px,4vw,60px);
+  }
+  ::selection{background:var(--a);color:#fff;}
+
+  /* ---- the space behind, in three layers at three depths -------------------
+     Each layer drifts on its own slow cycle and shifts a different amount under
+     the pointer, which is the whole reason it reads as depth rather than as a
+     moving picture. Amplitudes are deliberately tiny: the far layer travels
+     about 2% of the viewport over 54 seconds.                                */
+  .deep{position:fixed;inset:0;z-index:-3;pointer-events:none;overflow:hidden;}
+  .deep span{position:absolute;inset:-25%;display:block;will-change:transform;}
+  .deep .far{
+    background:
+      radial-gradient(34% 30% at 22% 26%, rgba(61,90,140,.26), transparent 70%),
+      radial-gradient(30% 28% at 78% 68%, rgba(47,122,99,.22), transparent 70%);
+    filter:blur(50px);
+    transform:translate3d(calc(var(--px,0) * 7px), calc(var(--py,0) * 7px), 0);
+    animation:far 54s ease-in-out infinite alternate;
+  }
+  .deep .mid{
+    background:
+      radial-gradient(22% 20% at 62% 22%, rgba(138,90,60,.22), transparent 72%),
+      radial-gradient(26% 24% at 30% 74%, rgba(61,90,140,.2), transparent 72%);
+    filter:blur(34px);
+    transform:translate3d(calc(var(--px,0) * 15px), calc(var(--py,0) * 15px), 0);
+    animation:mid 37s ease-in-out infinite alternate;
+  }
+  .deep .near{
+    background:repeating-linear-gradient(72deg, rgba(20,23,29,.045) 0 1px, transparent 1px 26px);
+    transform:translate3d(calc(var(--px,0) * 26px), calc(var(--py,0) * 26px), 0);
+    animation:near 29s ease-in-out infinite alternate;
+  }
+  @keyframes far{from{translate:-1.6% -1%;scale:1}  to{translate:1.8% 1.2%;scale:1.07}}
+  @keyframes mid{from{translate:1.4% .8%;scale:1.05} to{translate:-1.6% -1.1%;scale:1}}
+  @keyframes near{from{translate:-.8% -.5%}          to{translate:.9% .6%}}
+
+  /* ---- the screen -------------------------------------------------------
+     It is not pasted onto the space; its edges are feathered with a mask so
+     the frame dissolves into what is behind it, and the whole thing turns
+     very slightly, on a cycle long enough that you only catch it by looking
+     away and back.                                                          */
+  .screen{
+    position:relative;width:min(1000px,100%);
+    background:var(--glass);
+    border:1px solid var(--edge);border-radius:16px;
+    box-shadow:0 1px 0 rgba(255,255,255,.9) inset,
+               0 40px 80px -46px rgba(20,23,29,.6);
+    /* transform carries the pointer; rotate and translate are separate properties, so the slow
+       wobble composes with it instead of fighting it for the same declaration */
+    transform:translate3d(calc(var(--px,0) * -5px), calc(var(--py,0) * -5px), 0);
+    animation:wobble 26s ease-in-out infinite alternate, arrive 1s var(--ease) both;
+    will-change:transform, rotate, translate;
+  }
+  @keyframes wobble{
+    from{rotate:-.22deg; translate:0 -3px;}
+    to  {rotate:.22deg;  translate:0 3px;}
+  }
+  @keyframes arrive{from{opacity:0;scale:.985;}to{opacity:1;scale:1;}}
+  /* the feathered edge: a halo of the page colour, fading inward */
+  .screen::after{
+    content:'';position:absolute;inset:calc(-1 * clamp(6px,2.4vw,26px));z-index:-1;
+    border-radius:34px;pointer-events:none;
+    background:var(--space);
+    -webkit-mask-image:radial-gradient(closest-side, transparent 58%, #000 100%);
+    mask-image:radial-gradient(closest-side, transparent 58%, #000 100%);
+    opacity:.85;
+  }
+
+  .bar{display:flex;align-items:center;gap:12px;padding:12px 17px;border-bottom:1px solid var(--rule);}
+  .bar i{width:10px;height:10px;border-radius:50%;background:var(--rule);display:block;}
+  .bar .addr{flex:1;min-width:0;font-size:12.5px;color:var(--quiet);
+             background:#f5f7fa;border:1px solid var(--rule);border-radius:7px;padding:5px 11px;}
+
+  main{padding:clamp(26px,4.6vw,56px);}
+  h1{
+    font-family:'BricolageGrotesque',sans-serif;font-weight:700;letter-spacing:-.04em;
+    font-size:clamp(42px,7.6vw,82px);line-height:.92;margin-bottom:.22em;
+    text-wrap:balance;
+  }
+  .lede{
+    font-family:'BricolageGrotesque',sans-serif;font-weight:400;
+    font-size:clamp(17px,2.2vw,23px);color:var(--soft);max-width:34ch;
+    letter-spacing:-.014em;margin-bottom:28px;text-wrap:pretty;
+  }
+  p{font-size:15px;color:var(--soft);max-width:64ch;margin-bottom:13px;text-wrap:pretty;}
+  strong{color:var(--ink);font-weight:600;}
+
+  /* three strands, each a different depth of colour, matching the layers behind */
+  .strands{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));
+           gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;
+           overflow:hidden;margin-top:28px;}
+  .strand{background:var(--glass);padding:16px 18px;position:relative;
+          transition:background 200ms var(--ease);}
+  .strand:hover{background:#fafbfd;}
+  .strand::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--hue);}
+  .strand:nth-child(1){--hue:var(--a);}
+  .strand:nth-child(2){--hue:var(--b);}
+  .strand:nth-child(3){--hue:var(--c);}
+  .strand .yr{font-size:12px;color:var(--hue);font-weight:600;font-variant-numeric:tabular-nums;}
+  .strand h2{font-size:15.5px;font-weight:600;letter-spacing:-.012em;margin:3px 0 3px;}
+  .strand p{font-size:13.5px;color:var(--quiet);margin:0;}
+
+  .tools{margin-top:26px;display:flex;flex-wrap:wrap;gap:7px 9px;font-size:13px;color:var(--quiet);}
+  .tools span{border:1px solid var(--rule);border-radius:999px;padding:3px 11px;background:#f8fafc;}
+
+  :focus-visible{outline:2px solid var(--a);outline-offset:3px;border-radius:5px;}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+    /* the depth stays — it simply holds still, rather than the page going blank */
+    .screen{transform:none;}
+    .deep .far{translate:.6% .4%;scale:1.03;}
+    .deep .mid{translate:-.5% -.3%;scale:1.02;}
+  }
+</style>
+</head>
+<body>
+
+<div class="deep" aria-hidden="true">
+  <span class="far"></span><span class="mid"></span><span class="near"></span>
+</div>
+
+<div class="screen" id="screen">
+  <div class="bar">
+    <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
+    <div class="addr">aedinlai.com</div>
+  </div>
+
+  <main>
+    <h1>Aedin Lai</h1>
+    <p class="lede">Electrical and computer engineering, where the hardware and the software have to
+      agree with each other.</p>
+
+    <p>I build the measuring end of things — <strong>instrumentation that has to be right</strong>,
+      and the software that makes sense of what it reads. A number on a screen that is quietly wrong
+      is worse than no number at all, because everything downstream of it is wrong too and nobody can
+      tell. Most of the work is making sure that cannot happen.</p>
+    <p>I fence épée, the one weapon where both lights can come on at once.</p>
+
+    <div class="strands">
+      <section class="strand">
+        <p class="yr">2025</p>
+        <h2>SingleStore</h2>
+        <p>Data centre infrastructure. A private cloud scaled from 160 virtual machines to over 300.</p>
+      </section>
+      <section class="strand">
+        <p class="yr">2025</p>
+        <h2>Published in JAMA</h2>
+        <p>Research hardware with the Yale School of Medicine and the PEACE Foundation.</p>
+      </section>
+      <section class="strand">
+        <p class="yr">2021–26</p>
+        <h2>Épée, A25</h2>
+        <p>All-American, #103 national. Now captain at Northeastern, heading for nationals.</p>
+      </section>
+    </div>
+
+    <div class="tools">
+      <span>Python</span><span>Java</span><span>C#</span><span>SQL</span><span>MATLAB</span>
+      <span>JavaScript</span><span>Raspberry Pi</span><span>Embedded systems</span>
+      <span>Sensor integration</span><span>SolidWorks</span><span>Git</span><span>Linux</span>
+    </div>
+  </main>
+</div>
+
+<script>
+(() => {
+  // The pointer shifts the three layers by different amounts; that difference is the depth.
+  // One rAF, transform only, and nothing scheduled when the pointer is still.
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const root = document.documentElement;
+  let want = [0, 0], have = [0, 0], raf = 0;
+
+  function tick() {
+    const dx = want[0] - have[0], dy = want[1] - have[1];
+    have[0] += dx * 0.07;
+    have[1] += dy * 0.07;
+    root.style.setProperty('--px', have[0].toFixed(4));
+    root.style.setProperty('--py', have[1].toFixed(4));
+    // stop scheduling once it has effectively arrived, rather than looping forever
+    if (Math.abs(dx) > 0.0015 || Math.abs(dy) > 0.0015) raf = requestAnimationFrame(tick);
+    else raf = 0;
+  }
+  function aim(x, y) {
+    if (reduce.matches) return;
+    want = [(x / innerWidth) * 2 - 1, (y / innerHeight) * 2 - 1];
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+
+  addEventListener('pointermove', (e) => aim(e.clientX, e.clientY), { passive: true });
+  addEventListener('pointerleave', () => aim(innerWidth / 2, innerHeight / 2));
+  // On a phone there is no pointer, so the tilt of the device does the same job where it is offered.
+  addEventListener('deviceorientation', (e) => {
+    if (e.gamma == null || e.beta == null) return;
+    aim((Math.max(-30, Math.min(30, e.gamma)) / 30 + 1) / 2 * innerWidth,
+        (Math.max(-30, Math.min(30, e.beta - 40)) / 30 + 1) / 2 * innerHeight);
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

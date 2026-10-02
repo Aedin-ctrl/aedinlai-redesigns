@@ -1,7 +1,52 @@
 [
-  { "slug": "piste",      "name": "Piste",      "idea": "An épée scoring box you can set off — both lamps, with the real 40ms lockout." },
-  { "slug": "scope",      "name": "Scope",      "idea": "A bench oscilloscope. Four real signals, a timebase and a gain that do what they say." },
-  { "slug": "notebook",   "name": "Notebook",   "idea": "A bound lab notebook on a desk: ruled paper, dated entries, one open at a time." },
-  { "slug": "silkscreen", "name": "Silkscreen", "idea": "A circuit board with layers you can turn off, the way a CAD tool does it." },
-  { "slug": "wall-label", "name": "Wall label", "idea": "An exhibition hung sideways — one object to a wall, with its label." }
+  {
+    "slug": "piste",
+    "name": "Piste",
+    "idea": "An \u00e9p\u00e9e scoring box you can set off \u2014 both lamps, with the real 40ms lockout."
+  },
+  {
+    "slug": "scope",
+    "name": "Scope",
+    "idea": "A bench oscilloscope. Four real signals, a timebase and a gain that do what they say."
+  },
+  {
+    "slug": "notebook",
+    "name": "Notebook",
+    "idea": "A bound lab notebook on a desk: ruled paper, dated entries, one open at a time."
+  },
+  {
+    "slug": "silkscreen",
+    "name": "Silkscreen",
+    "idea": "A circuit board with layers you can turn off, the way a CAD tool does it."
+  },
+  {
+    "slug": "wall-label",
+    "name": "Wall label",
+    "idea": "An exhibition hung sideways \u2014 one object to a wall, with its label."
+  },
+  {
+    "slug": "drift",
+    "name": "Drift",
+    "idea": "A screen suspended in a space with three depths, its edges fading into it."
+  },
+  {
+    "slug": "datasheet",
+    "name": "Datasheet",
+    "idea": "A component datasheet: title block, abs-max ratings, and a pin map you can poke."
+  },
+  {
+    "slug": "broadsheet",
+    "name": "Broadsheet",
+    "idea": "A newspaper in real columns, with a measure control that changes the layout."
+  },
+  {
+    "slug": "bout-sheet",
+    "name": "Bout sheet",
+    "idea": "Mostly a results table, sortable, with the totals recomputed from the rows."
+  },
+  {
+    "slug": "card-index",
+    "name": "Card index",
+    "idea": "A box of index cards you riffle through, one tab at a time."
+  }
 ]

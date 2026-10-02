@@ -1,0 +1,12 @@
+{
+  "name": "aedinlai-redesigns",
+  "private": true,
+  "type": "module",
+  "description": "Design variations on aedinlai.com. Static; the build only regenerates the skin CSS.",
+  "scripts": {
+    "skins": "node build-skins.mjs"
+  },
+  "devDependencies": {
+    "colorjs.io": "^0.7.1"
+  }
+}

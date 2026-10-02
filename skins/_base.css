@@ -1,0 +1,156 @@
+/* Shared structure. Skins change tokens only — colour, type, radius, rule weight, texture — so a
+   new one is a single file with no markup or script changes.
+
+   Tokens a skin may set:
+     --ground --bezel --panel --ink --soft --quiet --rule --rule-firm --sigA --sigB
+     --display --display-w --display-track --body
+     --radius --rule-w --texture --scheme
+*/
+
+@font-face { font-family:'Archivo';      src:url('../fonts/Archivo-latin.woff2') format('woff2');            font-weight:100 900; font-display:swap; }
+@font-face { font-family:'BricolageG';   src:url('../fonts/BricolageGrotesque-latin.woff2') format('woff2'); font-weight:200 800; font-display:swap; }
+@font-face { font-family:'InterLocal';   src:url('../fonts/Inter-latin.woff2') format('woff2');              font-weight:100 900; font-display:swap; }
+@font-face { font-family:'SpaceG';       src:url('../fonts/SpaceGrotesk-latin.woff2') format('woff2');       font-weight:300 700; font-display:swap; }
+@font-face { font-family:'InstrumentS';  src:url('../fonts/InstrumentSerif-latin.woff2') format('woff2');    font-weight:400;     font-display:swap; }
+@font-face { font-family:'PlexMono';     src:url('../fonts/IBMPlexMono-latin.woff2') format('woff2');        font-weight:400 600; font-display:swap; }
+
+:root{
+  --display:'Archivo', sans-serif; --display-w:700; --display-track:-.045em;
+  --body:'InterLocal', system-ui, sans-serif;
+  --radius:12px; --rule-w:1px; --texture:none; --scheme:light;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{-webkit-text-size-adjust:100%; color-scheme:var(--scheme);}
+body{
+  font-family:var(--body); background:var(--ground); color:var(--ink);
+  background-image:var(--texture);
+  line-height:1.55; letter-spacing:-.004em;
+  padding:clamp(10px,2.2vw,26px);
+}
+::selection{background:var(--sigB); color:var(--bezel);}
+
+/* ---- the skin picker, above the device ---- */
+.picker{max-width:1180px; margin:0 auto clamp(10px,1.8vw,18px);}
+.picker-in{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  background:var(--bezel); border:var(--rule-w) solid var(--rule-firm);
+  border-radius:var(--radius); padding:9px 12px;
+}
+.picker-label{font-size:12px; color:var(--quiet); flex:0 0 auto;}
+.picker-btns{display:flex; gap:5px; flex-wrap:wrap;}
+.picker-btns button{
+  font:inherit; font-size:12px; letter-spacing:.005em; cursor:pointer;
+  background:none; color:var(--quiet);
+  border:var(--rule-w) solid transparent; border-radius:calc(var(--radius) * .7);
+  padding:5px 11px; transition:color .16s, border-color .16s, background .16s;
+}
+.picker-btns button:hover{color:var(--ink);}
+.picker-btns button[aria-pressed="true"]{color:var(--ink); border-color:var(--rule-firm); background:var(--panel);}
+
+/* ---- the device: the conceit worth keeping ---- */
+.device{
+  max-width:1180px; margin:0 auto; background:var(--bezel);
+  border:var(--rule-w) solid var(--rule-firm);
+  /* capped: a skin asking for a pill radius turned the whole frame into an ellipse. Small
+     elements may be as round as they like; the frame may not. */
+  border-radius:min(var(--radius), 18px);
+  overflow:hidden; view-transition-name:device;
+}
+.bar{display:flex; align-items:center; gap:14px; padding:11px 14px; border-bottom:var(--rule-w) solid var(--rule);}
+.lamps{display:flex; gap:7px; flex:0 0 auto;}
+.lamp{width:11px; height:11px; border-radius:50%; border:1px solid var(--rule-firm);}
+.addr{
+  flex:1; min-width:0; display:flex; align-items:center; gap:8px;
+  background:var(--panel); border:var(--rule-w) solid var(--rule);
+  border-radius:calc(var(--radius) * .58); padding:6px 11px;
+  font-size:12.5px; color:var(--quiet);
+}
+.skin-now{flex:0 0 auto; font-size:12px; color:var(--quiet);}
+
+nav{display:flex; gap:26px; padding:0 18px; border-bottom:var(--rule-w) solid var(--rule); overflow-x:auto;}
+nav button{
+  font:inherit; font-size:13.5px; background:none; border:0; cursor:pointer;
+  color:var(--quiet); padding:13px 1px 11px; border-bottom:2px solid transparent;
+  white-space:nowrap; transition:color .16s, border-color .16s;
+}
+nav button:hover{color:var(--soft);}
+nav button[aria-current="page"]{color:var(--ink); border-bottom-color:var(--ink);}
+
+main{padding:clamp(26px,4.4vw,54px) clamp(18px,3.8vw,50px) clamp(32px,4.6vw,56px);}
+.top{display:grid; grid-template-columns:minmax(0,1.32fr) minmax(0,1fr); gap:clamp(26px,4.2vw,60px); align-items:start;}
+@media (max-width:860px){ .top{grid-template-columns:1fr;} }
+
+h1{
+  font-family:var(--display); font-weight:var(--display-w);
+  font-size:clamp(46px,9vw,94px); line-height:.86;
+  letter-spacing:var(--display-track); margin:-.06em 0 20px;
+  view-transition-name:title;
+}
+.role{
+  font-family:var(--display); font-weight:500;
+  font-size:clamp(16px,2vw,21px); line-height:1.3; color:var(--soft);
+  letter-spacing:-.012em; max-width:30ch; margin-bottom:26px;
+}
+.body p{max-width:64ch; color:var(--soft); margin-bottom:14px; font-size:15px;}
+.body p:last-child{margin-bottom:0;}
+.body strong{color:var(--ink); font-weight:600;}
+
+.acts{display:flex; gap:10px; flex-wrap:wrap; margin-top:28px;}
+.acts button{
+  font:inherit; font-size:14px; font-weight:500; cursor:pointer;
+  padding:11px 20px; border-radius:calc(var(--radius) * .58);
+  border:var(--rule-w) solid var(--ink); background:var(--ink); color:var(--bezel);
+  transition:transform .12s ease;
+}
+.acts button.ghost{background:none; color:var(--ink);}
+.acts button:active{transform:translateY(1px);}
+
+/* the rail carries dates, because these entries are chronological. A number that means something
+   beats a number that decorates. */
+.rail{border:var(--rule-w) solid var(--rule); border-radius:calc(var(--radius) * .82); background:var(--panel); overflow:hidden;}
+.rail h2{
+  font-family:var(--display); font-size:13px; font-weight:600; letter-spacing:-.005em;
+  padding:14px 18px; border-bottom:var(--rule-w) solid var(--rule); color:var(--soft);
+}
+.entry{display:grid; grid-template-columns:auto 1fr; gap:14px; padding:14px 18px;}
+.entry + .entry{border-top:var(--rule-w) solid var(--rule);}
+.when{
+  font-family:var(--display); font-variant-numeric:tabular-nums lining-nums;
+  font-size:12.5px; font-weight:500; color:var(--quiet); padding-top:2px;
+  display:flex; align-items:flex-start; gap:9px; min-width:74px;
+}
+/* state is shown by position as well as colour — red/green alone is the worst pair for
+   colourblindness, and a scoring box uses left/right too */
+.mark{width:3px; align-self:stretch; border-radius:2px; background:var(--rule-firm);}
+.entry[data-state="a"] .mark{background:var(--sigA);}
+.entry[data-state="b"] .mark{background:var(--sigB);}
+.entry[data-state="both"] .mark{background:linear-gradient(var(--sigA) 0 50%, var(--sigB) 50% 100%);}
+.what{font-size:14px; font-weight:600; line-height:1.35;}
+.where{font-size:13px; color:var(--quiet); margin-top:3px; line-height:1.4;}
+
+.kit{margin-top:clamp(32px,4.6vw,52px); border-top:var(--rule-w) solid var(--rule); padding-top:26px;}
+.grp{display:grid; grid-template-columns:150px 1fr; gap:16px; padding:11px 0; align-items:baseline;}
+.grp + .grp{border-top:var(--rule-w) solid var(--rule);}
+@media (max-width:620px){ .grp{grid-template-columns:1fr; gap:5px;} }
+.grp dt{font-size:13.5px; font-weight:600; color:var(--soft);}
+.grp dd{display:flex; flex-wrap:wrap; gap:7px 14px; font-size:13.5px; color:var(--quiet);}
+
+footer{display:flex; gap:18px; justify-content:center; padding:16px; font-size:12px; color:var(--quiet);}
+footer button{font:inherit; background:none; border:0; color:inherit; cursor:pointer;}
+footer button:hover{color:var(--soft);}
+
+:focus-visible{outline:2px solid var(--ink); outline-offset:3px; border-radius:3px;}
+
+@media (max-width:620px){
+  .bar{flex-wrap:wrap; row-gap:9px;}
+  .addr{order:2; flex:1 1 100%;}
+  .skin-now{order:1; margin-left:auto;}
+}
+
+/* The switch is the one piece of motion, and it answers a click rather than playing on load. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none !important; animation:none !important;}
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none !important;}
+}
+::view-transition-old(device),::view-transition-new(device){animation-duration:.32s;}

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — design variations</title>
+<meta name="description" content="Ten skins for one layout. A design sandbox; every link is inert.">
+<meta name="color-scheme" content="light dark">
+
+<!-- Skins are plain CSS files listed in skins/manifest.json. Adding an eleventh means dropping a
+     file in skins/ and adding one line to the manifest — no code changes here. -->
+<link rel="stylesheet" href="skins/_base.css">
+<link rel="stylesheet" id="skinSheet" href="skins/piste.css">
+</head>
+<body>
+
+<header class="picker" id="picker">
+  <div class="picker-in">
+    <span class="picker-label">Skin</span>
+    <div class="picker-btns" id="skinButtons" role="group" aria-label="Choose a skin"></div>
+  </div>
+</header>
+
+<div class="device">
+  <div class="bar">
+    <div class="lamps"><i class="lamp"></i><i class="lamp"></i><i class="lamp"></i></div>
+    <div class="addr">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+        <rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+      </svg>
+      <span>aedinlai.com</span>
+    </div>
+    <span class="skin-now" id="skinNow"></span>
+  </div>
+
+  <nav aria-label="Sections">
+    <button type="button" aria-current="page">general</button>
+    <button type="button">projects</button>
+    <button type="button">resume</button>
+    <button type="button">news</button>
+    <button type="button">contact</button>
+  </nav>
+
+  <main>
+    <div class="top">
+      <div>
+        <h1>Aedin Lai</h1>
+        <p class="role">Electrical &amp; computer engineering, where the hardware and the software
+          have to agree.</p>
+        <div class="body">
+          <p>I build the measuring end of things — <strong>instrumentation that has to be right</strong>,
+            and the software that makes sense of what it reads. Recent work runs from data centre
+            infrastructure to research hardware for a neurology study, by way of an arcade machine
+            built from nothing.</p>
+          <p>I fence épée for Northeastern, which is the only weapon where both lights can come on
+            at once. That turns out to be a reasonable description of the work as well.</p>
+        </div>
+        <div class="acts">
+          <button type="button">See the work</button>
+          <button type="button" class="ghost">Get in touch</button>
+        </div>
+      </div>
+
+      <section class="rail" aria-label="Recent work">
+        <h2>Where I've been</h2>
+        <div class="entry" data-state="a">
+          <span class="when"><i class="mark"></i>2025</span>
+          <div><div class="what">Data Center Infrastructure Intern</div>
+            <div class="where">SingleStore — scaled a private cloud platform from 160 to over 300 VMs</div></div>
+        </div>
+        <div class="entry" data-state="b">
+          <span class="when"><i class="mark"></i>2025</span>
+          <div><div class="what">Co-authored research published in JAMA</div>
+            <div class="where">Yale School of Medicine, PEACE Foundation</div></div>
+        </div>
+        <div class="entry" data-state="both">
+          <span class="when"><i class="mark"></i>2021–25</span>
+          <div><div class="what">USA Fencing A25, All-American</div>
+            <div class="where">#103 national, #122 global</div></div>
+        </div>
+        <div class="entry" data-state="both">
+          <span class="when"><i class="mark"></i>2026</span>
+          <div><div class="what">Captain, Northeastern Club Fencing</div>
+            <div class="where">Leading the team into the national championship</div></div>
+        </div>
+      </section>
+    </div>
+
+    <dl class="kit">
+      <div class="grp"><dt>Writing code</dt>
+        <dd><span>Python</span><span>Java</span><span>C#</span><span>SQL</span><span>MATLAB</span><span>JavaScript</span></dd></div>
+      <div class="grp"><dt>Building hardware</dt>
+        <dd><span>Raspberry Pi</span><span>Embedded systems</span><span>Sensor integration</span><span>SolidWorks</span><span>AutoCAD</span></dd></div>
+      <div class="grp"><dt>Everything else</dt>
+        <dd><span>Git</span><span>Linux</span><span>Pandas</span><span>VS Code</span></dd></div>
+    </dl>
+  </main>
+</div>
+
+<footer>
+  <button type="button">Privacy</button>
+  <button type="button">Terms</button>
+</footer>
+
+<script>
+(async () => {
+  const sheet = document.getElementById('skinSheet');
+  const holder = document.getElementById('skinButtons');
+  const now = document.getElementById('skinNow');
+
+  let skins = [];
+  try {
+    skins = await (await fetch('skins/manifest.json', { cache: 'no-store' })).json();
+  } catch (e) {
+    holder.textContent = 'Could not load skins/manifest.json';
+    return;
+  }
+
+  // The address bar carries the choice, so a particular skin is linkable — which is how you look
+  // at one on a phone after picking it on a laptop. localStorage only remembers the last one.
+  const fromUrl = new URLSearchParams(location.search).get('skin');
+  let saved = null;
+  try { saved = localStorage.getItem('skin'); } catch {}
+  const start = skins.find((s) => s.id === fromUrl) || skins.find((s) => s.id === saved) || skins[0];
+
+  function apply(skin, { push = true } = {}) {
+    sheet.href = `skins/${skin.id}.css`;
+    document.documentElement.dataset.skin = skin.id;
+    now.textContent = skin.name;
+    for (const b of holder.children) b.setAttribute('aria-pressed', String(b.dataset.id === skin.id));
+    try { localStorage.setItem('skin', skin.id); } catch {}
+    if (push) {
+      const u = new URL(location.href);
+      u.searchParams.set('skin', skin.id);
+      history.replaceState({}, '', u);
+    }
+  }
+
+  for (const skin of skins) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.id = skin.id;
+    b.textContent = skin.name;
+    b.title = skin.note || '';
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => {
+      // One orchestrated moment, triggered by the person rather than played at them. Browsers
+      // without the API just get the instant swap, which is fine.
+      const go = () => apply(skin);
+      if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.startViewTransition(go);
+      } else { go(); }
+    });
+    holder.append(b);
+  }
+
+  apply(start, { push: false });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "piste",
+    "name": "Piste",
+    "note": "A fencing strip: cool steel, and the scoring lights"
+  },
+  {
+    "id": "cold-aisle",
+    "name": "Cold aisle",
+    "note": "A data-centre rack at 18°C"
+  },
+  {
+    "id": "cabinet",
+    "name": "Cabinet",
+    "note": "The arcade machine, built from nothing"
+  },
+  {
+    "id": "blueprint",
+    "name": "Blueprint",
+    "note": "Cyanotype: white rules on engineering blue"
+  },
+  {
+    "id": "solder-mask",
+    "name": "Solder mask",
+    "note": "A board before assembly: mask green, gold pads"
+  },
+  {
+    "id": "oscilloscope",
+    "name": "Oscilloscope",
+    "note": "Two traces on a graticule"
+  },
+  {
+    "id": "anodised",
+    "name": "Anodised",
+    "note": "Machined aluminium, dyed at the edges"
+  },
+  {
+    "id": "lab-book",
+    "name": "Lab book",
+    "note": "Graph paper, pencil, and a blue pen"
+  },
+  {
+    "id": "control-room",
+    "name": "Control room",
+    "note": "Amber, so your eyes stay dark-adapted"
+  },
+  {
+    "id": "lame",
+    "name": "Lamé",
+    "note": "The metallic jacket: everything is a conductor"
+  }
+]

@@ -275,14 +275,14 @@ footer button:hover{color:var(--soft);}
     padding:3px 10px; border-radius:999px;
     border:1px solid color-mix(in srgb, var(--chip) 38%, transparent);
     background:color-mix(in srgb, var(--chip) 13%, var(--panel));
-    color:color-mix(in srgb, var(--chip) 62%, var(--ink));
+    color:var(--chip-ink);
   }
-  .grp:nth-of-type(1) dd span{ --chip:var(--c1); }
-  .grp:nth-of-type(2) dd span{ --chip:var(--c5); }
-  .grp:nth-of-type(3) dd span{ --chip:var(--c6); }
-  .grp:nth-of-type(1) dt{ color:color-mix(in srgb, var(--c1) 55%, var(--ink)); }
-  .grp:nth-of-type(2) dt{ color:color-mix(in srgb, var(--c5) 55%, var(--ink)); }
-  .grp:nth-of-type(3) dt{ color:color-mix(in srgb, var(--c6) 55%, var(--ink)); }
+  .grp:nth-of-type(1) dd span{ --chip:var(--c1); --chip-ink:var(--c1-ink); }
+  .grp:nth-of-type(2) dd span{ --chip:var(--c5); --chip-ink:var(--c5-ink); }
+  .grp:nth-of-type(3) dd span{ --chip:var(--c6); --chip-ink:var(--c6-ink); }
+  .grp:nth-of-type(1) dt{ color:var(--c1-ink); }
+  .grp:nth-of-type(2) dt{ color:var(--c5-ink); }
+  .grp:nth-of-type(3) dt{ color:var(--c6-ink); }
   .grp{ border-top-color:color-mix(in srgb, var(--c4) 22%, var(--rule)); }
   .kit{ border-top-color:color-mix(in srgb, var(--c4) 30%, var(--rule)); }
 
@@ -290,14 +290,37 @@ footer button:hover{color:var(--soft);}
   .acts button:first-child{
     background:var(--c5-solid); border-color:var(--c5-solid); color:#fff;
   }
-  .acts button.ghost{ border-color:color-mix(in srgb, var(--c6) 55%, var(--rule-firm)); color:color-mix(in srgb, var(--c6) 60%, var(--ink)); }
+  .acts button.ghost{ border-color:color-mix(in srgb, var(--c6) 55%, var(--rule-firm)); color:var(--c6-ink); }
 
   /* the hero gets a coloured rule rather than a coloured word */
   h1{ padding-bottom:.08em; border-bottom:4px solid var(--c1);
       border-image:linear-gradient(90deg, var(--c1), var(--c5) 38%, var(--c6) 68%, var(--c3)) 1;
       display:inline-block; }
-  .role{ color:color-mix(in srgb, var(--c4) 34%, var(--soft)); }
+  .role{ color:var(--c4-ink); }
   .rail{ border-color:color-mix(in srgb, var(--c4) 26%, var(--rule)); }
+
+  /* a colour edge down the window, like a tabbed folder */
+  .device{ border-left:5px solid transparent;
+    border-image:linear-gradient(180deg, var(--c1), var(--c5) 34%, var(--c6) 67%, var(--c3)) 1; }
+  /* the tab strip picks up a wash, and each tab its own hue on hover */
+  nav{ background:linear-gradient(90deg,
+        color-mix(in srgb, var(--c1) 7%, transparent),
+        color-mix(in srgb, var(--c5) 7%, transparent) 50%,
+        color-mix(in srgb, var(--c6) 7%, transparent)); }
+  nav button:nth-child(1):hover{ color:var(--c1-ink); }
+  nav button:nth-child(2):hover{ color:var(--c5-ink); }
+  nav button:nth-child(3):hover{ color:var(--c3-ink); }
+  nav button:nth-child(4):hover{ color:var(--c6-ink); }
+  nav button:nth-child(5):hover{ color:var(--c2-ink); }
+  /* the date in each row takes its row's colour, so the rail reads at a glance */
+  .entry:nth-child(2) .when{ color:var(--c1-ink); }
+  .entry:nth-child(3) .when{ color:var(--c5-ink); }
+  .entry:nth-child(4) .when{ color:var(--c6-ink); }
+  .entry:nth-child(5) .when{ color:var(--c3-ink); }
+  /* the bold phrase in the body, and selection, join in */
+  .body strong{ color:var(--c5-ink); }
+  ::selection{ background:color-mix(in srgb, var(--c6) 30%, var(--panel)); color:var(--ink); }
+  .skin-all{ border-bottom-color:var(--c5); color:var(--c5-ink); }
   .addr{ border-color:color-mix(in srgb, var(--c5) 22%, var(--rule)); }
 }
 

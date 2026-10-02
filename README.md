@@ -1,6 +1,6 @@
 # aedinlai.com — design variations
 
-One hundred and twelve skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
+One hundred and twenty-eight skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
 a place to look at directions, not a working copy of the site.
 
 **Live:** https://www.aedinlai.com/aedinlai-redesigns/
@@ -18,6 +18,26 @@ all at a glance and filters by light or dark.
 Colour is **reserved for state** in all of them. It never tints a heading and never appears as
 decoration. The two signal colours come from épée, the one weapon where both lights can come on at
 once — which is also a fair description of working where hardware and software have to agree.
+
+## Two families
+
+**Reserved** — the original idea: near-monochrome, with two signal colours held back for state and
+never used as decoration.
+
+**Rich** (`--rich: on`) — colour used throughout on a white base: traffic-light window lamps, a
+gradient wash, a gradient rule under the name, a different hue per rail row and per skill group,
+coloured chips, a coloured tab strip and a coloured edge down the window. Sixteen so far —
+*spectrum, playroom, citrus, reef, studio, ribbon, bazaar, meridian, orchard, confetti, atlas,
+glasshouse, signal-mix, pastel-lab, kiosk, aurora-light*.
+
+Rich skins declare six accents (`c: [...]`). The generator derives two further variants of each,
+because neither can be judged by eye:
+
+- `--cN-ink` — the accent pushed until it clears AA **against the tints of itself it will sit on**.
+  A chip sits on 13% of its own accent, a rail row on 7%. Checking against the plain white surface
+  said 4.6 while the real background measured 4.27, and eight skins shipped under the line.
+- `--c5-solid` — darkened until white text on it passes, for the filled button. Tinting the text
+  toward the background instead gave 2.39:1.
 
 ## Tokens a skin can set
 
@@ -82,7 +102,7 @@ width, with no overflow and no script errors.
 ## Checked
 
 Every skin is checked against WCAG 2.0/2.1 A and AA at desktop and phone widths, with no horizontal
-overflow and no script errors — 336 combinations at the time of writing (Chrome desktop and phone, WebKit phone), and the check is re-run
+overflow and no script errors — 384 combinations at the time of writing (Chrome desktop and phone, WebKit phone), and the check is re-run
 whenever skins are added.
 
 Switching uses the **View Transitions API** where the browser has it, and falls back to an instant

@@ -706,5 +706,65 @@
     "name": "Ribbon",
     "note": "Colour applied in bands, not blocks",
     "tone": "light"
+  },
+  {
+    "id": "bazaar",
+    "name": "Bazaar",
+    "note": "Everything on display at once",
+    "tone": "light"
+  },
+  {
+    "id": "meridian",
+    "name": "Meridian",
+    "note": "Cool blues crossed by one warm line",
+    "tone": "light"
+  },
+  {
+    "id": "orchard",
+    "name": "Orchard",
+    "note": "Greens and reds, late in the season",
+    "tone": "light"
+  },
+  {
+    "id": "confetti",
+    "name": "Confetti",
+    "note": "Small bright things scattered on white",
+    "tone": "light"
+  },
+  {
+    "id": "atlas",
+    "name": "Atlas",
+    "note": "A map where every region is its own colour",
+    "tone": "light"
+  },
+  {
+    "id": "glasshouse",
+    "name": "Glasshouse",
+    "note": "Light through panes, everything slightly tinted",
+    "tone": "light"
+  },
+  {
+    "id": "signal-mix",
+    "name": "Signal mix",
+    "note": "All the indicator colours, used as indicators",
+    "tone": "light"
+  },
+  {
+    "id": "pastel-lab",
+    "name": "Pastel lab",
+    "note": "Soft hues, but still a working bench",
+    "tone": "light"
+  },
+  {
+    "id": "kiosk",
+    "name": "Kiosk",
+    "note": "Bright wayfinding, meant to be read fast",
+    "tone": "light"
+  },
+  {
+    "id": "aurora-light",
+    "name": "Aurora light",
+    "note": "The night sky palette, brought onto white",
+    "tone": "light"
   }
 ]

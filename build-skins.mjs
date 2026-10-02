@@ -665,6 +665,69 @@ const SKINS = [
     sigA:'#d6336c', sigB:'#15aabf', rich:true, radius:'24px', density:'spacious', layout:'stacked',
     c:['#d6336c','#f59f00','#15aabf','#7950f2','#37b24d','#1c7ed6'] },
 
+
+  { id:'bazaar', name:'Bazaar', note:'Everything on display at once',
+    ground:'#fbf8f4', bezel:'#ffffff', panel:'#ffffff', ink:'#18140f', scheme:'light',
+    soft:'#48423a', quiet:'#665f54', rule:'#ece5db', ruleFirm:'#cfc5b6',
+    sigA:'#c2255c', sigB:'#2b8a3e', rich:true, radius:'18px', density:'spacious',
+    c:['#c2255c','#f59f00','#2b8a3e','#1864ab','#7048e8','#e8590c'] },
+
+  { id:'meridian', name:'Meridian', note:'Cool blues crossed by one warm line',
+    ground:'#f5f8fd', bezel:'#ffffff', panel:'#ffffff', ink:'#111620', scheme:'light',
+    soft:'#404856', quiet:'#5c6576', rule:'#e2e9f4', ruleFirm:'#bfcbdd',
+    sigA:'#1c7ed6', sigB:'#f76707', rich:true, radius:'12px', layout:'mirrored',
+    c:['#1c7ed6','#4263eb','#0ca678','#7048e8','#f76707','#d6336c'] },
+
+  { id:'orchard', name:'Orchard', note:'Greens and reds, late in the season',
+    ground:'#f8faf5', bezel:'#ffffff', panel:'#ffffff', ink:'#141810', scheme:'light',
+    soft:'#434a39', quiet:'#5f6753', rule:'#e6ecdd', ruleFirm:'#c4cfb4',
+    sigA:'#2f9e44', sigB:'#e03131', rich:true, radius:'20px', density:'spacious',
+    c:['#2f9e44','#94d82d','#e03131','#f08c00','#1098ad','#862e9c'] },
+
+  { id:'confetti', name:'Confetti', note:'Small bright things scattered on white',
+    ground:'#ffffff', bezel:'#ffffff', panel:'#fcfcfd', ink:'#121214', scheme:'light',
+    soft:'#414146', quiet:'#5d5d64', rule:'#ececed', ruleFirm:'#cdcdd0',
+    sigA:'#e64980', sigB:'#15aabf', rich:true, radius:'999px', density:'spacious',
+    c:['#e64980','#fab005','#40c057','#228be6','#7950f2','#fd7e14'],
+    display:"'BricolageG', sans-serif", displayW:800, track:'-.035em' },
+
+  { id:'atlas', name:'Atlas', note:'A map where every region is its own colour',
+    ground:'#f7f6f2', bezel:'#ffffff', panel:'#ffffff', ink:'#17161a', scheme:'light',
+    soft:'#46444a', quiet:'#636168', rule:'#e8e6e0', ruleFirm:'#c9c6bd',
+    sigA:'#0b7285', sigB:'#a9471f', rich:true, radius:'6px', layout:'mirrored', density:'compact',
+    c:['#0b7285','#5c940d','#a9471f','#5f3dc4','#c2255c','#1864ab'] },
+
+  { id:'glasshouse', name:'Glasshouse', note:'Light through panes, everything slightly tinted',
+    ground:'#f4fbf8', bezel:'#ffffff', panel:'#ffffff', ink:'#101a16', scheme:'light',
+    soft:'#3e4a45', quiet:'#5a6862', rule:'#ddeee8', ruleFirm:'#b7d4c9',
+    sigA:'#099268', sigB:'#e8590c', rich:true, radius:'22px', density:'spacious', layout:'stacked',
+    c:['#099268','#15aabf','#f59f00','#4263eb','#e8590c','#ae3ec9'] },
+
+  { id:'signal-mix', name:'Signal mix', note:'All the indicator colours, used as indicators',
+    ground:'#f9f9fa', bezel:'#ffffff', panel:'#ffffff', ink:'#141416', scheme:'light',
+    soft:'#434347', quiet:'#5f5f65', rule:'#e9e9eb', ruleFirm:'#c9c9ce',
+    sigA:'#e03131', sigB:'#2f9e44', rich:true, radius:'8px', density:'compact',
+    c:['#e03131','#f59f00','#2f9e44','#1c7ed6','#7048e8','#0c8599'] },
+
+  { id:'pastel-lab', name:'Pastel lab', note:'Soft hues, but still a working bench',
+    ground:'#fbf9fc', bezel:'#ffffff', panel:'#ffffff', ink:'#16141a', scheme:'light',
+    soft:'#45424c', quiet:'#615d6b', rule:'#eeeaf1', ruleFirm:'#d0c9d6',
+    sigA:'#9c36b5', sigB:'#0ca678', rich:true, radius:'16px', density:'spacious',
+    c:['#9c36b5','#e64980','#0ca678','#4c6ef5','#f08c00','#12b886'] },
+
+  { id:'kiosk', name:'Kiosk', note:'Bright wayfinding, meant to be read fast',
+    ground:'#f6f7f8', bezel:'#ffffff', panel:'#ffffff', ink:'#131417', scheme:'light',
+    soft:'#42444a', quiet:'#5e6168', rule:'#e7e8ea', ruleFirm:'#c6c8cc',
+    sigA:'#d6336c', sigB:'#1971c2', rich:true, radius:'4px', density:'compact', layout:'stacked',
+    c:['#d6336c','#f76707','#2b8a3e','#1971c2','#6741d9','#0c8599'],
+    display:"'BricolageG', sans-serif", displayW:800, track:'-.03em' },
+
+  { id:'aurora-light', name:'Aurora light', note:'The night sky palette, brought onto white',
+    ground:'#f7f9fc', bezel:'#ffffff', panel:'#ffffff', ink:'#11151c', scheme:'light',
+    soft:'#3f4652', quiet:'#5b6370', rule:'#e5eaf2', ruleFirm:'#c2cbd9',
+    sigA:'#0ca678', sigB:'#7950f2', rich:true, radius:'24px', density:'spacious',
+    c:['#0ca678','#15aabf','#4c6ef5','#7950f2','#e64980','#f59f00'] },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });
@@ -700,6 +763,25 @@ function solidFor(c) {
   let guard = 0;
   while (col.contrast('#ffffff', 'WCAG21') < 4.6 && guard++ < 200) {
     col = col.set('hsl.l', (l) => Math.max(0, l - 1));
+  }
+  return col.to('srgb').toString({ format: 'hex' });
+}
+
+// Every accent also gets a readable variant: the same hue, pushed until it clears AA against the
+// worst of this skin's surfaces. Coloured TEXT uses that; the raw accent is for marks, borders and
+// tinted backgrounds only. Mixing an accent toward the ink by eye put eight skins under the line.
+function readable(c, surfaces, dark) {
+  let col = new Color(c);
+  // Rich mode puts this text on tints of its OWN accent — a chip sits on 13% of itself, a rail row
+  // on 7%. Checking against the plain surfaces alone said 4.6 while the real background measured
+  // 4.27, so include those tints in the worst case.
+  const base = surfaces[surfaces.length - 1];
+  const tint = (pct) => new Color(base).mix(new Color(c), pct / 100, { space: 'srgb' }).to('srgb').toString({ format: 'hex' });
+  const all = [...surfaces, tint(7), tint(13), tint(16)];
+  const worst = () => Math.min(...all.map((b) => col.contrast(b, 'WCAG21')));
+  let guard = 0;
+  while (worst() < 4.6 && guard++ < 220) {
+    col = col.set('hsl.l', (l) => Math.max(0, Math.min(100, l + (dark ? 0.8 : -0.8))));
   }
   return col.to('srgb').toString({ format: 'hex' });
 }
@@ -740,6 +822,7 @@ ${note}:root{
   --c1:${s.c?.[0] || s.sigA}; --c2:${s.c?.[1] || s.sigB}; --c3:${s.c?.[2] || s.sigA};
   --c4:${s.c?.[3] || s.sigB}; --c5:${s.c?.[4] || s.sigA}; --c6:${s.c?.[5] || s.sigB};
   --c5-solid:${solidFor(s.c?.[4] || s.sigA)};
+${[0,1,2,3,4,5].map((k) => `  --c${k+1}-ink:${readable(s.c?.[k] || (k % 2 ? s.sigB : s.sigA), surfaces, dark)};`).join('\n')}
 }
 `;
   writeFileSync(join(HERE, 'skins', `${s.id}.css`), css);

@@ -98,5 +98,45 @@
     "id": "night-match",
     "name": "Night match",
     "note": "A dark hall, one lit strip"
+  },
+  {
+    "id": "blinkenlights",
+    "name": "Blinkenlights",
+    "note": "A rack face in the dark, all status LEDs"
+  },
+  {
+    "id": "whiteboard",
+    "name": "Whiteboard",
+    "note": "Marker on a board mid-explanation"
+  },
+  {
+    "id": "multimeter",
+    "name": "Multimeter",
+    "note": "An LCD waiting for a reading"
+  },
+  {
+    "id": "chalk",
+    "name": "Chalk",
+    "note": "A board that has been half rubbed out"
+  },
+  {
+    "id": "copper",
+    "name": "Copper",
+    "note": "A ground pour before the mask goes on"
+  },
+  {
+    "id": "resistor",
+    "name": "Resistor",
+    "note": "Beige body, and the bands that tell you the value"
+  },
+  {
+    "id": "rubylith",
+    "name": "Rubylith",
+    "note": "Photomask film, cut by hand"
+  },
+  {
+    "id": "sodium",
+    "name": "Sodium",
+    "note": "A car park at night, one orange lamp"
   }
 ]

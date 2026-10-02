@@ -42,7 +42,23 @@ body{
   border-radius:var(--radius); padding:9px 12px;
 }
 .picker-label{font-size:12px; color:var(--quiet); flex:0 0 auto;}
-.picker-btns{display:flex; gap:5px; flex-wrap:wrap;}
+.picker-btns{display:flex; gap:5px; flex-wrap:wrap; position:relative;}
+
+/* An indicator that slides to whichever skin is selected, tethered with anchor positioning rather
+   than measured in JS. Progressive: without support the pressed button keeps its own border, so
+   nothing is lost — which is why there is no fallback to write. */
+@supports (anchor-name: --a) {
+  .picker-btns button[aria-pressed="true"]{ anchor-name:--skin-active; border-color:transparent; }
+  .picker-btns::before{
+    content:''; position:absolute; position-anchor:--skin-active;
+    inset-block-start:anchor(top); inset-block-end:anchor(bottom);
+    inset-inline-start:anchor(left); inset-inline-end:anchor(right);
+    border:var(--rule-w) solid var(--rule-firm); background:var(--panel);
+    border-radius:calc(var(--radius) * .7); z-index:0;
+    transition:all .34s cubic-bezier(.22,1,.36,1);
+  }
+  .picker-btns button{ position:relative; z-index:1; }
+}
 .picker-btns button{
   font:inherit; font-size:12px; letter-spacing:.005em; cursor:pointer;
   background:none; color:var(--quiet);

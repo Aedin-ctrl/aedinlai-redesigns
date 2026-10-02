@@ -126,6 +126,47 @@ const SKINS = [
     ground:'#08090c', bezel:'#101319', panel:'#161a22', ink:'#f0f3f8', scheme:'dark',
     soft:'#aeb6c2', quiet:'#8b94a2', rule:'#1f242e', ruleFirm:'#323a47',
     sigA:'#e63946', sigB:'#2a9d8f', radius:'18px', frame:'raised', density:'spacious' },
+
+  { id:'blinkenlights', name:'Blinkenlights', note:'A rack face in the dark, all status LEDs',
+    ground:'#050607', bezel:'#0c0e11', panel:'#111418', ink:'#e9eef2', scheme:'dark',
+    soft:'#a6b0ba', quiet:'#848f9a', rule:'#1b2027', ruleFirm:'#2b323b',
+    sigA:'#38d66b', sigB:'#ffb13d', radius:'3px', density:'compact' },
+
+  { id:'whiteboard', name:'Whiteboard', note:'Marker on a board mid-explanation',
+    ground:'#eceff0', bezel:'#f8fafa', panel:'#ffffff', ink:'#15181a', scheme:'light',
+    soft:'#464b4f', quiet:'#666d72', rule:'#d9dedf', ruleFirm:'#b2b9bb',
+    sigA:'#d1392b', sigB:'#1f6fd0', radius:'10px', density:'spacious' },
+
+  { id:'multimeter', name:'Multimeter', note:'An LCD waiting for a reading',
+    ground:'#9aa894', bezel:'#aab7a3', panel:'#b7c3b0', ink:'#10150f', scheme:'light',
+    soft:'#2f3a2b', quiet:'#46523f', rule:'#879479', ruleFirm:'#6d7a61',
+    sigA:'#8a2416', sigB:'#1c4a6b', radius:'4px', density:'compact',
+    display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.02em' },
+
+  { id:'chalk', name:'Chalk', note:'A board that has been half rubbed out',
+    ground:'#15201b', bezel:'#1c2a23', panel:'#22322a', ink:'#eef3ec', scheme:'dark',
+    soft:'#bfccbe', quiet:'#9fb09e', rule:'#2d4036', ruleFirm:'#3e5648',
+    sigA:'#ffd9a0', sigB:'#a8d5e2', radius:'7px', density:'spacious' },
+
+  { id:'copper', name:'Copper', note:'A ground pour before the mask goes on',
+    ground:'#2a1710', bezel:'#381e15', panel:'#44261a', ink:'#ffe8d5', scheme:'dark',
+    soft:'#d8b096', quiet:'#b88d72', rule:'#53311f', ruleFirm:'#6e432c',
+    sigA:'#ff9a52', sigB:'#6fc3b5', radius:'5px' },
+
+  { id:'resistor', name:'Resistor', note:'Beige body, and the bands that tell you the value',
+    ground:'#ded3bb', bezel:'#eae1cd', panel:'#f3ecdc', ink:'#1b1812', scheme:'light',
+    soft:'#4a4334', quiet:'#6a6150', rule:'#c9bda2', ruleFirm:'#a89a7c',
+    sigA:'#8a3b14', sigB:'#2b5e8a', radius:'999px', density:'regular' },
+
+  { id:'rubylith', name:'Rubylith', note:'Photomask film, cut by hand',
+    ground:'#2b0810', bezel:'#3a0c16', panel:'#47101c', ink:'#ffe7ec', scheme:'dark',
+    soft:'#e2a9b6', quiet:'#c78896', rule:'#5a1724', ruleFirm:'#762030',
+    sigA:'#ff6b8a', sigB:'#ffd166', radius:'2px', frame:'etched' },
+
+  { id:'sodium', name:'Sodium', note:'A car park at night, one orange lamp',
+    ground:'#120d06', bezel:'#1c150b', panel:'#241c0f', ink:'#ffeccd', scheme:'dark',
+    soft:'#d9bb8e', quiet:'#b89a6e', rule:'#352814', ruleFirm:'#4d3b1d',
+    sigA:'#ffa500', sigB:'#7fb3d5', radius:'12px', frame:'raised' },
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });
@@ -139,6 +180,19 @@ function fix(start, surfaces, dark) {
     c = c.set('hsl.l', (l) => Math.max(0, Math.min(100, l + (dark ? 0.6 : -0.6))));
   }
   return { hex: hex(c), ratio: worst(), moved: hex(c).toLowerCase() !== String(start).toLowerCase() };
+}
+
+// Catch a malformed palette here rather than three frames deep inside the colour library. A
+// stray non-ASCII character in a hex value cost more time than this check will ever take.
+const HEX = /^#[0-9a-fA-F]{6}$/;
+for (const s of SKINS) {
+  for (const key of ['ground','bezel','panel','ink','soft','quiet','rule','ruleFirm','sigA','sigB']) {
+    const v = s[key];
+    if (!HEX.test(v || '')) {
+      console.error(`skin "${s.id}": ${key} is ${JSON.stringify(v)} — expected a 6-digit hex like #aabbcc`);
+      process.exit(1);
+    }
+  }
 }
 
 const manifest = [];

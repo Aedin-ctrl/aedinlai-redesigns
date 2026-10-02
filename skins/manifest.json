@@ -244,5 +244,47 @@
     "name": "Engineering pad",
     "note": "Green tint, printed on the back",
     "tone": "light"
+  },
+  {
+    "id": "dot-matrix",
+    "name": "Dot matrix",
+    "note": "Green-bar paper, still joined at the edges",
+    "tone": "light"
+  },
+  {
+    "id": "arc-weld",
+    "name": "Arc weld",
+    "note": "Heat tint on steel, and one bright spark",
+    "tone": "dark"
+  },
+  {
+    "id": "bus-bar",
+    "name": "Bus bar",
+    "note": "Distribution gear, and the yellow that means stay back",
+    "tone": "dark"
+  },
+  {
+    "id": "breadboard",
+    "name": "Breadboard",
+    "note": "White plastic and whatever jumper colours you had",
+    "tone": "light"
+  },
+  {
+    "id": "datasheet",
+    "name": "Datasheet",
+    "note": "Dense, printed, and absolutely not decorative",
+    "tone": "light"
+  },
+  {
+    "id": "token",
+    "name": "Token",
+    "note": "Brass, worn smooth at the rim",
+    "tone": "dark"
+  },
+  {
+    "id": "target",
+    "name": "Target",
+    "note": "White jacket, lame over it, and one red light",
+    "tone": "light"
   }
 ]

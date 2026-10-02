@@ -1,6 +1,6 @@
 # aedinlai.com — design variations
 
-Ten skins for one layout, switchable from the buttons at the top. **Every link is inert** — this is
+Forty-eight skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
 a place to look at directions, not a working copy of the site.
 
 **Live:** https://www.aedinlai.com/aedinlai-redesigns/
@@ -8,35 +8,26 @@ a place to look at directions, not a working copy of the site.
 The chosen skin is in the address bar, so a link points at a specific one —
 `?skin=blueprint` — which is how you look at it on a phone after picking it on a laptop.
 
-## The ten
+## The skins
 
 Each is drawn from something in the subject's own world rather than a stock palette, because that is
-where a design that isn't interchangeable with anyone else's comes from.
-
-| | from |
-|---|---|
-| **Piste** | a fencing strip: cool steel, and the scoring lights |
-| **Cold aisle** | a data-centre rack at 18°C |
-| **Cabinet** | the arcade machine, built from nothing |
-| **Blueprint** | cyanotype: white rules on engineering blue |
-| **Solder mask** | a board before assembly: mask green, gold pads |
-| **Oscilloscope** | two traces on a graticule |
-| **Anodised** | machined aluminium, dyed at the edges |
-| **Lab book** | graph paper, pencil, and a blue pen |
-| **Control room** | amber, so your eyes stay dark-adapted |
-| **Lamé** | the metallic jacket: everything is a conductor |
+where a design that isn't interchangeable with anyone else's comes from — fencing, data centres, the
+bench, the arcade, the lab. `skins/manifest.json` is the current list; the gallery page shows them
+all at a glance and filters by light or dark.
 
 Colour is **reserved for state** in all of them. It never tints a heading and never appears as
 decoration. The two signal colours come from épée, the one weapon where both lights can come on at
 once — which is also a fair description of working where hardware and software have to agree.
 
-## Adding an eleventh
+## Adding another
 
 Add an entry to `SKINS` in `build-skins.mjs`, then:
 
 ```sh
-npm install        # once, for colorjs.io
-npm run skins
+npm install                 # once
+npm run skins               # writes skins/*.css and the manifest
+python3 -m http.server 8931 # then, in another shell:
+node make-thumbs.mjs        # refreshes the gallery thumbnails
 ```
 
 That writes `skins/<id>.css` and updates `skins/manifest.json`; the page builds its buttons from the
@@ -44,7 +35,7 @@ manifest, so there is no code to change.
 
 **The build enforces contrast so you cannot get it wrong.** Each skin names three surfaces and three
 text greys, and the generator walks each grey until it clears WCAG AA against the *worst* of the
-three. Three of the ten needed correcting. This is deliberate: the same mistake — a grey that passes
+three. Fourteen of the forty-eight needed correcting. This is deliberate: the same mistake — a grey that passes
 against the panel and fails against the page behind it — was made three times by eye in a single day
 before the build started checking it.
 
@@ -60,8 +51,9 @@ before the build started checking it.
 
 ## Checked
 
-All 30 combinations — ten skins across desktop, tablet and phone — are clean against WCAG 2.0/2.1
-A and AA, with no horizontal overflow and no script errors.
+Every skin is checked against WCAG 2.0/2.1 A and AA at desktop and phone widths, with no horizontal
+overflow and no script errors — 96 combinations at the time of writing, and the check is re-run
+whenever skins are added.
 
 Switching uses the **View Transitions API** where the browser has it, and falls back to an instant
 swap where it doesn't. It is the only motion on the page, and it answers a click rather than playing

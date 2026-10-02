@@ -239,6 +239,46 @@ const SKINS = [
     sigA:'#1f6b4f', sigB:'#8a4b1f', radius:'1px', density:'compact', frame:'etched',
     texture:'repeating-linear-gradient(0deg, rgba(60,100,60,.07) 0 1px, transparent 1px 15px), repeating-linear-gradient(90deg, rgba(60,100,60,.07) 0 1px, transparent 1px 15px)' },
 
+
+  { id:'dot-matrix', name:'Dot matrix', note:'Green-bar paper, still joined at the edges',
+    ground:'#dfe7dc', bezel:'#eaf0e7', panel:'#f4f7f2', ink:'#17190f', scheme:'light',
+    soft:'#44483a', quiet:'#646956', rule:'#c9d6c4', ruleFirm:'#a4b59d',
+    sigA:'#1f5f3f', sigB:'#8a4418', radius:'0px', density:'compact',
+    display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.02em',
+    texture:'repeating-linear-gradient(0deg, rgba(40,90,50,.08) 0 18px, transparent 18px 36px)' },
+
+  { id:'arc-weld', name:'Arc weld', note:'Heat tint on steel, and one bright spark',
+    ground:'#1b1e22', bezel:'#24282d', panel:'#2c3138', ink:'#eef1f4', scheme:'dark',
+    soft:'#b3bac2', quiet:'#939ba5', rule:'#353b43', ruleFirm:'#49515c',
+    sigA:'#ff8c2b', sigB:'#6ba6ff', radius:'3px', frame:'raised' },
+
+  { id:'bus-bar', name:'Bus bar', note:'Distribution gear, and the yellow that means stay back',
+    ground:'#232529', bezel:'#2d3035', panel:'#363a40', ink:'#f1f2f4', scheme:'dark',
+    soft:'#b8bcc3', quiet:'#989da6', rule:'#3f444b', ruleFirm:'#545b64',
+    sigA:'#ffd500', sigB:'#4aa3df', radius:'2px', density:'compact' },
+
+  { id:'breadboard', name:'Breadboard', note:'White plastic and whatever jumper colours you had',
+    ground:'#e9e7e1', bezel:'#f4f3ef', panel:'#fbfaf8', ink:'#1a1917', scheme:'light',
+    soft:'#48463f', quiet:'#68655c', rule:'#d8d5cc', ruleFirm:'#b4b0a4',
+    sigA:'#c62828', sigB:'#1565c0', radius:'5px',
+    texture:'repeating-linear-gradient(90deg, rgba(120,115,100,.07) 0 1px, transparent 1px 11px)' },
+
+  { id:'datasheet', name:'Datasheet', note:'Dense, printed, and absolutely not decorative',
+    ground:'#f0f0ee', bezel:'#f8f8f7', panel:'#ffffff', ink:'#111111', scheme:'light',
+    soft:'#3f3f3f', quiet:'#616161', rule:'#dcdcda', ruleFirm:'#b5b5b2',
+    sigA:'#0a4a8f', sigB:'#8c2f0d', radius:'0px', density:'compact',
+    display:"'InterLocal', system-ui, sans-serif", displayW:700, track:'-.03em' },
+
+  { id:'token', name:'Token', note:'Brass, worn smooth at the rim',
+    ground:'#2b2415', bezel:'#39301d', panel:'#453b25', ink:'#ffefc9', scheme:'dark',
+    soft:'#dcc08a', quiet:'#bb9f6c', rule:'#54482c', ruleFirm:'#6e5e3a',
+    sigA:'#e7c25d', sigB:'#8fb9a8', radius:'999px', frame:'raised' },
+
+  { id:'target', name:'Target', note:'White jacket, lame over it, and one red light',
+    ground:'#e7e8ea', bezel:'#f2f3f4', panel:'#fafafb', ink:'#121316', scheme:'light',
+    soft:'#45474b', quiet:'#64676c', rule:'#d6d8db', ruleFirm:'#aeb1b6',
+    sigA:'#b00020', sigB:'#4a4e55', radius:'8px', density:'spacious', frame:'etched' },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });

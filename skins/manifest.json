@@ -478,5 +478,53 @@
     "name": "Brass rule",
     "note": "A straightedge that has been used for years",
     "tone": "light"
+  },
+  {
+    "id": "salt-flat",
+    "name": "Salt flat",
+    "note": "Very flat, very bright, no shade anywhere",
+    "tone": "light"
+  },
+  {
+    "id": "harbour",
+    "name": "Harbour",
+    "note": "Steel, rust, and a cold morning",
+    "tone": "dark"
+  },
+  {
+    "id": "lichen",
+    "name": "Lichen",
+    "note": "Slow growth on a north-facing wall",
+    "tone": "light"
+  },
+  {
+    "id": "vellum",
+    "name": "Vellum",
+    "note": "Thin, translucent, and difficult to work on",
+    "tone": "light"
+  },
+  {
+    "id": "basalt",
+    "name": "Basalt",
+    "note": "Columns that cooled into hexagons",
+    "tone": "dark"
+  },
+  {
+    "id": "citrine",
+    "name": "Citrine",
+    "note": "A warm stone held up to the light",
+    "tone": "dark"
+  },
+  {
+    "id": "newsprint",
+    "name": "Newsprint",
+    "note": "Grey paper that rubs off on your hands",
+    "tone": "light"
+  },
+  {
+    "id": "signal-green",
+    "name": "Signal green",
+    "note": "The other lamp, on its own for once",
+    "tone": "dark"
   }
 ]

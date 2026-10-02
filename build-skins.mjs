@@ -456,6 +456,48 @@ const SKINS = [
     soft:'#484334', quiet:'#67624f', rule:'#d3cab4', ruleFirm:'#b0a488',
     sigA:'#8a6a1f', sigB:'#2f5a6b', radius:'2px', layout:'mirrored', frame:'etched' },
 
+
+  { id:'salt-flat', name:'Salt flat', note:'Very flat, very bright, no shade anywhere',
+    ground:'#eceae4', bezel:'#f5f4f0', panel:'#fbfaf8', ink:'#17171a', scheme:'light',
+    soft:'#45454a', quiet:'#64646a', rule:'#dddbd5', ruleFirm:'#b5b3ad',
+    sigA:'#b0552a', sigB:'#2a6b8f', radius:'0px', layout:'stacked', density:'spacious' },
+
+  { id:'harbour', name:'Harbour', note:'Steel, rust, and a cold morning',
+    ground:'#15222b', bezel:'#1d2d38', panel:'#243744', ink:'#e9f1f6', scheme:'dark',
+    soft:'#a9c0ce', quiet:'#89a4b4', rule:'#2d4552', ruleFirm:'#3d5a6b',
+    sigA:'#e07a3f', sigB:'#6fc2d6', radius:'6px', layout:'mirrored' },
+
+  { id:'lichen', name:'Lichen', note:'Slow growth on a north-facing wall',
+    ground:'#dfe3d6', bezel:'#eaeee2', panel:'#f3f6ec', ink:'#181a13', scheme:'light',
+    soft:'#45483a', quiet:'#656956', rule:'#cbd2bd', ruleFirm:'#a6af96',
+    sigA:'#5a6b1f', sigB:'#8a4a2a', radius:'14px', density:'spacious', frame:'etched' },
+
+  { id:'vellum', name:'Vellum', note:'Thin, translucent, and difficult to work on',
+    ground:'#eae6da', bezel:'#f3f0e8', panel:'#faf8f3', ink:'#1a1813', scheme:'light',
+    soft:'#474236', quiet:'#676252', rule:'#d9d3c3', ruleFirm:'#b5ad98',
+    sigA:'#6b3a1f', sigB:'#2a5a52', radius:'5px', layout:'mirrored', density:'compact' },
+
+  { id:'basalt', name:'Basalt', note:'Columns that cooled into hexagons',
+    ground:'#141618', bezel:'#1c1f22', panel:'#23272b', ink:'#eaedf0', scheme:'dark',
+    soft:'#aeb4ba', quiet:'#8e959c', rule:'#2a2f34', ruleFirm:'#3b424a',
+    sigA:'#9bb8c9', sigB:'#c98a5a', radius:'0px', layout:'stacked', density:'compact' },
+
+  { id:'citrine', name:'Citrine', note:'A warm stone held up to the light',
+    ground:'#2a2410', bezel:'#372f16', panel:'#443a1c', ink:'#fff3cf', scheme:'dark',
+    soft:'#dcc890', quiet:'#bca971', rule:'#514623', ruleFirm:'#6b5c30',
+    sigA:'#ffd04d', sigB:'#86c6b0', radius:'16px', frame:'raised', density:'spacious' },
+
+  { id:'newsprint', name:'Newsprint', note:'Grey paper that rubs off on your hands',
+    ground:'#e4e2dd', bezel:'#eeedea', panel:'#f6f5f3', ink:'#1a1a1a', scheme:'light',
+    soft:'#444444', quiet:'#636363', rule:'#d4d2cd', ruleFirm:'#aeaca7',
+    sigA:'#8c1c13', sigB:'#1c3f6e', radius:'0px', layout:'stacked', density:'compact',
+    display:"'InstrumentS', Georgia, serif", displayW:400, track:'-.012em' },
+
+  { id:'signal-green', name:'Signal green', note:'The other lamp, on its own for once',
+    ground:'#0a1410', bezel:'#101d17', panel:'#15261d', ink:'#e6f6ec', scheme:'dark',
+    soft:'#a6cdb5', quiet:'#86ae95', rule:'#1c3327', ruleFirm:'#294634',
+    sigA:'#2ecc71', sigB:'#ffd166', radius:'9px', layout:'mirrored', frame:'raised' },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });

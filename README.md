@@ -1,6 +1,6 @@
 # aedinlai.com — design variations
 
-Eighty skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
+Eighty-eight skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
 a place to look at directions, not a working copy of the site.
 
 **Live:** https://www.aedinlai.com/aedinlai-redesigns/
@@ -82,7 +82,7 @@ width, with no overflow and no script errors.
 ## Checked
 
 Every skin is checked against WCAG 2.0/2.1 A and AA at desktop and phone widths, with no horizontal
-overflow and no script errors — 240 combinations at the time of writing (Chrome desktop and phone, WebKit phone), and the check is re-run
+overflow and no script errors — 264 combinations at the time of writing (Chrome desktop and phone, WebKit phone), and the check is re-run
 whenever skins are added.
 
 Switching uses the **View Transitions API** where the browser has it, and falls back to an instant

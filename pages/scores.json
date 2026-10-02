@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "piste",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 11,
+      "keyframes": 3,
+      "transitions": 3,
+      "mediaQueries": 2,
+      "interactive": 2,
+      "landmarks": 2,
+      "headings": 1,
+      "svg": 0,
+      "canvas": 0,
+      "textChars": 704
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 11995,
+    "nearest": 99,
+    "fit": true,
+    "score": 81
+  }
+]

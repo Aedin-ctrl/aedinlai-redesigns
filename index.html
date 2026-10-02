@@ -3,223 +3,96 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aedin Lai — design variations</title>
-<meta name="description" content="Ten skins for one layout. A design sandbox; every link is inert.">
+<title>Redesigns — aedinlai.com</title>
+<meta name="description" content="Twenty alternative designs for one personal site. Each page is its own design, not a repaint.">
 <meta name="color-scheme" content="light dark">
+<style>
+  @font-face{font-family:'Archivo';src:url('fonts/Archivo-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('fonts/Inter-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
 
-<!-- Skins are plain CSS files listed in skins/manifest.json. Adding an eleventh means dropping a
-     file in skins/ and adding one line to the manifest — no code changes here. -->
-<link rel="stylesheet" href="skins/_base.css">
-<link rel="stylesheet" id="skinSheet" href="skins/piste.css">
+  :root{
+    --page:#eef0f3; --card:#fff; --ink:#111419; --soft:#424953; --quiet:#596170;
+    --rule:#d2d8df; --accent:#00603a;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--page:#101216; --card:#181b21; --ink:#f2f4f7; --soft:#bcc3cd; --quiet:#a3abb7;
+          --rule:#2b303a; --accent:#5fd3a0;}
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Inter',system-ui,sans-serif; background:var(--page); color:var(--ink);
+    line-height:1.55; padding:clamp(20px,4vw,52px) clamp(16px,4vw,52px) 80px;
+  }
+  header{max-width:72ch;margin-bottom:38px;}
+  h1{font-family:'Archivo',sans-serif;font-weight:700;letter-spacing:-.04em;
+     font-size:clamp(32px,6vw,54px);line-height:1;margin-bottom:14px;}
+  .sub{color:var(--soft);font-size:clamp(15px,2vw,17px);max-width:58ch;}
+  .meta{margin-top:14px;font-size:13px;color:var(--quiet);font-variant-numeric:tabular-nums;}
+
+  .grid{display:grid;gap:clamp(14px,2vw,22px);
+        grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));}
+  .card{
+    background:var(--card);border:1px solid var(--rule);border-radius:12px;overflow:hidden;
+    display:flex;flex-direction:column;text-decoration:none;color:inherit;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .card:hover{border-color:var(--accent);}
+  .card:active{transform:translateY(1px);}
+  .card img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;
+            object-position:top center;background:var(--page);border-bottom:1px solid var(--rule);}
+  .card .body{padding:13px 15px 15px;}
+  .card h2{font-family:'Archivo',sans-serif;font-size:16px;font-weight:600;letter-spacing:-.015em;margin-bottom:4px;}
+  .card p{font-size:13.5px;color:var(--quiet);}
+  .empty{color:var(--quiet);font-size:15px;}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px;}
+  footer{margin-top:46px;font-size:13px;color:var(--quiet);max-width:70ch;}
+  a{color:inherit;}
+</style>
 </head>
 <body>
-
-<header class="picker" id="picker">
-  <div class="picker-in">
-    <span class="picker-label">Skin</span>
-    <div class="picker-filter" role="group" aria-label="Filter by tone">
-      <button type="button" data-tone="all" aria-pressed="true">All</button>
-      <button type="button" data-tone="light" aria-pressed="false">Light</button>
-      <button type="button" data-tone="dark" aria-pressed="false">Dark</button>
-    </div>
-    <div class="picker-step">
-      <button type="button" id="prevSkin" aria-label="Previous skin">&#8249;</button>
-      <button type="button" id="nextSkin" aria-label="Next skin">&#8250;</button>
-    </div>
-    <div class="picker-btns" id="skinButtons" role="group" aria-label="Choose a skin"></div>
-  </div>
+<header>
+  <h1>Redesigns</h1>
+  <p class="sub">Alternative designs for <a href="https://www.aedinlai.com/">aedinlai.com</a>. Each one is a
+    standalone page with its own layout and its own single idea — not one layout repainted. New ones
+    are added in batches; the weakest are retired, so the set turns over.</p>
+  <p class="meta" id="meta"></p>
 </header>
 
-<div class="device">
-  <div class="bar">
-    <div class="lamps"><i class="lamp"></i><i class="lamp"></i><i class="lamp"></i></div>
-    <div class="addr">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
-        <rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
-      </svg>
-      <span>aedinlai.com</span>
-    </div>
-    <span class="skin-now" id="skinNow"></span>
-    <a class="skin-all" href="gallery.html">see all</a>
-  </div>
-
-  <nav aria-label="Sections">
-    <button type="button" aria-current="page">general</button>
-    <button type="button">projects</button>
-    <button type="button">resume</button>
-    <button type="button">news</button>
-    <button type="button">contact</button>
-  </nav>
-
-  <main>
-    <div class="top">
-      <div>
-        <h1>Aedin Lai</h1>
-        <p class="role">Electrical &amp; computer engineering, where the hardware and the software
-          have to agree.</p>
-        <div class="body">
-          <p>I build the measuring end of things — <strong>instrumentation that has to be right</strong>,
-            and the software that makes sense of what it reads. Recent work runs from data centre
-            infrastructure to research hardware for a neurology study, by way of an arcade machine
-            built from nothing.</p>
-          <p>I fence épée for Northeastern, which is the only weapon where both lights can come on
-            at once. That turns out to be a reasonable description of the work as well.</p>
-        </div>
-        <div class="acts">
-          <button type="button">See the work</button>
-          <button type="button" class="ghost">Get in touch</button>
-        </div>
-      </div>
-
-      <section class="rail" aria-label="Recent work">
-        <h2>Where I've been</h2>
-        <div class="entry" data-state="a">
-          <span class="when"><i class="mark"></i>2025</span>
-          <div><div class="what">Data Center Infrastructure Intern</div>
-            <div class="where">SingleStore — scaled a private cloud platform from 160 to over 300 VMs</div></div>
-        </div>
-        <div class="entry" data-state="b">
-          <span class="when"><i class="mark"></i>2025</span>
-          <div><div class="what">Co-authored research published in JAMA</div>
-            <div class="where">Yale School of Medicine, PEACE Foundation</div></div>
-        </div>
-        <div class="entry" data-state="both">
-          <span class="when"><i class="mark"></i>2021–25</span>
-          <div><div class="what">USA Fencing A25, All-American</div>
-            <div class="where">#103 national, #122 global</div></div>
-        </div>
-        <div class="entry" data-state="both">
-          <span class="when"><i class="mark"></i>2026</span>
-          <div><div class="what">Captain, Northeastern Club Fencing</div>
-            <div class="where">Leading the team into the national championship</div></div>
-        </div>
-      </section>
-    </div>
-
-    <dl class="kit">
-      <div class="grp"><dt>Writing code</dt>
-        <dd><span>Python</span><span>Java</span><span>C#</span><span>SQL</span><span>MATLAB</span><span>JavaScript</span></dd></div>
-      <div class="grp"><dt>Building hardware</dt>
-        <dd><span>Raspberry Pi</span><span>Embedded systems</span><span>Sensor integration</span><span>SolidWorks</span><span>AutoCAD</span></dd></div>
-      <div class="grp"><dt>Everything else</dt>
-        <dd><span>Git</span><span>Linux</span><span>Pandas</span><span>VS Code</span></dd></div>
-    </dl>
-  </main>
-</div>
+<main>
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>Nothing here yet — the first batch is being built.</p>
+</main>
 
 <footer>
-  <button type="button">Privacy</button>
-  <button type="button">Terms</button>
+  Every page is gated before it is allowed to live: WCAG 2.1 AA in Chrome and in Safari at phone
+  width, no horizontal overflow, no script errors, and motion that genuinely stops under
+  <code>prefers-reduced-motion</code> rather than merely claiming to. Links inside the pages are
+  inert — these are designs, not a working copy of the site.
 </footer>
 
 <script>
 (async () => {
-  const sheet = document.getElementById('skinSheet');
-  const holder = document.getElementById('skinButtons');
-  const now = document.getElementById('skinNow');
+  const grid = document.getElementById('grid');
+  const meta = document.getElementById('meta');
+  let pages = [];
+  try { pages = await (await fetch('pages/manifest.json', { cache: 'no-store' })).json(); } catch {}
 
-  let skins = [];
-  try {
-    skins = await (await fetch('skins/manifest.json', { cache: 'no-store' })).json();
-  } catch (e) {
-    holder.textContent = 'Could not load skins/manifest.json';
-    return;
-  }
+  if (!pages.length) { document.getElementById('empty').hidden = false; return; }
 
-  // The address bar carries the choice, so a particular skin is linkable — which is how you look
-  // at one on a phone after picking it on a laptop. localStorage only remembers the last one.
-  const fromUrl = new URLSearchParams(location.search).get('skin');
-  let saved = null;
-  try { saved = localStorage.getItem('skin'); } catch {}
-  const start = skins.find((s) => s.id === fromUrl) || skins.find((s) => s.id === saved) || skins[0];
-
-  let committed = null;
-
-  function apply(skin, { push = true, remember = true } = {}) {
-    sheet.href = `skins/${skin.id}.css`;
-    document.documentElement.dataset.skin = skin.id;
-    now.textContent = skin.name;
-    // the pressed state follows the committed choice, not a passing preview
-    const marked = remember ? skin : (committed || skin);
-    for (const b of holder.children) b.setAttribute('aria-pressed', String(b.dataset.id === marked.id));
-    if (!remember) return;
-    try { localStorage.setItem('skin', skin.id); } catch {}
-    if (push) {
-      const u = new URL(location.href);
-      u.searchParams.set('skin', skin.id);
-      history.replaceState({}, '', u);
-    }
-  }
-
-  for (const skin of skins) {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.dataset.id = skin.id;
-    b.textContent = skin.name;
-    b.title = skin.note || '';
-    b.setAttribute('aria-pressed', 'false');
-    b.addEventListener('click', () => {
-      committed = skin;
-      // One orchestrated moment, triggered by the person rather than played at them. Browsers
-      // without the API just get the instant swap, which is fine.
-      const go = () => apply(skin);
-      if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.startViewTransition(go);
-      } else { go(); }
-    });
-
-    // Preview on hover or keyboard focus, and put it back on the way out. Done with plain events
-    // rather than interest invokers, which are still experimental — a gallery's whole job is
-    // letting you look, so this is not somewhere to depend on a flag.
-    const peek = () => { if (skin !== committed) apply(skin, { push: false, remember: false }); };
-    const unpeek = () => { if (committed && skin !== committed) apply(committed, { push: false, remember: false }); };
-    b.addEventListener('pointerenter', peek);
-    b.addEventListener('pointerleave', unpeek);
-    b.addEventListener('focus', peek);
-    b.addEventListener('blur', unpeek);
-
-    holder.append(b);
-  }
-
-  committed = start;
-  apply(start, { push: false });
-  scrollSelectedIntoView();
-
-  function scrollSelectedIntoView() {
-    const el = holder.querySelector('button[aria-pressed="true"]');
-    el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
-  }
-
-  // Stepping, for when you want to walk the whole set rather than hunt for one.
-  function step(by) {
-    const visible = [...holder.children].filter((b) => !b.hidden);
-    const here = visible.findIndex((b) => b.dataset.id === committed.id);
-    const next = visible[(here + by + visible.length) % visible.length];
-    next?.click();
-    requestAnimationFrame(scrollSelectedIntoView);
-  }
-  document.getElementById('prevSkin').addEventListener('click', () => step(-1));
-  document.getElementById('nextSkin').addEventListener('click', () => step(1));
-  addEventListener('keydown', (e) => {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
-    const tag = (e.target.tagName || '').toLowerCase();
-    if (tag === 'input' || tag === 'textarea') return;
-    if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
-  });
-
-  // Tone filter. With this many skins, looking only at the light ones is a real need.
-  for (const f of document.querySelectorAll('.picker-filter button')) {
-    f.addEventListener('click', () => {
-      const tone = f.dataset.tone;
-      for (const o of document.querySelectorAll('.picker-filter button')) {
-        o.setAttribute('aria-pressed', String(o === f));
-      }
-      for (const b of holder.children) {
-        const s = skins.find((x) => x.id === b.dataset.id);
-        b.hidden = tone !== 'all' && s.tone !== tone;
-      }
-    });
+  meta.textContent = `${pages.length} ${pages.length === 1 ? 'design' : 'designs'}`;
+  for (const p of pages) {
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.href = `pages/${p.slug}/`;
+    a.innerHTML = `
+      <img src="shots/${p.slug}.webp" alt="" loading="lazy" width="600" height="400">
+      <div class="body">
+        <h2></h2>
+        <p></p>
+      </div>`;
+    a.querySelector('h2').textContent = p.name;
+    a.querySelector('p').textContent = p.idea;
+    grid.append(a);
   }
 })();
 </script>

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — transit</title>
+<meta name="description" content="A personal page drawn as a transit diagram: three lines, one interchange.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f4f4f2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4f4f2'/%3E%3Cg fill='none' stroke-width='3.4' stroke-linecap='round'%3E%3Cpath d='M5 10h9l7 7h6' stroke='%23c3362b'/%3E%3Cpath d='M5 22h9l7-7h6' stroke='%231c5fa8'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='3.6' fill='%23fff' stroke='%23201f1d' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'Archivo';src:url('../../fonts/Archivo-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('../../fonts/Inter-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+
+  :root{
+    --paper:#f4f4f2; --card:#fff; --ink:#201f1d; --soft:#3c3b38; --quiet:#52514d;
+    --faint:#63625d; --rule:#d7d7d3;
+    --red:#c3362b; --blue:#1c5fa8; --green:#17714f;
+    --ease:cubic-bezier(.25,.85,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;color:var(--ink);line-height:1.6;
+    background:var(--paper);overflow-x:hidden;padding:clamp(14px,3vw,42px);
+  }
+  ::selection{background:var(--ink);color:var(--paper);}
+
+  body::before{
+    content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+    background:radial-gradient(50% 42% at 18% 6%, rgba(255,255,255,.95), transparent 66%),
+               radial-gradient(44% 38% at 86% 94%, rgba(32,31,29,.05), transparent 70%);
+    animation:board 50s ease-in-out infinite alternate;
+  }
+  @keyframes board{from{transform:translate3d(-1.6%,-1%,0) scale(1)}to{transform:translate3d(2%,1.4%,0) scale(1.05)}}
+
+  .network{max-width:1120px;margin:0 auto;}
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;
+         border-bottom:2px solid var(--ink);padding-bottom:13px;margin-bottom:20px;}
+  h1{font-family:'Archivo',sans-serif;font-weight:700;letter-spacing:-.04em;
+     font-size:clamp(32px,6vw,56px);line-height:.95;}
+  header p{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+           text-align:right;line-height:1.8;}
+
+  /* ---- line key ---- */
+  .key{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:18px;}
+  .key > span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);}
+  .key button{
+    font:inherit;font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+    color:var(--quiet);background:var(--card);border:1px solid var(--rule);border-radius:999px;
+    padding:5px 14px 5px 9px;
+    transition:color 140ms ease,border-color 140ms ease,transform 60ms ease,opacity 140ms ease;
+  }
+  .key button:hover{color:var(--ink);border-color:var(--ink);}
+  .key button:active{transform:translateY(1px);}
+  .key button[aria-pressed="false"]{opacity:.42;}
+  .key .bar{width:16px;height:5px;border-radius:3px;}
+
+  .deck{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);
+        gap:clamp(16px,3vw,36px);align-items:start;}
+  @media (max-width:860px){.deck{grid-template-columns:1fr;}}
+
+  .diagram{background:var(--card);border:1px solid var(--rule);border-radius:10px;
+           padding:clamp(12px,2vw,20px);position:sticky;top:clamp(14px,3vw,42px);}
+  .diagram svg{display:block;width:100%;height:auto;}
+  .route{fill:none;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;
+         transition:opacity 220ms var(--ease), stroke-width 220ms var(--ease);}
+  .r-red{stroke:var(--red);} .r-blue{stroke:var(--blue);} .r-green{stroke:var(--green);}
+  :root[data-red="off"] .r-red,
+  :root[data-blue="off"] .r-blue,
+  :root[data-green="off"] .r-green{opacity:.12;}
+  .stop circle{fill:#fff;stroke:var(--ink);stroke-width:2.6;transition:r 200ms var(--ease);}
+  .stop.interchange circle{stroke-width:3.4;}
+  .stop text{font-family:'Archivo',sans-serif;font-size:10px;fill:var(--soft);font-weight:600;
+             letter-spacing:-.008em;}
+  .stop .yr{font-size:8.5px;fill:var(--faint);font-weight:400;}
+  .stop-hit{fill:transparent;cursor:pointer;}
+  .stop.on circle{r:7.5;}
+  .stop.on text{fill:var(--ink);}
+
+  /* ---- the stops, written out ---- */
+  .stops > section{
+    scroll-margin-top:clamp(14px,3vw,42px);
+    background:var(--card);border:1px solid var(--rule);border-radius:10px;
+    padding:clamp(15px,2.4vw,22px);margin-bottom:12px;position:relative;overflow:hidden;
+    transition:border-color 200ms var(--ease);
+  }
+  .stops > section::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+                           background:var(--hue);}
+  .stops > section.on{border-color:var(--hue);}
+  .stops .ln{font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--hue);
+             font-weight:600;}
+  .stops h2{font-family:'Archivo',sans-serif;font-size:clamp(17px,2.3vw,22px);font-weight:600;
+            letter-spacing:-.022em;margin:3px 0 7px;text-wrap:balance;}
+  .stops p{font-size:14px;color:var(--soft);margin-bottom:9px;max-width:60ch;text-wrap:pretty;}
+  .stops strong{color:var(--ink);font-weight:600;}
+  .stops .when{font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums;}
+
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px;}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;}
+    html{scroll-behavior:auto;}
+  }
+  @media not (prefers-reduced-motion:reduce){html{scroll-behavior:smooth;}}
+</style>
+</head>
+<body>
+<div class="network">
+
+  <header>
+    <h1>Aedin Lai</h1>
+    <p>Three lines &middot; one interchange<br>Electrical &amp; computer engineering</p>
+  </header>
+
+  <div class="key" role="group" aria-label="Lines">
+    <span id="klbl">Lines</span>
+    <button type="button" data-line="red" aria-pressed="true" aria-describedby="klbl">
+      <i class="bar" style="background:var(--red)" aria-hidden="true"></i>Hardware</button>
+    <button type="button" data-line="blue" aria-pressed="true" aria-describedby="klbl">
+      <i class="bar" style="background:var(--blue)" aria-hidden="true"></i>Software</button>
+    <button type="button" data-line="green" aria-pressed="true" aria-describedby="klbl">
+      <i class="bar" style="background:var(--green)" aria-hidden="true"></i>Épée</button>
+  </div>
+
+  <div class="deck">
+    <div class="diagram">
+      <svg viewBox="0 0 440 300" role="group" aria-label="Transit diagram. Each stop links to its entry.">
+        <!-- routes: 45 and 90 degrees only, as a diagram of this kind must be -->
+        <path class="route r-red"   d="M40 60h110l50 50h80l40 40h70"/>
+        <path class="route r-blue"  d="M40 150h90l40-40h70l50 50h110"/>
+        <path class="route r-green" d="M40 260h150l50-50h90l50 50h20"/>
+        <g id="stops"></g>
+      </svg>
+    </div>
+
+    <div class="stops" id="list"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  // Diagram and text come from one list, so a stop cannot be drawn in one place and described
+  // somewhere else. Line colours are tokens, not literals, so the key and the routes agree.
+  const STOPS = [
+    { id:'bench', x:40,  y:60,  line:'red',   lineName:'Hardware', name:'The bench', when:'from 2022',
+      anchor:'start', dy:-14,
+      body:['Instrumentation, sensors, embedded systems. I build the measuring end of things — <strong>something that has to be right</strong> — and the appeal is that the work is checkable. Either the reading is the reading that happened, or it is not.'] },
+    { id:'arcade', x:200, y:110, line:'red', lineName:'Hardware', name:'Arcade machine', when:'2024',
+      anchor:'middle', dy:-16, interchange:true,
+      body:['Cabinet, wiring, boards and software, all of which had to be persuaded to agree with each other. It taught more about tolerances than any course did, mostly by not fitting.'] },
+    { id:'clinic', x:320, y:150, line:'red', lineName:'Hardware', name:'Published in JAMA', when:'2025',
+      anchor:'middle', dy:-16,
+      body:['Research hardware with the Yale School of Medicine and the PEACE Foundation for a neurology study, co-authored and published. The requirement was not sophistication; it was that a reading taken in a clinic be <strong>the reading that actually happened</strong>.'] },
+    { id:'code', x:40, y:150, line:'blue', lineName:'Software', name:'Languages', when:'ongoing',
+      anchor:'start', dy:22,
+      body:['Python, Java, C#, SQL, MATLAB, JavaScript. Git, Linux, Pandas. SolidWorks and AutoCAD on the drawing side.'] },
+    { id:'racks', x:400, y:150, line:'blue', lineName:'Software', name:'The racks', when:'2025',
+      anchor:'end', dy:22,
+      body:['A season on data centre infrastructure at SingleStore: a private cloud from <strong>160 virtual machines to over 300</strong>. The count was never the point; the tooling written along the way is what made the growth survivable rather than merely possible.'] },
+    { id:'piste', x:190, y:260, line:'green', lineName:'Épée', name:'The piste', when:'2021–25',
+      anchor:'middle', dy:24,
+      body:['Épée is the one weapon where both lights can come on at once — once the first lamp fires, the box gives the other forty milliseconds and then it has made up its mind.',
+            '<strong>USA Fencing A25, All-American.</strong> #103 national, #122 global.'] },
+    { id:'captain', x:330, y:210, line:'green', lineName:'Épée', name:'Captain', when:'2026',
+      anchor:'middle', dy:-16,
+      body:['Leading Northeastern Club Fencing into the national championship, which is mostly logistics and occasionally fencing.'] },
+  ];
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const g = document.getElementById('stops');
+  const list = document.getElementById('list');
+  const marks = {};
+
+  for (const s of STOPS) {
+    const a = document.createElementNS(NS, 'a');
+    a.setAttribute('href', '#' + s.id);
+    a.setAttribute('class', 'stop' + (s.interchange ? ' interchange' : ''));
+    a.setAttribute('aria-label', `${s.name}, ${s.when}`);
+    a.innerHTML = `
+      <circle cx="${s.x}" cy="${s.y}" r="${s.interchange ? 7 : 5.5}"></circle>
+      <text x="${s.x}" y="${s.y + s.dy}" text-anchor="${s.anchor}"></text>
+      <text class="yr" x="${s.x}" y="${s.y + s.dy + (s.dy > 0 ? 11 : -10)}" text-anchor="${s.anchor}"></text>
+      <circle class="stop-hit" cx="${s.x}" cy="${s.y}" r="17"></circle>`;
+    a.querySelectorAll('text')[0].textContent = s.name;
+    a.querySelectorAll('text')[1].textContent = s.when;
+    g.append(a);
+    marks[s.id] = a;
+
+    const sec = document.createElement('section');
+    sec.id = s.id;
+    sec.style.setProperty('--hue', `var(--${s.line})`);
+    sec.innerHTML = `<p class="ln"></p><h2></h2><p class="when"></p>
+                     ${s.body.map((p) => `<p>${p}</p>`).join('')}`;
+    sec.querySelector('.ln').textContent = s.lineName + ' line';
+    sec.querySelector('h2').textContent = s.name;
+    sec.querySelector('.when').textContent = s.when;
+    list.append(sec);
+
+    const lit = (on) => { a.classList.toggle('on', on); sec.classList.toggle('on', on); };
+    a.addEventListener('pointerenter', () => lit(true));
+    a.addEventListener('pointerleave', () => lit(false));
+    sec.addEventListener('pointerenter', () => lit(true));
+    sec.addEventListener('pointerleave', () => lit(false));
+    a.addEventListener('focus', () => lit(true));
+    a.addEventListener('blur', () => lit(false));
+  }
+
+  const root = document.documentElement;
+  for (const b of document.querySelectorAll('.key button')) {
+    b.addEventListener('click', () => {
+      const on = b.getAttribute('aria-pressed') === 'true';
+      b.setAttribute('aria-pressed', String(!on));
+      root.dataset[b.dataset.line] = on ? 'off' : 'on';
+      for (const s of STOPS) if (s.line === b.dataset.line) {
+        marks[s.id].style.opacity = on ? '.2' : '';
+        document.getElementById(s.id).style.display = on ? 'none' : '';
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -73,5 +73,30 @@
     "slug": "memory-map",
     "name": "Memory map",
     "idea": "An address space from reset vector to stack, blocks drawn to scale."
+  },
+  {
+    "slug": "blueprint",
+    "name": "Blueprint",
+    "idea": "A dimensioned drawing with a title block, and line types you can switch off."
+  },
+  {
+    "slug": "receipt",
+    "name": "Receipt",
+    "idea": "A till slip, printed. Serrated at both ends, barcode encoded from the name."
+  },
+  {
+    "slug": "transit",
+    "name": "Transit",
+    "idea": "Three lines and one interchange; each stop is a real anchor into its entry."
+  },
+  {
+    "slug": "poster",
+    "name": "Poster",
+    "idea": "One screen, two inks, slightly out of register \u2014 and the register follows you."
+  },
+  {
+    "slug": "punchcard",
+    "name": "Punch card",
+    "idea": "Four 80-column cards in real IBM 029 keypunch code."
   }
 ]

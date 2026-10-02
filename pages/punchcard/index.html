@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — punch card</title>
+<meta name="description" content="A personal page on an 80-column punched card, in real Hollerith code.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#3b3a36">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 7h22l4 4v14H3z' fill='%23e8dcb8' stroke='%23a6966a'/%3E%3Cg fill='%233b3a36'%3E%3Crect x='7' y='13' width='2' height='4'/%3E%3Crect x='13' y='19' width='2' height='4'/%3E%3Crect x='19' y='13' width='2' height='4'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'IBMPlexMono';src:url('../../fonts/IBMPlexMono-latin.woff2') format('woff2');font-weight:100 700;font-display:swap;}
+
+  :root{
+    --deck:#3b3a36; --card:#e8dcb8; --card-2:#dfd2ab; --ink:#211f1a; --soft:#3c382e;
+    --quiet:#4e4939; --faint:#5e5847; --rule:#b9a97e; --hole:#2b2a26; --mark:#8c3a2a;
+    --ease:cubic-bezier(.25,.85,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'IBMPlexMono',ui-monospace,monospace;color:var(--ink);line-height:1.62;
+    background:var(--deck);min-height:100svh;overflow-x:hidden;
+    padding:clamp(14px,3vw,40px);
+  }
+  ::selection{background:var(--mark);color:var(--card);}
+
+  body::before{
+    content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+    background:radial-gradient(56% 44% at 50% 2%, rgba(255,243,210,.13), transparent 68%),
+               repeating-linear-gradient(96deg, rgba(0,0,0,.15) 0 2px, transparent 2px 9px);
+    animation:hopper 46s ease-in-out infinite alternate;
+  }
+  @keyframes hopper{from{transform:translate3d(-1.4%,-.8%,0)}to{transform:translate3d(1.7%,1%,0)}}
+
+  .deck{max-width:1040px;margin:0 auto;}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;
+         border-bottom:1px solid #56534a;padding-bottom:13px;margin-bottom:20px;color:var(--card);}
+  h1{font-size:clamp(28px,5.4vw,50px);font-weight:700;letter-spacing:-.025em;line-height:.98;}
+  header p{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:#b3aa93;
+           text-align:right;line-height:1.8;}
+
+  /* ---- a card ---- */
+  .card{
+    background:var(--card);border:1px solid var(--rule);position:relative;
+    /* the clipped top-left corner every card has, so an upside-down one is obvious */
+    clip-path:polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px);
+    padding:14px clamp(12px,2vw,20px) 16px;
+    margin-bottom:14px;
+    box-shadow:0 16px 36px -26px rgba(0,0,0,.85);
+    animation:feed .42s var(--ease) both;
+  }
+  @keyframes feed{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+  .card:nth-of-type(2){animation-delay:.07s;}
+  .card:nth-of-type(3){animation-delay:.14s;}
+  .card:nth-of-type(4){animation-delay:.21s;}
+
+  .printed{
+    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+    border-bottom:1px solid var(--rule);padding-bottom:7px;margin-bottom:9px;
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+  .printed .seq{color:var(--faint);font-variant-numeric:tabular-nums;}
+
+  .punches{width:100%;overflow-x:auto;}
+  .punches svg{display:block;min-width:620px;width:100%;height:auto;}
+  .hole{fill:var(--hole);}
+  .row-lbl{font-size:5.6px;fill:var(--faint);letter-spacing:.04em;}
+  .col-rule{fill:none;stroke:var(--rule);stroke-width:.3;opacity:.55;}
+
+  .says{margin-top:10px;font-size:13.5px;color:var(--soft);text-wrap:pretty;max-width:66ch;}
+  .says strong{color:var(--ink);font-weight:600;}
+
+  .legend{color:#b3aa93;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+          margin-top:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+
+  :focus-visible{outline:2px solid var(--card);outline-offset:3px;}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <header>
+    <div>
+      <h1>Aedin Lai</h1>
+    </div>
+    <p>Deck AL&#8209;2026 &middot; four cards &middot; 80 columns<br>Electrical &amp; computer engineering</p>
+  </header>
+
+  <div id="cards"></div>
+
+  <p class="legend">
+    <span>Rows 12, 11, 0–9 &middot; IBM 029 keypunch code</span>
+    <span>Every link inert</span>
+  </p>
+</div>
+
+<script>
+(() => {
+  // IBM 029 keypunch encoding, which is the real thing rather than a pattern that looks like it.
+  // Rows run 12, 11, 0, 1…9. A letter is one zone punch and one digit punch; a digit is one punch.
+  const ZONE = { A:12, B:12, C:12, D:12, E:12, F:12, G:12, H:12, I:12,
+                 J:11, K:11, L:11, M:11, N:11, O:11, P:11, Q:11, R:11,
+                 S:0,  T:0,  U:0,  V:0,  W:0,  X:0,  Y:0,  Z:0 };
+  const DIGIT = {};
+  'ABCDEFGHI'.split('').forEach((c, i) => (DIGIT[c] = i + 1));
+  'JKLMNOPQR'.split('').forEach((c, i) => (DIGIT[c] = i + 1));
+  'STUVWXYZ'.split('').forEach((c, i) => (DIGIT[c] = i + 2));
+
+  const ROWS = [12, 11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  function punches(ch) {
+    const c = ch.toUpperCase();
+    if (c === ' ') return [];
+    if (c >= '0' && c <= '9') return [+c];
+    if (ZONE[c] !== undefined) return [ZONE[c], DIGIT[c]];
+    if (c === '-') return [11];
+    if (c === '.') return [12, 3, 8];
+    if (c === ',') return [0, 3, 8];
+    if (c === '&') return [12];
+    if (c === '/') return [0, 1];
+    return [12, 5, 8];                                  // anything else: a lozenge, as on a 029
+  }
+
+  const CARDS = [
+    { seq: '0010', text: 'AEDIN LAI - ELECTRICAL AND COMPUTER ENGINEERING',
+      says: 'I build the measuring end of things — <strong>instrumentation that has to be right</strong>, and the software that makes sense of what it reads. A number that is quietly wrong is worse than no number at all, because everything downstream inherits it and nobody can tell by looking.' },
+    { seq: '0020', text: 'SINGLESTORE 2025 - 160 VM TO 300 VM',
+      says: 'A season on data centre infrastructure. The count was never the point; the tooling written along the way is what made the growth survivable rather than merely possible.' },
+    { seq: '0030', text: 'JAMA 2025 - YALE SCHOOL OF MEDICINE - PEACE',
+      says: 'Research hardware for a neurology study, co-authored and published. The requirement was not sophistication — it was that a reading taken in a clinic be the reading that actually happened.' },
+    { seq: '0040', text: 'EPEE A25 - 103 US - 122 GLOBAL - CAPTAIN 2026',
+      says: 'Épée is the one weapon where both lights can come on at once. Forty milliseconds after the first lamp, the box stops listening. Now captain at Northeastern, into the national championship.' },
+  ];
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const COLS = 80, CW = 7.6, H = 86, TOP = 13;
+  const host = document.getElementById('cards');
+
+  for (const c of CARDS) {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <p class="printed"><span class="txt"></span><span class="seq"></span></p>
+      <div class="punches" tabindex="0" role="region"><svg viewBox="0 0 ${COLS * CW} ${H}"></svg></div>
+      <p class="says"></p>`;
+    card.querySelector('.txt').textContent = c.text;
+    card.querySelector('.seq').textContent = c.seq;
+    card.querySelector('.says').innerHTML = c.says;
+    const region = card.querySelector('.punches');
+    region.setAttribute('aria-label', `Punched columns for: ${c.text}`);
+    const svg = card.querySelector('svg');
+
+    // row labels down the left, as printed on the card stock
+    ROWS.forEach((r, i) => {
+      const t = document.createElementNS(NS, 'text');
+      t.setAttribute('class', 'row-lbl');
+      t.setAttribute('x', '1'); t.setAttribute('y', (TOP + i * 6.1 + 2).toFixed(1));
+      t.textContent = r;
+      svg.append(t);
+    });
+
+    for (let col = 0; col < COLS; col++) {
+      const ch = c.text[col] || ' ';
+      const set = new Set(punches(ch));
+      ROWS.forEach((r, i) => {
+        const x = 9 + col * CW * 0.955;
+        const y = TOP + i * 6.1;
+        const el = document.createElementNS(NS, 'rect');
+        el.setAttribute('x', x.toFixed(2)); el.setAttribute('y', y.toFixed(2));
+        el.setAttribute('width', '3.4'); el.setAttribute('height', '4.4');
+        el.setAttribute('rx', '.5');
+        el.setAttribute('class', set.has(r) ? 'hole' : 'col-rule');
+        svg.append(el);
+      });
+    }
+    host.append(card);
+  }
+})();
+</script>
+</body>
+</html>

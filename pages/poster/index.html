@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — poster</title>
+<meta name="description" content="A personal page as a two-colour screenprint, on one screen, slightly out of register.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f0ebe1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f0ebe1'/%3E%3Ccircle cx='13' cy='15' r='8' fill='%23d4452f' opacity='.85'/%3E%3Ccircle cx='19' cy='17' r='8' fill='%231b4f8f' opacity='.75'/%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'Archivo';src:url('../../fonts/Archivo-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+  @font-face{font-family:'IBMPlexMono';src:url('../../fonts/IBMPlexMono-latin.woff2') format('woff2');font-weight:100 700;font-display:swap;}
+
+  :root{
+    --stock:#f0ebe1; --ink:#1a1814; --soft:#35322b; --quiet:#4a463d; --faint:#5a564c;
+    --rule:#cdc5b6;
+    --ink-a:#d4452f; --ink-b:#1b4f8f;
+    --ease:cubic-bezier(.2,.9,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'Archivo',system-ui,sans-serif;color:var(--ink);line-height:1.4;
+    background:var(--stock);min-height:100svh;overflow-x:hidden;
+    display:grid;place-items:center;padding:clamp(12px,3vw,34px);
+  }
+  ::selection{background:var(--ink-b);color:var(--stock);}
+
+  /* the paper itself: a flatbed with a tooth to it */
+  body::before{
+    content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='110' height='110' filter='url(%23t)' opacity='.16'/%3E%3C/svg%3E");
+  }
+
+  .poster{
+    position:relative;z-index:1;
+    width:min(900px,100%);min-height:min(860px,calc(100svh - clamp(24px,6vw,68px)));
+    border:1px solid var(--rule);background:var(--stock);
+    padding:clamp(18px,3.4vw,42px);
+    display:grid;grid-template-rows:auto 1fr auto;gap:clamp(14px,2.4vw,26px);
+    box-shadow:0 24px 54px -34px rgba(26,24,20,.55);
+    animation:pull .5s var(--ease) both;
+  }
+  @keyframes pull{from{opacity:0;transform:translateY(10px) scale(.994)}to{opacity:1;transform:none}}
+
+  /* registration marks at the corners, as on a print that has been through twice */
+  .reg{position:absolute;width:15px;height:15px;opacity:.55;}
+  .reg::before,.reg::after{content:'';position:absolute;background:var(--ink);}
+  .reg::before{left:7px;top:0;width:1px;height:15px;}
+  .reg::after{top:7px;left:0;height:1px;width:15px;}
+  .reg:nth-of-type(1){top:7px;left:7px;} .reg:nth-of-type(2){top:7px;right:7px;}
+  .reg:nth-of-type(3){bottom:7px;left:7px;} .reg:nth-of-type(4){bottom:7px;right:7px;}
+
+  .top{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline;
+       border-bottom:2px solid var(--ink);padding-bottom:9px;
+       font-family:'IBMPlexMono',monospace;font-size:10.5px;letter-spacing:.14em;
+       text-transform:uppercase;color:var(--faint);}
+
+  /* ---- the name, printed twice and very slightly out of register ----------
+     Two coloured copies sit under the black one and shift a couple of pixels
+     toward the pointer. That misregistration is the whole image: it is what a
+     two-colour print looks like when the stock moved between passes.        */
+  .name{align-self:center;position:relative;isolation:isolate;}
+  .name h1{
+    font-weight:800;letter-spacing:-.055em;line-height:.82;
+    font-size:clamp(58px,15.5vw,172px);text-wrap:balance;
+    position:relative;z-index:3;
+  }
+  .name .plate{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    font-weight:800;letter-spacing:-.055em;line-height:.82;
+    font-size:clamp(58px,15.5vw,172px);
+    mix-blend-mode:multiply;
+    transition:transform .5s var(--ease);
+  }
+  .plate.a{color:var(--ink-a);
+    transform:translate3d(calc(var(--px,0) * 7px - 3px), calc(var(--py,0) * 7px - 3px), 0);}
+  .plate.b{color:var(--ink-b);z-index:2;
+    transform:translate3d(calc(var(--px,0) * -7px + 3px), calc(var(--py,0) * -7px + 2px), 0);}
+
+  .sub{
+    position:relative;z-index:3;margin-top:clamp(12px,2vw,20px);
+    font-size:clamp(15px,2.3vw,23px);font-weight:500;color:var(--soft);
+    max-width:30ch;letter-spacing:-.016em;line-height:1.26;text-wrap:balance;
+  }
+
+  .foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));
+        gap:1px;background:var(--rule);border-top:2px solid var(--ink);padding-top:1px;}
+  .foot div{background:var(--stock);padding:11px 2px 0;}
+  .foot dt{font-family:'IBMPlexMono',monospace;font-size:9.5px;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--faint);}
+  .foot dd{font-size:clamp(14px,1.8vw,18px);font-weight:600;letter-spacing:-.018em;margin-top:2px;
+           font-variant-numeric:tabular-nums slashed-zero;}
+  .foot dd small{display:block;font-size:11.5px;font-weight:400;color:var(--quiet);
+                 letter-spacing:0;margin-top:1px;}
+
+  :focus-visible{outline:2px solid var(--ink-b);outline-offset:3px;}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+    /* the misregistration stays — it is the design — it simply stops following you */
+    .plate.a{transform:translate3d(-3px,-3px,0);}
+    .plate.b{transform:translate3d(3px,2px,0);}
+  }
+</style>
+</head>
+<body>
+
+<main class="poster">
+  <i class="reg" aria-hidden="true"></i><i class="reg" aria-hidden="true"></i>
+  <i class="reg" aria-hidden="true"></i><i class="reg" aria-hidden="true"></i>
+
+  <div class="top">
+    <span>Electrical &amp; computer engineering</span>
+    <span>Northeastern &middot; Boston</span>
+    <span>Two inks &middot; 2026</span>
+  </div>
+
+  <div class="name">
+    <span class="plate a" aria-hidden="true">Aedin Lai</span>
+    <span class="plate b" aria-hidden="true">Aedin Lai</span>
+    <h1>Aedin Lai</h1>
+    <p class="sub">Instrumentation that has to be right, and the software that makes sense of what
+      it reads.</p>
+  </div>
+
+  <dl class="foot">
+    <div><dt>Infrastructure</dt><dd>160 → 300+<small>VMs at SingleStore, 2025</small></dd></div>
+    <div><dt>Research</dt><dd>JAMA<small>Yale · PEACE Foundation, 2025</small></dd></div>
+    <div><dt>Épée</dt><dd>A25<small>All-American · #103 national</small></dd></div>
+    <div><dt>Now</dt><dd>Captain<small>Northeastern, into nationals</small></dd></div>
+  </dl>
+</main>
+
+<script>
+(() => {
+  // The two colour plates slide a few pixels toward the pointer and settle back. One rAF, nothing
+  // scheduled once it has arrived, and nothing at all when reduced motion is asked for.
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const root = document.documentElement;
+  let want = [0, 0], have = [0, 0], raf = 0;
+
+  function tick() {
+    const dx = want[0] - have[0], dy = want[1] - have[1];
+    have[0] += dx * 0.08; have[1] += dy * 0.08;
+    root.style.setProperty('--px', have[0].toFixed(4));
+    root.style.setProperty('--py', have[1].toFixed(4));
+    raf = (Math.abs(dx) > 0.002 || Math.abs(dy) > 0.002) ? requestAnimationFrame(tick) : 0;
+  }
+  addEventListener('pointermove', (e) => {
+    if (reduce.matches) return;
+    want = [(e.clientX / innerWidth) * 2 - 1, (e.clientY / innerHeight) * 2 - 1];
+    if (!raf) raf = requestAnimationFrame(tick);
+  }, { passive: true });
+  addEventListener('pointerleave', () => { want = [0, 0]; if (!raf) raf = requestAnimationFrame(tick); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — receipt</title>
+<meta name="description" content="A personal page printed as a till receipt, line by line.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#2a2a28">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M8 3h16v25l-3-2-3 2-2-2-2 2-3-2-3 2z' fill='%23faf8f2' stroke='%23b8b2a4'/%3E%3Cg stroke='%232e2c28' stroke-width='1.2'%3E%3Cpath d='M11 9h10M11 13h10M11 17h6'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'IBMPlexMono';src:url('../../fonts/IBMPlexMono-latin.woff2') format('woff2');font-weight:100 700;font-display:swap;}
+
+  :root{
+    --counter:#2a2a28; --slip:#faf8f2; --ink:#232220; --soft:#3b3933; --quiet:#4e4b44;
+    --faint:#605c53; --rule:#cfc9bb; --red:#8f2f22;
+    --ease:cubic-bezier(.25,.85,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'IBMPlexMono',ui-monospace,monospace;color:var(--ink);line-height:1.62;
+    background:var(--counter);min-height:100svh;overflow-x:hidden;
+    display:flex;justify-content:center;
+    padding:0 clamp(10px,4vw,30px) clamp(30px,6vw,70px);
+  }
+  ::selection{background:var(--ink);color:var(--slip);}
+
+  /* the counter the slip is lying on */
+  body::before{
+    content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+    background:radial-gradient(54% 42% at 50% 0%, rgba(255,246,222,.12), transparent 68%),
+               repeating-linear-gradient(102deg, rgba(0,0,0,.16) 0 2px, transparent 2px 8px);
+    animation:counter 44s ease-in-out infinite alternate;
+  }
+  @keyframes counter{from{transform:translate3d(-1.4%,-.6%,0)}to{transform:translate3d(1.6%,.9%,0)}}
+
+  /* ---- the slip ---- */
+  .slip{
+    width:min(100%,460px);background:var(--slip);color:var(--ink);
+    padding:clamp(22px,4vw,34px) clamp(18px,4vw,30px) clamp(26px,5vw,38px);
+    font-size:13px;
+    box-shadow:0 26px 54px -32px rgba(0,0,0,.8);
+    animation:print .7s var(--ease) both;
+  }
+  /* serrated at both ends, the way a slip torn off a roll actually is */
+  .slip::before,.slip::after{
+    content:'';display:block;height:11px;
+    margin-left:calc(-1 * clamp(18px,4vw,30px));margin-right:calc(-1 * clamp(18px,4vw,30px));
+    background:repeating-linear-gradient(90deg, var(--slip) 0 9px, transparent 9px 18px);
+  }
+  .slip::before{margin-top:calc(-1 * clamp(22px,4vw,34px));margin-bottom:18px;
+                background:repeating-linear-gradient(90deg, transparent 0 9px, var(--slip) 9px 18px);}
+  .slip::after{margin-top:20px;margin-bottom:calc(-1 * clamp(26px,5vw,38px));}
+  @keyframes print{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+
+  .head{text-align:center;padding-bottom:14px;}
+  h1{font-size:clamp(21px,5vw,27px);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+     line-height:1.2;}
+  .head p{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:6px;}
+
+  .tear{border-top:1px dashed var(--rule);margin:12px 0;}
+  .rule{border-top:1px solid var(--ink);margin:12px 0;}
+
+  .meta{display:grid;grid-template-columns:auto 1fr;gap:1px 12px;font-size:11.5px;color:var(--quiet);}
+  .meta dd{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums slashed-zero;}
+
+  /* every line of a receipt is item … amount, dot-led */
+  .line{display:flex;align-items:baseline;gap:6px;padding:3px 0;}
+  .line .what{color:var(--soft);}
+  .line .dots{flex:1;border-bottom:1px dotted var(--rule);transform:translateY(-3px);min-width:14px;}
+  .line .amt{color:var(--ink);font-variant-numeric:tabular-nums slashed-zero;white-space:nowrap;}
+  .line.big .what{font-weight:600;color:var(--ink);}
+  .sub{font-size:11.5px;color:var(--faint);padding:0 0 5px 12px;text-wrap:pretty;}
+
+  h2{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);
+     margin:4px 0 7px;}
+
+  .total{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
+         font-size:15px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+  .total span:last-child{font-variant-numeric:tabular-nums slashed-zero;}
+
+  .note{font-size:11.5px;color:var(--quiet);text-wrap:pretty;}
+  .note strong{color:var(--ink);font-weight:600;}
+
+  /* a barcode, drawn from the name rather than faked with a picture */
+  .barcode{margin:16px 0 8px;}
+  .barcode svg{display:block;width:100%;height:52px;}
+  .barcode p{text-align:center;font-size:10.5px;letter-spacing:.36em;color:var(--faint);
+             margin-top:5px;}
+
+  .stamp{
+    margin-top:14px;border:2px solid var(--red);color:var(--red);
+    transform:rotate(-2.4deg);text-align:center;padding:5px 10px;
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+  }
+
+  .foot{text-align:center;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+        color:var(--faint);margin-top:16px;line-height:1.9;}
+
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px;}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+  }
+  @media print{body{background:#fff;padding:0;}.slip{box-shadow:none;}.slip::before,.slip::after{display:none;}}
+</style>
+</head>
+<body>
+
+<article class="slip">
+  <div class="head">
+    <h1>Aedin Lai</h1>
+    <p>Electrical &amp; computer engineering<br>Northeastern University &middot; Boston MA</p>
+  </div>
+
+  <div class="rule"></div>
+
+  <dl class="meta">
+    <dt>Issued</dt><dd id="when">—</dd>
+    <dt>Terminal</dt><dd>AL&#8209;2026</dd>
+    <dt>Clerk</dt><dd>A. Lai</dd>
+  </dl>
+
+  <div class="tear"></div>
+
+  <h2>Items</h2>
+
+  <div class="line big"><span class="what">Data centre infrastructure</span>
+    <i class="dots"></i><span class="amt">2025</span></div>
+  <p class="sub">SingleStore. A private cloud from 160 virtual machines to 300+, and the tooling
+    that made the growth survivable rather than merely possible.</p>
+
+  <div class="line big"><span class="what">Research, published in JAMA</span>
+    <i class="dots"></i><span class="amt">2025</span></div>
+  <p class="sub">Yale School of Medicine and the PEACE Foundation. Research hardware for a
+    neurology study.</p>
+
+  <div class="line big"><span class="what">USA Fencing A25, All-American</span>
+    <i class="dots"></i><span class="amt">2021–25</span></div>
+  <p class="sub">Épée. #103 national, #122 global.</p>
+
+  <div class="line big"><span class="what">Captain, Northeastern fencing</span>
+    <i class="dots"></i><span class="amt">2026</span></div>
+  <p class="sub">Into the national championship. Mostly logistics, occasionally fencing.</p>
+
+  <div class="line big"><span class="what">One arcade machine, from nothing</span>
+    <i class="dots"></i><span class="amt">2024</span></div>
+  <p class="sub">Cabinet included. Taught more about tolerances than any course did.</p>
+
+  <div class="tear"></div>
+
+  <h2>Languages</h2>
+  <div class="line"><span class="what">Python</span><i class="dots"></i><span class="amt">●●●●●</span></div>
+  <div class="line"><span class="what">Java</span><i class="dots"></i><span class="amt">●●●●</span></div>
+  <div class="line"><span class="what">C#</span><i class="dots"></i><span class="amt">●●●●</span></div>
+  <div class="line"><span class="what">SQL</span><i class="dots"></i><span class="amt">●●●●</span></div>
+  <div class="line"><span class="what">MATLAB</span><i class="dots"></i><span class="amt">●●●</span></div>
+  <div class="line"><span class="what">JavaScript</span><i class="dots"></i><span class="amt">●●●</span></div>
+
+  <h2>Hardware</h2>
+  <div class="line"><span class="what">Raspberry Pi</span><i class="dots"></i><span class="amt">✓</span></div>
+  <div class="line"><span class="what">Embedded systems</span><i class="dots"></i><span class="amt">✓</span></div>
+  <div class="line"><span class="what">Sensor integration</span><i class="dots"></i><span class="amt">✓</span></div>
+  <div class="line"><span class="what">SolidWorks / AutoCAD</span><i class="dots"></i><span class="amt">✓</span></div>
+
+  <div class="rule"></div>
+
+  <div class="total"><span>Total</span><span>5 years</span></div>
+
+  <div class="tear"></div>
+
+  <p class="note">I build the measuring end of things — <strong>instrumentation that has to be
+    right</strong>, and the software that makes sense of what it reads. A number that is quietly
+    wrong is worse than no number, because everything downstream inherits it and nobody can tell by
+    looking.</p>
+
+  <div class="barcode" aria-hidden="true">
+    <svg id="bars" viewBox="0 0 200 52" preserveAspectRatio="none"></svg>
+    <p>AEDIN LAI</p>
+  </div>
+
+  <p class="stamp">Both lights &middot; 40 ms</p>
+
+  <p class="foot">Thank you for reading<br>No returns on time spent</p>
+</article>
+
+<script>
+(() => {
+  // The bars come from the letters of the name rather than from a picture, so the barcode is at
+  // least an honest encoding of something instead of decorative scribble.
+  const svg = document.getElementById('bars');
+  const NS = 'http://www.w3.org/2000/svg';
+  const name = 'AEDINLAI2026';
+  let x = 0;
+  for (const ch of name) {
+    const code = ch.charCodeAt(0);
+    for (let bit = 6; bit >= 0; bit--) {
+      const w = (code >> bit & 1) ? 2.4 : 1.1;
+      if ((code >> bit & 1) || bit % 2 === 0) {
+        const r = document.createElementNS(NS, 'rect');
+        r.setAttribute('x', x.toFixed(2)); r.setAttribute('y', '0');
+        r.setAttribute('width', w.toFixed(2)); r.setAttribute('height', '52');
+        r.setAttribute('fill', '#232220');
+        svg.append(r);
+      }
+      x += w + 0.9;
+    }
+  }
+  svg.setAttribute('viewBox', `0 0 ${x.toFixed(0)} 52`);
+
+  document.getElementById('when').textContent =
+    new Date().toLocaleString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit' }).replace(',', '');
+})();
+</script>
+</body>
+</html>

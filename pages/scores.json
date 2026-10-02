@@ -1,5 +1,37 @@
 [
   {
+    "slug": "punchcard",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 11,
+      "keyframes": 2,
+      "transitions": 1,
+      "mediaQueries": 1,
+      "interactive": 4,
+      "landmarks": 1,
+      "headings": 1,
+      "svg": 4,
+      "canvas": 0,
+      "textChars": 1249
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 8663,
+    "nearest": 90,
+    "fit": true,
+    "score": 82
+  },
+  {
     "slug": "piste",
     "gates": {
       "a11y": 0,
@@ -219,12 +251,12 @@
     "a11yDetail": [],
     "errorDetail": [],
     "bytes": 11635,
-    "nearest": 117,
+    "nearest": 81,
     "fit": true,
     "score": 78
   },
   {
-    "slug": "plotter",
+    "slug": "transit",
     "gates": {
       "a11y": 0,
       "motionRespected": true,
@@ -237,23 +269,23 @@
       "reducedMotion": true,
       "focusVisible": true,
       "customProps": 11,
-      "keyframes": 3,
-      "transitions": 2,
-      "mediaQueries": 2,
-      "interactive": 4,
-      "landmarks": 2,
-      "headings": 4,
+      "keyframes": 1,
+      "transitions": 4,
+      "mediaQueries": 3,
+      "interactive": 10,
+      "landmarks": 1,
+      "headings": 8,
       "svg": 1,
       "canvas": 0,
-      "textChars": 892
+      "textChars": 1778
     },
     "fails": [],
     "a11yDetail": [],
     "errorDetail": [],
-    "bytes": 11616,
-    "nearest": 15,
+    "bytes": 12299,
+    "nearest": 17,
     "fit": true,
-    "score": 77
+    "score": 78
   },
   {
     "slug": "specimen",
@@ -320,6 +352,102 @@
     "score": 76
   },
   {
+    "slug": "receipt",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 9,
+      "keyframes": 2,
+      "transitions": 1,
+      "mediaQueries": 2,
+      "interactive": 0,
+      "landmarks": 0,
+      "headings": 4,
+      "svg": 1,
+      "canvas": 0,
+      "textChars": 1233
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 10114,
+    "nearest": 115,
+    "fit": true,
+    "score": 76
+  },
+  {
+    "slug": "poster",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 9,
+      "keyframes": 1,
+      "transitions": 2,
+      "mediaQueries": 1,
+      "interactive": 0,
+      "landmarks": 1,
+      "headings": 1,
+      "svg": 0,
+      "canvas": 0,
+      "textChars": 365
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 7814,
+    "nearest": 38,
+    "fit": true,
+    "score": 75
+  },
+  {
+    "slug": "blueprint",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 9,
+      "keyframes": 2,
+      "transitions": 2,
+      "mediaQueries": 3,
+      "interactive": 3,
+      "landmarks": 1,
+      "headings": 3,
+      "svg": 1,
+      "canvas": 0,
+      "textChars": 1158
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 12306,
+    "nearest": 16,
+    "fit": true,
+    "score": 74
+  },
+  {
     "slug": "bout-sheet",
     "gates": {
       "a11y": 0,
@@ -380,6 +508,38 @@
     "errorDetail": [],
     "bytes": 10886,
     "nearest": 13,
+    "fit": true,
+    "score": 74
+  },
+  {
+    "slug": "plotter",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 11,
+      "keyframes": 3,
+      "transitions": 2,
+      "mediaQueries": 2,
+      "interactive": 4,
+      "landmarks": 2,
+      "headings": 4,
+      "svg": 1,
+      "canvas": 0,
+      "textChars": 892
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 11616,
+    "nearest": 12,
     "fit": true,
     "score": 74
   },

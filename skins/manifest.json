@@ -48,5 +48,55 @@
     "id": "lame",
     "name": "Lamé",
     "note": "The metallic jacket: everything is a conductor"
+  },
+  {
+    "id": "eeg",
+    "name": "EEG",
+    "note": "Chart paper and electrode leads, from the neurology work"
+  },
+  {
+    "id": "thermal",
+    "name": "Thermal",
+    "note": "A rack through a thermal camera"
+  },
+  {
+    "id": "clean-room",
+    "name": "Clean room",
+    "note": "Filtered air and a blue cast"
+  },
+  {
+    "id": "vacuum-tube",
+    "name": "Vacuum tube",
+    "note": "Warm glass, and a heater that takes a moment"
+  },
+  {
+    "id": "punch-card",
+    "name": "Punch card",
+    "note": "Card stock, red ink, eighty columns"
+  },
+  {
+    "id": "husky",
+    "name": "Husky",
+    "note": "Northeastern: red, black, and not much else"
+  },
+  {
+    "id": "fibre",
+    "name": "Fibre",
+    "note": "Light down a glass thread"
+  },
+  {
+    "id": "tape",
+    "name": "Tape",
+    "note": "Oxide and a handwritten label"
+  },
+  {
+    "id": "graphite",
+    "name": "Graphite",
+    "note": "A 2H pencil on technical paper"
+  },
+  {
+    "id": "night-match",
+    "name": "Night match",
+    "note": "A dark hall, one lit strip"
   }
 ]

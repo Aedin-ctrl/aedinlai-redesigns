@@ -14,4 +14,6 @@
   --display-w:700;
   --display-track:-.045em;
   --texture:none;
+  --density:regular;
+  --frame:flat;
 }

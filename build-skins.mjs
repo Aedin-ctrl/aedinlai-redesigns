@@ -71,6 +71,61 @@ const SKINS = [
     soft:'#434a53', quiet:'#5f6771', rule:'#b0b5bc', ruleFirm:'#8d939b',
     sigA:'#8c0b22', sigB:'#005c33', radius:'16px', ruleW:'2px',
     display:"'SpaceG', sans-serif", displayW:700, track:'-.04em' },
+
+  { id:'eeg', name:'EEG', note:'Chart paper and electrode leads, from the neurology work',
+    ground:'#f1ece4', bezel:'#faf7f1', panel:'#fffdf9', ink:'#1c1a17', scheme:'light',
+    soft:'#4b463e', quiet:'#6c6559', rule:'#ded5c6', ruleFirm:'#bdb09b',
+    sigA:'#b4232b', sigB:'#1f5fa8', radius:'3px', density:'compact', frame:'etched',
+    texture:'repeating-linear-gradient(0deg, rgba(150,120,80,.08) 0 1px, transparent 1px 16px)' },
+
+  { id:'thermal', name:'Thermal', note:'A rack through a thermal camera',
+    ground:'#0b0618', bezel:'#140b25', panel:'#1a0f2e', ink:'#ffe9c7', scheme:'dark',
+    soft:'#d7b7e0', quiet:'#b292c4', rule:'#2d1b48', ruleFirm:'#43295f',
+    sigA:'#ff7847', sigB:'#9b5de5', radius:'10px', frame:'raised' },
+
+  { id:'clean-room', name:'Clean room', note:'Filtered air and a blue cast',
+    ground:'#e4ecf2', bezel:'#f1f6fa', panel:'#f9fcfe', ink:'#111a22', scheme:'light',
+    soft:'#43505c', quiet:'#64717e', rule:'#ccd9e4', ruleFirm:'#a4b5c4',
+    sigA:'#0f6ea8', sigB:'#108a6a', radius:'8px', density:'spacious', frame:'etched' },
+
+  { id:'vacuum-tube', name:'Vacuum tube', note:'Warm glass, and a heater that takes a moment',
+    ground:'#120d07', bezel:'#1d150c', panel:'#251b10', ink:'#ffe6bd', scheme:'dark',
+    soft:'#d6b183', quiet:'#b08f64', rule:'#36281a', ruleFirm:'#4d3a26',
+    sigA:'#ff9d2e', sigB:'#64c8d8', radius:'14px', frame:'raised' },
+
+  { id:'punch-card', name:'Punch card', note:'Card stock, red ink, eighty columns',
+    ground:'#e8dfc8', bezel:'#f3ecda', panel:'#faf5e8', ink:'#1a1813', scheme:'light',
+    soft:'#4a4535', quiet:'#6b6450', rule:'#d3c7a9', ruleFirm:'#b3a481',
+    sigA:'#a81f22', sigB:'#2f5d50', radius:'0px', density:'compact',
+    display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.02em',
+    texture:'repeating-linear-gradient(90deg, rgba(120,100,60,.09) 0 1px, transparent 1px 13px)' },
+
+  { id:'husky', name:'Husky', note:'Northeastern: red, black, and not much else',
+    ground:'#f2f2f3', bezel:'#fbfbfc', panel:'#ffffff', ink:'#0d0d0f', scheme:'light',
+    soft:'#45464a', quiet:'#65676c', rule:'#dcdde0', ruleFirm:'#b6b8bd',
+    sigA:'#c8102e', sigB:'#2b2d31', radius:'6px', density:'spacious',
+    display:"'BricolageG', sans-serif", displayW:800, track:'-.035em' },
+
+  { id:'fibre', name:'Fibre', note:'Light down a glass thread',
+    ground:'#04080f', bezel:'#081220', panel:'#0b1828', ink:'#dff2ff', scheme:'dark',
+    soft:'#9dc2d9', quiet:'#7ba3bd', rule:'#132a40', ruleFirm:'#1d3e5c',
+    sigA:'#36e2d0', sigB:'#a87bff', radius:'16px', frame:'raised' },
+
+  { id:'tape', name:'Tape', note:'Oxide and a handwritten label',
+    ground:'#241a12', bezel:'#30241a', panel:'#3a2c20', ink:'#f3e7d6', scheme:'dark',
+    soft:'#cbb296', quiet:'#a98f74', rule:'#4a3828', ruleFirm:'#644c37',
+    sigA:'#e0a458', sigB:'#8fb08c', radius:'4px', density:'compact' },
+
+  { id:'graphite', name:'Graphite', note:'A 2H pencil on technical paper',
+    ground:'#dcdcda', bezel:'#eaeae8', panel:'#f4f4f2', ink:'#17181a', scheme:'light',
+    soft:'#45474a', quiet:'#64676b', rule:'#c6c6c3', ruleFirm:'#a2a3a0',
+    sigA:'#3f4a8a', sigB:'#7a5230', radius:'2px', density:'spacious', frame:'etched',
+    display:"'InstrumentS', Georgia, serif", displayW:400, track:'-.012em' },
+
+  { id:'night-match', name:'Night match', note:'A dark hall, one lit strip',
+    ground:'#08090c', bezel:'#101319', panel:'#161a22', ink:'#f0f3f8', scheme:'dark',
+    soft:'#aeb6c2', quiet:'#8b94a2', rule:'#1f242e', ruleFirm:'#323a47',
+    sigA:'#e63946', sigB:'#2a9d8f', radius:'18px', frame:'raised', density:'spacious' },
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });
@@ -115,6 +170,8 @@ ${note}:root{
   --display-w:${s.displayW || 700};
   --display-track:${s.track || '-.045em'};
   --texture:${s.texture ? s.texture : 'none'};
+  --density:${s.density || 'regular'};
+  --frame:${s.frame || 'flat'};
 }
 `;
   writeFileSync(join(HERE, 'skins', `${s.id}.css`), css);

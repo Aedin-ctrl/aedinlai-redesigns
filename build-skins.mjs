@@ -203,6 +203,42 @@ const SKINS = [
     soft:'#aeaeb2', quiet:'#8c8c92', rule:'#27272c', ruleFirm:'#393940',
     sigA:'#e5484d', sigB:'#3e8fd9', radius:'999px', density:'compact' },
 
+
+  { id:'risograph', name:'Risograph', note:'Two inks, slightly out of register',
+    ground:'#f2ece1', bezel:'#faf6ee', panel:'#fffdf8', ink:'#1a1718', scheme:'light',
+    soft:'#4a4345', quiet:'#6b6366', rule:'#ded5c7', ruleFirm:'#bcb0a0',
+    sigA:'#e8336d', sigB:'#1f70c2', radius:'0px', density:'spacious',
+    display:"'BricolageG', sans-serif", displayW:800, track:'-.04em' },
+
+  { id:'telemetry', name:'Telemetry', note:'Mission control: dense, green, and all numbers',
+    ground:'#02060a', bezel:'#060d13', panel:'#09131b', ink:'#d6ffe6', scheme:'dark',
+    soft:'#8fd4a8', quiet:'#71b78b', rule:'#0f2230', ruleFirm:'#17354a',
+    sigA:'#43e08a', sigB:'#ffcc4d', radius:'2px', density:'compact',
+    display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.03em' },
+
+  { id:'enamel', name:'Enamel', note:'A vitreous sign that has outlived the building',
+    ground:'#0e3b5c', bezel:'#14496e', panel:'#1a567f', ink:'#f3f9fd', scheme:'dark',
+    soft:'#bcd8ea', quiet:'#9cc2db', rule:'#226b96', ruleFirm:'#2d84b4',
+    sigA:'#ffd54a', sigB:'#ff8f6b', radius:'999px', density:'spacious', frame:'raised' },
+
+  { id:'solar', name:'Solar', note:'Monocrystalline cells and silver busbars',
+    ground:'#0a0d1c', bezel:'#111529', panel:'#161b33', ink:'#e6ebff', scheme:'dark',
+    soft:'#a9b3d4', quiet:'#8a95ba', rule:'#1f2647', ruleFirm:'#2e3762',
+    sigA:'#cfd6e8', sigB:'#f2a541', radius:'4px',
+    texture:'repeating-linear-gradient(90deg, rgba(220,230,255,.05) 0 1px, transparent 1px 36px)' },
+
+  { id:'neon', name:'Neon', note:'The marquee, after dark',
+    ground:'#0a0612', bezel:'#120b1e', panel:'#180f28', ink:'#f6ecff', scheme:'dark',
+    soft:'#c9b2e0', quiet:'#a98fc6', rule:'#261642', ruleFirm:'#38215e',
+    sigA:'#ff4fa3', sigB:'#3ddbd9', radius:'14px', frame:'raised',
+    display:"'BricolageG', sans-serif", displayW:800, track:'-.035em' },
+
+  { id:'engineering-pad', name:'Engineering pad', note:'Green tint, printed on the back',
+    ground:'#dfe8dc', bezel:'#eaf1e7', panel:'#f4f8f2', ink:'#161a15', scheme:'light',
+    soft:'#434a41', quiet:'#636b60', rule:'#cbd8c6', ruleFirm:'#a6b7a0',
+    sigA:'#1f6b4f', sigB:'#8a4b1f', radius:'1px', density:'compact', frame:'etched',
+    texture:'repeating-linear-gradient(0deg, rgba(60,100,60,.07) 0 1px, transparent 1px 15px), repeating-linear-gradient(90deg, rgba(60,100,60,.07) 0 1px, transparent 1px 15px)' },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });

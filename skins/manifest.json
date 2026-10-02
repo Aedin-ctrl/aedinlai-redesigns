@@ -208,5 +208,41 @@
     "name": "Heat shrink",
     "note": "Sleeving in the three colours you actually have",
     "tone": "dark"
+  },
+  {
+    "id": "risograph",
+    "name": "Risograph",
+    "note": "Two inks, slightly out of register",
+    "tone": "light"
+  },
+  {
+    "id": "telemetry",
+    "name": "Telemetry",
+    "note": "Mission control: dense, green, and all numbers",
+    "tone": "dark"
+  },
+  {
+    "id": "enamel",
+    "name": "Enamel",
+    "note": "A vitreous sign that has outlived the building",
+    "tone": "dark"
+  },
+  {
+    "id": "solar",
+    "name": "Solar",
+    "note": "Monocrystalline cells and silver busbars",
+    "tone": "dark"
+  },
+  {
+    "id": "neon",
+    "name": "Neon",
+    "note": "The marquee, after dark",
+    "tone": "dark"
+  },
+  {
+    "id": "engineering-pad",
+    "name": "Engineering pad",
+    "note": "Green tint, printed on the back",
+    "tone": "light"
   }
 ]

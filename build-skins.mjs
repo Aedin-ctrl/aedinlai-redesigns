@@ -626,6 +626,45 @@ const SKINS = [
     soft:'#d9bd91', quiet:'#b99d71', rule:'#372c19', ruleFirm:'#4d3e24',
     sigA:'#ffc96b', sigB:'#8fb7c9', radius:'21px', frame:'raised', density:'spacious' },
 
+
+  // ---- multicoloured family: white undertones, six hues used throughout ----
+  { id:'spectrum', name:'Spectrum', note:'All six at once, on white',
+    ground:'#f6f7f9', bezel:'#ffffff', panel:'#ffffff', ink:'#15171c', scheme:'light',
+    soft:'#434852', quiet:'#5f6672', rule:'#e4e7ec', ruleFirm:'#c3c8d1',
+    sigA:'#e5484d', sigB:'#0f9d58', rich:true, radius:'14px', density:'spacious',
+    c:['#e5484d','#f5a524','#0f9d58','#6366f1','#0ea5e9','#d946a6'] },
+
+  { id:'playroom', name:'Playroom', note:'Primary colours and no apologies',
+    ground:'#fbfaf7', bezel:'#ffffff', panel:'#ffffff', ink:'#14151a', scheme:'light',
+    soft:'#434650', quiet:'#5f6370', rule:'#e8e6e0', ruleFirm:'#c9c6bd',
+    sigA:'#e03131', sigB:'#1971c2', rich:true, radius:'20px', density:'spacious',
+    c:['#e03131','#f08c00','#2f9e44','#1971c2','#7048e8','#c2255c'],
+    display:"'BricolageG', sans-serif", displayW:800, track:'-.035em' },
+
+  { id:'citrus', name:'Citrus', note:'Warm end of the wheel, on paper white',
+    ground:'#fdfaf5', bezel:'#ffffff', panel:'#ffffff', ink:'#1a1613', scheme:'light',
+    soft:'#4a443c', quiet:'#6a6358', rule:'#eee7db', ruleFirm:'#d2c8b5',
+    sigA:'#d9480f', sigB:'#e8590c', rich:true, radius:'16px',
+    c:['#e8590c','#f59f00','#c2255c','#d9480f','#f76707','#9c36b5'] },
+
+  { id:'reef', name:'Reef', note:'Cool hues with one hot one, on white',
+    ground:'#f5fafb', bezel:'#ffffff', panel:'#ffffff', ink:'#101a1d', scheme:'light',
+    soft:'#3e4a4e', quiet:'#5a686d', rule:'#deecef', ruleFirm:'#b9d2d8',
+    sigA:'#0c8599', sigB:'#f76707', rich:true, radius:'18px', density:'spacious',
+    c:['#0c8599','#1098ad','#0ca678','#4263eb','#f76707','#e64980'] },
+
+  { id:'studio', name:'Studio', note:'A neutral room with coloured work pinned up',
+    ground:'#f7f7f6', bezel:'#ffffff', panel:'#ffffff', ink:'#16161a', scheme:'light',
+    soft:'#45454c', quiet:'#616169', rule:'#e6e6e4', ruleFirm:'#c6c6c2',
+    sigA:'#5f3dc4', sigB:'#2b8a3e', rich:true, radius:'10px', layout:'mirrored',
+    c:['#5f3dc4','#1971c2','#2b8a3e','#e8590c','#c2255c','#0c8599'] },
+
+  { id:'ribbon', name:'Ribbon', note:'Colour applied in bands, not blocks',
+    ground:'#fafafa', bezel:'#ffffff', panel:'#ffffff', ink:'#131316', scheme:'light',
+    soft:'#42424a', quiet:'#5e5e68', rule:'#e9e9ea', ruleFirm:'#c9c9cc',
+    sigA:'#d6336c', sigB:'#15aabf', rich:true, radius:'24px', density:'spacious', layout:'stacked',
+    c:['#d6336c','#f59f00','#15aabf','#7950f2','#37b24d','#1c7ed6'] },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });
@@ -652,6 +691,17 @@ for (const s of SKINS) {
       process.exit(1);
     }
   }
+}
+
+// An accent used as a solid button background must carry white text at AA. Darken it until it
+// does, rather than tinting the text toward the background and hoping — which gave 2.39:1.
+function solidFor(c) {
+  let col = new Color(c);
+  let guard = 0;
+  while (col.contrast('#ffffff', 'WCAG21') < 4.6 && guard++ < 200) {
+    col = col.set('hsl.l', (l) => Math.max(0, l - 1));
+  }
+  return col.to('srgb').toString({ format: 'hex' });
 }
 
 const manifest = [];
@@ -686,6 +736,10 @@ ${note}:root{
   --density:${s.density || 'regular'};
   --frame:${s.frame || 'flat'};
   --layout:${s.layout || 'standard'};
+  --rich:${s.rich ? 'on' : 'off'};
+  --c1:${s.c?.[0] || s.sigA}; --c2:${s.c?.[1] || s.sigB}; --c3:${s.c?.[2] || s.sigA};
+  --c4:${s.c?.[3] || s.sigB}; --c5:${s.c?.[4] || s.sigA}; --c6:${s.c?.[5] || s.sigB};
+  --c5-solid:${solidFor(s.c?.[4] || s.sigA)};
 }
 `;
   writeFileSync(join(HERE, 'skins', `${s.id}.css`), css);

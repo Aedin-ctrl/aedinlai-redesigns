@@ -18,4 +18,8 @@
   --density:compact;
   --frame:flat;
   --layout:stacked;
+  --rich:off;
+  --c1:#8c3a00; --c2:#15616d; --c3:#8c3a00;
+  --c4:#15616d; --c5:#8c3a00; --c6:#15616d;
+  --c5-solid:#8c3a00;
 }

@@ -17,4 +17,8 @@
   --density:spacious;
   --frame:etched;
   --layout:standard;
+  --rich:off;
+  --c1:#5a3e86; --c2:#2f6b52; --c3:#5a3e86;
+  --c4:#2f6b52; --c5:#5a3e86; --c6:#2f6b52;
+  --c5-solid:#5a3e86;
 }

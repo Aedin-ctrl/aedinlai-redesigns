@@ -237,6 +237,70 @@ footer button:hover{color:var(--soft);}
 }
 /* Layout is a token too, so a skin can change the arrangement and not just the colour. Same
    mechanism as density; same graceful outcome if a browser lacks it (everything stays standard). */
+/* ---- rich mode -------------------------------------------------------------
+   A skin that sets --rich:on gets SIX accents used across the whole page rather than two signal
+   colours held in reserve. Every tint is mixed against the skin's own panel colour, so it stays
+   light and modern instead of turning into a toy. Text sits on tints no stronger than ~14%, which
+   keeps contrast where it needs to be.                                        */
+@container style(--rich: on) {
+  /* the window lamps become real traffic lights */
+  .lamp:nth-child(1){ background:var(--c1); border-color:color-mix(in srgb, var(--c1) 70%, #000); }
+  .lamp:nth-child(2){ background:var(--c2); border-color:color-mix(in srgb, var(--c2) 70%, #000); }
+  .lamp:nth-child(3){ background:var(--c3); border-color:color-mix(in srgb, var(--c3) 70%, #000); }
+
+  /* a quiet wash so the page is never a flat sheet */
+  body{
+    background-image:
+      radial-gradient(70ch 50ch at 12% -8%, color-mix(in srgb, var(--c4) 16%, transparent), transparent 70%),
+      radial-gradient(60ch 46ch at 92% 4%, color-mix(in srgb, var(--c6) 14%, transparent), transparent 68%),
+      var(--texture);
+  }
+
+  nav button[aria-current="page"]{ border-bottom-color:var(--c5); color:var(--ink); }
+  .rail h2{ background:color-mix(in srgb, var(--c4) 12%, var(--panel)); }
+
+  /* each entry carries its own hue, so the rail reads as four things not one list */
+  .entry:nth-child(2) .mark{ background:var(--c1); }
+  .entry:nth-child(3) .mark{ background:var(--c5); }
+  .entry:nth-child(4) .mark{ background:var(--c6); }
+  .entry:nth-child(5) .mark{ background:var(--c3); }
+  .entry:nth-child(2){ background:color-mix(in srgb, var(--c1) 7%, transparent); }
+  .entry:nth-child(3){ background:color-mix(in srgb, var(--c5) 7%, transparent); }
+  .entry:nth-child(4){ background:color-mix(in srgb, var(--c6) 7%, transparent); }
+  .entry:nth-child(5){ background:color-mix(in srgb, var(--c3) 7%, transparent); }
+  .mark{ width:4px; }
+
+  /* the skill chips become actual chips */
+  .grp dd span{
+    padding:3px 10px; border-radius:999px;
+    border:1px solid color-mix(in srgb, var(--chip) 38%, transparent);
+    background:color-mix(in srgb, var(--chip) 13%, var(--panel));
+    color:color-mix(in srgb, var(--chip) 62%, var(--ink));
+  }
+  .grp:nth-of-type(1) dd span{ --chip:var(--c1); }
+  .grp:nth-of-type(2) dd span{ --chip:var(--c5); }
+  .grp:nth-of-type(3) dd span{ --chip:var(--c6); }
+  .grp:nth-of-type(1) dt{ color:color-mix(in srgb, var(--c1) 55%, var(--ink)); }
+  .grp:nth-of-type(2) dt{ color:color-mix(in srgb, var(--c5) 55%, var(--ink)); }
+  .grp:nth-of-type(3) dt{ color:color-mix(in srgb, var(--c6) 55%, var(--ink)); }
+  .grp{ border-top-color:color-mix(in srgb, var(--c4) 22%, var(--rule)); }
+  .kit{ border-top-color:color-mix(in srgb, var(--c4) 30%, var(--rule)); }
+
+  /* buttons stop being black-and-white */
+  .acts button:first-child{
+    background:var(--c5-solid); border-color:var(--c5-solid); color:#fff;
+  }
+  .acts button.ghost{ border-color:color-mix(in srgb, var(--c6) 55%, var(--rule-firm)); color:color-mix(in srgb, var(--c6) 60%, var(--ink)); }
+
+  /* the hero gets a coloured rule rather than a coloured word */
+  h1{ padding-bottom:.08em; border-bottom:4px solid var(--c1);
+      border-image:linear-gradient(90deg, var(--c1), var(--c5) 38%, var(--c6) 68%, var(--c3)) 1;
+      display:inline-block; }
+  .role{ color:color-mix(in srgb, var(--c4) 34%, var(--soft)); }
+  .rail{ border-color:color-mix(in srgb, var(--c4) 26%, var(--rule)); }
+  .addr{ border-color:color-mix(in srgb, var(--c5) 22%, var(--rule)); }
+}
+
 @container style(--layout: mirrored) {
   .top{grid-template-columns:minmax(0,1fr) minmax(0,1.32fr);}
   .top > div:first-child{order:2;}

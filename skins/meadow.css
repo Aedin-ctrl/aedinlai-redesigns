@@ -18,4 +18,8 @@
   --density:spacious;
   --frame:flat;
   --layout:mirrored;
+  --rich:off;
+  --c1:#6b7a1f; --c2:#8a3b5a; --c3:#6b7a1f;
+  --c4:#8a3b5a; --c5:#6b7a1f; --c6:#8a3b5a;
+  --c5-solid:#6b7a1f;
 }

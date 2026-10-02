@@ -17,4 +17,8 @@
   --density:spacious;
   --frame:raised;
   --layout:stacked;
+  --rich:off;
+  --c1:#ffe066; --c2:#4cc9f0; --c3:#ffe066;
+  --c4:#4cc9f0; --c5:#ffe066; --c6:#4cc9f0;
+  --c5-solid:#8a6e00;
 }

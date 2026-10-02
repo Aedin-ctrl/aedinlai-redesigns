@@ -670,5 +670,41 @@
     "name": "Lantern",
     "note": "One small light carried from room to room",
     "tone": "dark"
+  },
+  {
+    "id": "spectrum",
+    "name": "Spectrum",
+    "note": "All six at once, on white",
+    "tone": "light"
+  },
+  {
+    "id": "playroom",
+    "name": "Playroom",
+    "note": "Primary colours and no apologies",
+    "tone": "light"
+  },
+  {
+    "id": "citrus",
+    "name": "Citrus",
+    "note": "Warm end of the wheel, on paper white",
+    "tone": "light"
+  },
+  {
+    "id": "reef",
+    "name": "Reef",
+    "note": "Cool hues with one hot one, on white",
+    "tone": "light"
+  },
+  {
+    "id": "studio",
+    "name": "Studio",
+    "note": "A neutral room with coloured work pinned up",
+    "tone": "light"
+  },
+  {
+    "id": "ribbon",
+    "name": "Ribbon",
+    "note": "Colour applied in bands, not blocks",
+    "tone": "light"
   }
 ]

@@ -17,4 +17,8 @@
   --density:compact;
   --frame:etched;
   --layout:standard;
+  --rich:off;
+  --c1:#b4232b; --c2:#1f5fa8; --c3:#b4232b;
+  --c4:#1f5fa8; --c5:#b4232b; --c6:#1f5fa8;
+  --c5-solid:#b4232b;
 }

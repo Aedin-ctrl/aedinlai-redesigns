@@ -17,4 +17,8 @@
   --density:regular;
   --frame:flat;
   --layout:mirrored;
+  --rich:off;
+  --c1:#e07a3f; --c2:#6fc2d6; --c3:#e07a3f;
+  --c4:#6fc2d6; --c5:#e07a3f; --c6:#6fc2d6;
+  --c5-solid:#ba571e;
 }

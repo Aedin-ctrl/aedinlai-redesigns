@@ -220,6 +220,20 @@ footer button:hover{color:var(--soft);}
   .device{box-shadow:0 1px 0 color-mix(in srgb, var(--ink) 8%, transparent) inset,
                      0 18px 44px -24px color-mix(in srgb, var(--ink) 55%, transparent);}
 }
+/* Layout is a token too, so a skin can change the arrangement and not just the colour. Same
+   mechanism as density; same graceful outcome if a browser lacks it (everything stays standard). */
+@container style(--layout: mirrored) {
+  .top{grid-template-columns:minmax(0,1fr) minmax(0,1.32fr);}
+  .top > div:first-child{order:2;}
+  .rail{order:1;}
+}
+@container style(--layout: stacked) {
+  .top{grid-template-columns:1fr;}
+  .rail{margin-top:clamp(8px,1.4vw,16px);}
+  .role{max-width:38ch;}
+  .body p{max-width:72ch;}
+}
+
 @container style(--frame: etched) {
   .device{box-shadow:0 0 0 1px color-mix(in srgb, var(--ink) 7%, transparent) inset;}
   .rail, .addr{box-shadow:0 1px 0 color-mix(in srgb, var(--ink) 5%, transparent) inset;}

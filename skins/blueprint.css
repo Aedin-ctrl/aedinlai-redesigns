@@ -16,4 +16,5 @@
   --texture:repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 28px), repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 28px);
   --density:regular;
   --frame:flat;
+  --layout:standard;
 }

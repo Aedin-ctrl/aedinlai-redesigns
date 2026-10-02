@@ -286,5 +286,53 @@
     "name": "Target",
     "note": "White jacket, lame over it, and one red light",
     "tone": "light"
+  },
+  {
+    "id": "left-rail",
+    "name": "Left rail",
+    "note": "The record first, the words after",
+    "tone": "light"
+  },
+  {
+    "id": "broadsheet",
+    "name": "Broadsheet",
+    "note": "Everything stacked, read top to bottom",
+    "tone": "light"
+  },
+  {
+    "id": "console",
+    "name": "Console",
+    "note": "A terminal that has been left on",
+    "tone": "dark"
+  },
+  {
+    "id": "slate",
+    "name": "Slate",
+    "note": "Split stone, and a chalk line",
+    "tone": "dark"
+  },
+  {
+    "id": "ledger",
+    "name": "Ledger",
+    "note": "Ruled columns, and everything accounted for",
+    "tone": "light"
+  },
+  {
+    "id": "floodlight",
+    "name": "Floodlight",
+    "note": "A bright strip and everything else in shadow",
+    "tone": "dark"
+  },
+  {
+    "id": "drafting",
+    "name": "Drafting",
+    "note": "Vellum, a straightedge, and a hard pencil",
+    "tone": "light"
+  },
+  {
+    "id": "signal-box",
+    "name": "Signal box",
+    "note": "Two lamps, and nothing else to say",
+    "tone": "dark"
   }
 ]

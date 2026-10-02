@@ -12,7 +12,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const AA = 4.5;
+const AA = 4.6;   // 4.5 is the rule; the margin absorbs rounding differences between libraries
 
 const SKINS = [
   { id:'piste', name:'Piste', note:'A fencing strip: cool steel, and the scoring lights',
@@ -279,6 +279,52 @@ const SKINS = [
     soft:'#45474b', quiet:'#64676c', rule:'#d6d8db', ruleFirm:'#aeb1b6',
     sigA:'#b00020', sigB:'#4a4e55', radius:'8px', density:'spacious', frame:'etched' },
 
+
+  { id:'left-rail', name:'Left rail', note:'The record first, the words after',
+    ground:'#e6e4e0', bezel:'#f1f0ed', panel:'#f9f8f6', ink:'#16161a', scheme:'light',
+    soft:'#45454c', quiet:'#64656d', rule:'#d5d4d0', ruleFirm:'#aeada8',
+    sigA:'#9b2226', sigB:'#005f73', radius:'4px', layout:'mirrored', density:'spacious' },
+
+  { id:'broadsheet', name:'Broadsheet', note:'Everything stacked, read top to bottom',
+    ground:'#f4f1ea', bezel:'#faf8f3', panel:'#fffefb', ink:'#17150f', scheme:'light',
+    soft:'#45413a', quiet:'#66604f', rule:'#ddd6c7', ruleFirm:'#b9b09b',
+    sigA:'#8c2f0d', sigB:'#26553f', radius:'0px', layout:'stacked',
+    display:"'InstrumentS', Georgia, serif", displayW:400, track:'-.015em' },
+
+  { id:'console', name:'Console', note:'A terminal that has been left on',
+    ground:'#0a0c0a', bezel:'#101410', panel:'#141a14', ink:'#d9f0d9', scheme:'dark',
+    soft:'#93c193', quiet:'#76a376', rule:'#1b241b', ruleFirm:'#283628',
+    sigA:'#5fe85f', sigB:'#ffd34d', radius:'0px', density:'compact', layout:'stacked',
+    display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.025em' },
+
+  { id:'slate', name:'Slate', note:'Split stone, and a chalk line',
+    ground:'#2a2d31', bezel:'#34383d', panel:'#3c4147', ink:'#eef1f4', scheme:'dark',
+    soft:'#b7bdc4', quiet:'#99a0a8', rule:'#454b52', ruleFirm:'#5a616a',
+    sigA:'#e8eaed', sigB:'#7fb2d9', radius:'3px', layout:'mirrored', frame:'etched' },
+
+  { id:'ledger', name:'Ledger', note:'Ruled columns, and everything accounted for',
+    ground:'#eee9dc', bezel:'#f7f3ea', panel:'#fdfbf5', ink:'#1a1813', scheme:'light',
+    soft:'#484335', quiet:'#696250', rule:'#d9d1bd', ruleFirm:'#b6ab90',
+    sigA:'#1f4f8f', sigB:'#8a1f1f', radius:'0px', density:'compact', layout:'mirrored',
+    texture:'repeating-linear-gradient(0deg, rgba(110,95,60,.08) 0 1px, transparent 1px 22px)' },
+
+  { id:'floodlight', name:'Floodlight', note:'A bright strip and everything else in shadow',
+    ground:'#0c0d10', bezel:'#15171c', panel:'#1d2027', ink:'#fdfdfe', scheme:'dark',
+    soft:'#b9bec7', quiet:'#99a0ab', rule:'#232831', ruleFirm:'#343b47',
+    sigA:'#ffe066', sigB:'#4cc9f0', radius:'20px', density:'spacious', frame:'raised',
+    layout:'stacked', display:"'BricolageG', sans-serif", displayW:800, track:'-.04em' },
+
+  { id:'drafting', name:'Drafting', note:'Vellum, a straightedge, and a hard pencil',
+    ground:'#e9e6dc', bezel:'#f3f1e9', panel:'#faf9f4', ink:'#1b1a16', scheme:'light',
+    soft:'#484539', quiet:'#6a6655', rule:'#d7d2c3', ruleFirm:'#b2ab98',
+    sigA:'#2f5d8a', sigB:'#8a4a2f', radius:'1px', layout:'mirrored', frame:'etched',
+    display:"'InstrumentS', Georgia, serif", displayW:400, track:'-.01em' },
+
+  { id:'signal-box', name:'Signal box', note:'Two lamps, and nothing else to say',
+    ground:'#101216', bezel:'#181b21', panel:'#1e222a', ink:'#f2f5f8', scheme:'dark',
+    soft:'#b4bbc4', quiet:'#949ca7', rule:'#262c35', ruleFirm:'#373f4b',
+    sigA:'#ff3b3b', sigB:'#2ecc71', radius:'8px', layout:'stacked', density:'spacious' },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });
@@ -338,6 +384,7 @@ ${note}:root{
   --texture:${s.texture ? s.texture : 'none'};
   --density:${s.density || 'regular'};
   --frame:${s.frame || 'flat'};
+  --layout:${s.layout || 'standard'};
 }
 `;
   writeFileSync(join(HERE, 'skins', `${s.id}.css`), css);

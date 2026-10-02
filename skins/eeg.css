@@ -16,4 +16,5 @@
   --texture:repeating-linear-gradient(0deg, rgba(150,120,80,.08) 0 1px, transparent 1px 16px);
   --density:compact;
   --frame:etched;
+  --layout:standard;
 }

@@ -382,5 +382,53 @@
     "name": "Parchment",
     "note": "Something written down to last",
     "tone": "light"
+  },
+  {
+    "id": "cyan-press",
+    "name": "Cyan press",
+    "note": "One plate of a four-colour job",
+    "tone": "light"
+  },
+  {
+    "id": "obsidian",
+    "name": "Obsidian",
+    "note": "Volcanic glass: black with a conchoidal edge",
+    "tone": "dark"
+  },
+  {
+    "id": "field-notes",
+    "name": "Field notes",
+    "note": "A pocket book that has been rained on",
+    "tone": "light"
+  },
+  {
+    "id": "mercury",
+    "name": "Mercury",
+    "note": "A meniscus that will not sit still",
+    "tone": "light"
+  },
+  {
+    "id": "barn",
+    "name": "Barn",
+    "note": "Painted boards and a lot of weather",
+    "tone": "dark"
+  },
+  {
+    "id": "plotter",
+    "name": "Plotter",
+    "note": "A pen that only knows four colours",
+    "tone": "light"
+  },
+  {
+    "id": "dusk",
+    "name": "Dusk",
+    "note": "The twenty minutes when both lights are on",
+    "tone": "dark"
+  },
+  {
+    "id": "bare-metal",
+    "name": "Bare metal",
+    "note": "No finish at all, just the material",
+    "tone": "light"
   }
 ]

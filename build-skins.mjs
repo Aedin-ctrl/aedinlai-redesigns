@@ -371,6 +371,49 @@ const SKINS = [
     sigA:'#7a2e1e', sigB:'#2e5a3f', radius:'9px', layout:'stacked', density:'spacious',
     display:"'InstrumentS', Georgia, serif", displayW:400, track:'-.01em' },
 
+
+  { id:'cyan-press', name:'Cyan press', note:'One plate of a four-colour job',
+    ground:'#dff0f4', bezel:'#ecf7fa', panel:'#f6fbfd', ink:'#0d1a1f', scheme:'light',
+    soft:'#3b4a51', quiet:'#5a6a72', rule:'#c6dfe6', ruleFirm:'#9dbfc9',
+    sigA:'#006d8f', sigB:'#a8381f', radius:'0px', layout:'stacked', density:'compact' },
+
+  { id:'obsidian', name:'Obsidian', note:'Volcanic glass: black with a conchoidal edge',
+    ground:'#070708', bezel:'#0e0e10', panel:'#141417', ink:'#ececed', scheme:'dark',
+    soft:'#aeaeb3', quiet:'#8e8e95', rule:'#1c1c20', ruleFirm:'#2b2b31',
+    sigA:'#b8a6ff', sigB:'#7fe3c4', radius:'10px', frame:'etched', density:'spacious' },
+
+  { id:'field-notes', name:'Field notes', note:'A pocket book that has been rained on',
+    ground:'#ddd8c8', bezel:'#e9e5d8', panel:'#f3f0e6', ink:'#1c1a14', scheme:'light',
+    soft:'#484334', quiet:'#67624e', rule:'#cbc4ae', ruleFirm:'#a89f84',
+    sigA:'#7a3b1c', sigB:'#2d5444', radius:'3px', layout:'mirrored', density:'compact' },
+
+  { id:'mercury', name:'Mercury', note:'A meniscus that will not sit still',
+    ground:'#c6c9cd', bezel:'#d6d9dd', panel:'#e4e7ea', ink:'#111316', scheme:'light',
+    soft:'#3f444a', quiet:'#5d636a', rule:'#aeb2b8', ruleFirm:'#8b9097',
+    sigA:'#7c2855', sigB:'#1f5f6b', radius:'999px', frame:'raised', density:'spacious' },
+
+  { id:'barn', name:'Barn', note:'Painted boards and a lot of weather',
+    ground:'#2e1512', bezel:'#3b1c18', panel:'#48231e', ink:'#ffe9e0', scheme:'dark',
+    soft:'#dcb3a8', quiet:'#bd9085', rule:'#572c25', ruleFirm:'#713a31',
+    sigA:'#ffb3a7', sigB:'#9ec9a0', radius:'2px', layout:'mirrored' },
+
+  { id:'plotter', name:'Plotter', note:'A pen that only knows four colours',
+    ground:'#f2f3f1', bezel:'#f9faf8', panel:'#ffffff', ink:'#121311', scheme:'light',
+    soft:'#41433f', quiet:'#616360', rule:'#dddfdb', ruleFirm:'#b5b8b2',
+    sigA:'#1b5e20', sigB:'#b71c1c', radius:'0px', density:'compact', layout:'mirrored',
+    texture:'repeating-linear-gradient(0deg, rgba(0,0,0,.035) 0 1px, transparent 1px 26px), repeating-linear-gradient(90deg, rgba(0,0,0,.035) 0 1px, transparent 1px 26px)' },
+
+  { id:'dusk', name:'Dusk', note:'The twenty minutes when both lights are on',
+    ground:'#141829', bezel:'#1c2238', panel:'#232a45', ink:'#eef1fa', scheme:'dark',
+    soft:'#b2bada', quiet:'#939cc0', rule:'#2d3555', ruleFirm:'#3e4871',
+    sigA:'#ff9e6d', sigB:'#7bb8ff', radius:'15px', frame:'raised', density:'spacious' },
+
+  { id:'bare-metal', name:'Bare metal', note:'No finish at all, just the material',
+    ground:'#cfd1d2', bezel:'#dcdedf', panel:'#e8eaea', ink:'#0f1011', scheme:'light',
+    soft:'#3d3f41', quiet:'#5b5e60', rule:'#b7babb', ruleFirm:'#93979a',
+    sigA:'#8c3a00', sigB:'#15616d', radius:'0px', layout:'stacked', density:'compact',
+    display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.025em' },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });

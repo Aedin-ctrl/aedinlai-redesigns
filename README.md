@@ -1,6 +1,6 @@
 # aedinlai.com — design variations
 
-Sixty-four skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
+Seventy-two skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
 a place to look at directions, not a working copy of the site.
 
 **Live:** https://www.aedinlai.com/aedinlai-redesigns/

@@ -325,6 +325,52 @@ const SKINS = [
     soft:'#b4bbc4', quiet:'#949ca7', rule:'#262c35', ruleFirm:'#373f4b',
     sigA:'#ff3b3b', sigB:'#2ecc71', radius:'8px', layout:'stacked', density:'spacious' },
 
+
+  { id:'tournament', name:'Tournament', note:'A results board at the end of a long day',
+    ground:'#111418', bezel:'#191d23', panel:'#20252c', ink:'#f4f6f9', scheme:'dark',
+    soft:'#b6bdc6', quiet:'#969ea9', rule:'#272d36', ruleFirm:'#3a424e',
+    sigA:'#ef476f', sigB:'#06d6a0', radius:'6px', layout:'stacked', density:'compact',
+    display:"'BricolageG', sans-serif", displayW:800, track:'-.035em' },
+
+  { id:'wind-tunnel', name:'Wind tunnel', note:'Smoke lines over a pale model',
+    ground:'#dfe3e6', bezel:'#eceff1', panel:'#f6f8f9', ink:'#131619', scheme:'light',
+    soft:'#434950', quiet:'#636a72', rule:'#ccd2d6', ruleFirm:'#a7afb6',
+    sigA:'#0b6e99', sigB:'#b5453b', radius:'22px', layout:'mirrored', density:'spacious',
+    texture:'repeating-linear-gradient(0deg, rgba(40,70,90,.05) 0 1px, transparent 1px 9px)' },
+
+  { id:'foundry', name:'Foundry', note:'Hot metal and a very old process',
+    ground:'#17100c', bezel:'#211712', panel:'#2a1e17', ink:'#ffe8d4', scheme:'dark',
+    soft:'#d7b49a', quiet:'#b7937a', rule:'#3a281e', ruleFirm:'#523a2b',
+    sigA:'#ff6b35', sigB:'#ffd166', radius:'2px', frame:'raised', layout:'mirrored' },
+
+  { id:'manual', name:'Manual', note:'The page of a service manual, exploded view opposite',
+    ground:'#edeae3', bezel:'#f5f3ee', panel:'#fbfaf7', ink:'#191815', scheme:'light',
+    soft:'#464338', quiet:'#676354', rule:'#d9d5ca', ruleFirm:'#b4afa1',
+    sigA:'#17497a', sigB:'#9a3b12', radius:'0px', density:'compact', layout:'mirrored',
+    display:"'InterLocal', system-ui, sans-serif", displayW:700, track:'-.03em' },
+
+  { id:'aurora', name:'Aurora', note:'A cold sky doing something unexpected',
+    ground:'#050c14', bezel:'#0a1620', panel:'#0e1d2a', ink:'#e8f6ff', scheme:'dark',
+    soft:'#a4c8dd', quiet:'#83aac3', rule:'#143044', ruleFirm:'#1e475f',
+    sigA:'#6ef0c0', sigB:'#9a7bff', radius:'18px', frame:'raised', density:'spacious' },
+
+  { id:'index-card', name:'Index card', note:'Ruled, cornered, and one thing per card',
+    ground:'#e6e2d6', bezel:'#f2efe6', panel:'#fbf9f3', ink:'#1a1915', scheme:'light',
+    soft:'#474436', quiet:'#686352', rule:'#d6d0bf', ruleFirm:'#b3ab95',
+    sigA:'#a4303a', sigB:'#2f6d6a', radius:'1px', layout:'stacked',
+    texture:'repeating-linear-gradient(0deg, rgba(120,105,70,.09) 0 1px, transparent 1px 20px)' },
+
+  { id:'relay', name:'Relay', note:'Contacts, coils, and a satisfying click',
+    ground:'#1a1a1d', bezel:'#232327', panel:'#2b2b30', ink:'#eeeef1', scheme:'dark',
+    soft:'#b2b2b9', quiet:'#92929b', rule:'#323238', ruleFirm:'#454550',
+    sigA:'#d94f4f', sigB:'#4fa3d9', radius:'4px', density:'compact', frame:'etched' },
+
+  { id:'parchment', name:'Parchment', note:'Something written down to last',
+    ground:'#e9e0cd', bezel:'#f3ecdd', panel:'#faf5ea', ink:'#1d1a12', scheme:'light',
+    soft:'#4a4433', quiet:'#6b644e', rule:'#d8ceb6', ruleFirm:'#b5a988',
+    sigA:'#7a2e1e', sigB:'#2e5a3f', radius:'9px', layout:'stacked', density:'spacious',
+    display:"'InstrumentS', Georgia, serif", displayW:400, track:'-.01em' },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });

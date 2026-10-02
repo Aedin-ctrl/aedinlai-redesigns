@@ -1,6 +1,6 @@
 # aedinlai.com — design variations
 
-Forty-eight skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
+Sixty-four skins for one layout, switchable from the buttons at the top, or browsable as thumbnails on [the gallery page](https://www.aedinlai.com/aedinlai-redesigns/gallery.html). **Every link is inert** — this is
 a place to look at directions, not a working copy of the site.
 
 **Live:** https://www.aedinlai.com/aedinlai-redesigns/
@@ -19,6 +19,20 @@ Colour is **reserved for state** in all of them. It never tints a heading and ne
 decoration. The two signal colours come from épée, the one weapon where both lights can come on at
 once — which is also a fair description of working where hardware and software have to agree.
 
+## Tokens a skin can set
+
+Beyond colour, a skin sets higher-order tokens and the layout responds — no new selectors, no
+markup changes. All three use container style queries:
+
+| token | values |
+|---|---|
+| `--density` | `compact` · `regular` · `spacious` |
+| `--frame` | `flat` · `raised` · `etched` |
+| `--layout` | `standard` (rail right) · `mirrored` (rail left) · `stacked` (single column) |
+
+Plus `--radius`, `--rule-w`, `--display`, `--display-w`, `--display-track` and `--texture`. That is
+why switching skins reads as a different design rather than a recolour.
+
 ## Adding another
 
 Add an entry to `SKINS` in `build-skins.mjs`, then:
@@ -35,7 +49,7 @@ manifest, so there is no code to change.
 
 **The build enforces contrast so you cannot get it wrong.** Each skin names three surfaces and three
 text greys, and the generator walks each grey until it clears WCAG AA against the *worst* of the
-three. Fourteen of the forty-eight needed correcting. This is deliberate: the same mistake — a grey that passes
+three. Twenty-two of the sixty-four needed correcting. This is deliberate: the same mistake — a grey that passes
 against the panel and fails against the page behind it — was made three times by eye in a single day
 before the build started checking it.
 
@@ -68,7 +82,7 @@ width, with no overflow and no script errors.
 ## Checked
 
 Every skin is checked against WCAG 2.0/2.1 A and AA at desktop and phone widths, with no horizontal
-overflow and no script errors — 96 combinations at the time of writing, and the check is re-run
+overflow and no script errors — 192 combinations at the time of writing (Chrome desktop and phone, WebKit phone), and the check is re-run
 whenever skins are added.
 
 Switching uses the **View Transitions API** where the browser has it, and falls back to an instant

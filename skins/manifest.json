@@ -334,5 +334,53 @@
     "name": "Signal box",
     "note": "Two lamps, and nothing else to say",
     "tone": "dark"
+  },
+  {
+    "id": "tournament",
+    "name": "Tournament",
+    "note": "A results board at the end of a long day",
+    "tone": "dark"
+  },
+  {
+    "id": "wind-tunnel",
+    "name": "Wind tunnel",
+    "note": "Smoke lines over a pale model",
+    "tone": "light"
+  },
+  {
+    "id": "foundry",
+    "name": "Foundry",
+    "note": "Hot metal and a very old process",
+    "tone": "dark"
+  },
+  {
+    "id": "manual",
+    "name": "Manual",
+    "note": "The page of a service manual, exploded view opposite",
+    "tone": "light"
+  },
+  {
+    "id": "aurora",
+    "name": "Aurora",
+    "note": "A cold sky doing something unexpected",
+    "tone": "dark"
+  },
+  {
+    "id": "index-card",
+    "name": "Index card",
+    "note": "Ruled, cornered, and one thing per card",
+    "tone": "light"
+  },
+  {
+    "id": "relay",
+    "name": "Relay",
+    "note": "Contacts, coils, and a satisfying click",
+    "tone": "dark"
+  },
+  {
+    "id": "parchment",
+    "name": "Parchment",
+    "note": "Something written down to last",
+    "tone": "light"
   }
 ]

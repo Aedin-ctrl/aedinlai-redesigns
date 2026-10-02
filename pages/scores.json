@@ -91,41 +91,9 @@
     "a11yDetail": [],
     "errorDetail": [],
     "bytes": 13451,
-    "nearest": 33,
+    "nearest": 31,
     "fit": true,
     "score": 80
-  },
-  {
-    "slug": "bout-sheet",
-    "gates": {
-      "a11y": 0,
-      "motionRespected": true,
-      "errors": 0,
-      "overflow_chrome": false,
-      "overflow_webkit": false,
-      "a11yPhone": 0
-    },
-    "signals": {
-      "reducedMotion": true,
-      "focusVisible": true,
-      "customProps": 12,
-      "keyframes": 2,
-      "transitions": 4,
-      "mediaQueries": 2,
-      "interactive": 9,
-      "landmarks": 1,
-      "headings": 4,
-      "svg": 1,
-      "canvas": 0,
-      "textChars": 1585
-    },
-    "fails": [],
-    "a11yDetail": [],
-    "errorDetail": [],
-    "bytes": 14468,
-    "nearest": 17,
-    "fit": true,
-    "score": 79
   },
   {
     "slug": "scope",
@@ -219,7 +187,7 @@
     "a11yDetail": [],
     "errorDetail": [],
     "bytes": 11999,
-    "nearest": 21,
+    "nearest": 20,
     "fit": true,
     "score": 78
   },
@@ -256,6 +224,70 @@
     "score": 78
   },
   {
+    "slug": "plotter",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 11,
+      "keyframes": 3,
+      "transitions": 2,
+      "mediaQueries": 2,
+      "interactive": 4,
+      "landmarks": 2,
+      "headings": 4,
+      "svg": 1,
+      "canvas": 0,
+      "textChars": 892
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 11616,
+    "nearest": 15,
+    "fit": true,
+    "score": 77
+  },
+  {
+    "slug": "specimen",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 7,
+      "keyframes": 1,
+      "transitions": 4,
+      "mediaQueries": 3,
+      "interactive": 6,
+      "landmarks": 1,
+      "headings": 4,
+      "svg": 0,
+      "canvas": 0,
+      "textChars": 2090
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 11685,
+    "nearest": 23,
+    "fit": true,
+    "score": 77
+  },
+  {
     "slug": "card-index",
     "gates": {
       "a11y": 0,
@@ -288,6 +320,38 @@
     "score": 76
   },
   {
+    "slug": "bout-sheet",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 12,
+      "keyframes": 2,
+      "transitions": 4,
+      "mediaQueries": 2,
+      "interactive": 9,
+      "landmarks": 1,
+      "headings": 4,
+      "svg": 1,
+      "canvas": 0,
+      "textChars": 1585
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 14468,
+    "nearest": 12,
+    "fit": true,
+    "score": 74
+  },
+  {
     "slug": "drift",
     "gates": {
       "a11y": 0,
@@ -318,5 +382,101 @@
     "nearest": 13,
     "fit": true,
     "score": 74
+  },
+  {
+    "slug": "reel",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 12,
+      "keyframes": 1,
+      "transitions": 3,
+      "mediaQueries": 2,
+      "interactive": 1,
+      "landmarks": 1,
+      "headings": 2,
+      "svg": 1,
+      "canvas": 0,
+      "textChars": 400
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 13630,
+    "nearest": 15,
+    "fit": true,
+    "score": 71
+  },
+  {
+    "slug": "floorplan",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 11,
+      "keyframes": 1,
+      "transitions": 3,
+      "mediaQueries": 2,
+      "interactive": 4,
+      "landmarks": 1,
+      "headings": 5,
+      "svg": 1,
+      "canvas": 0,
+      "textChars": 1830
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 12247,
+    "nearest": 13,
+    "fit": true,
+    "score": 70
+  },
+  {
+    "slug": "memory-map",
+    "gates": {
+      "a11y": 0,
+      "motionRespected": true,
+      "errors": 0,
+      "overflow_chrome": false,
+      "overflow_webkit": false,
+      "a11yPhone": 0
+    },
+    "signals": {
+      "reducedMotion": true,
+      "focusVisible": true,
+      "customProps": 13,
+      "keyframes": 1,
+      "transitions": 3,
+      "mediaQueries": 2,
+      "interactive": 4,
+      "landmarks": 1,
+      "headings": 5,
+      "svg": 0,
+      "canvas": 0,
+      "textChars": 2529
+    },
+    "fails": [],
+    "a11yDetail": [],
+    "errorDetail": [],
+    "bytes": 11247,
+    "nearest": 13,
+    "fit": true,
+    "score": 70
   }
 ]

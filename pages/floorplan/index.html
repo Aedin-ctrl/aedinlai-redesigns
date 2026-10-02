@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — floor plan</title>
+<meta name="description" content="A personal page navigated as a floor plan: each room is a part of the work.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#eceef0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23eceef0'/%3E%3Cg fill='none' stroke='%231f242b' stroke-width='2'%3E%3Crect x='4' y='5' width='24' height='22'/%3E%3Cpath d='M16 5v10M16 19v8M4 15h12'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'Archivo';src:url('../../fonts/Archivo-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+  @font-face{font-family:'IBMPlexMono';src:url('../../fonts/IBMPlexMono-latin.woff2') format('woff2');font-weight:100 700;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('../../fonts/Inter-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+
+  :root{
+    --site:#eceef0; --floor:#f8f9fa; --ink:#1f242b; --soft:#3e4652; --quiet:#555e6b;
+    --faint:#636b78; --wall:#1f242b; --rule:#d5d9de; --live:#1f5f9e; --live-wash:#dfeaf5;
+    --ease:cubic-bezier(.25,.8,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+  body{
+    font-family:'Inter',system-ui,sans-serif;color:var(--ink);line-height:1.6;
+    background:var(--site);overflow-x:hidden;padding:clamp(14px,3vw,38px);
+  }
+  ::selection{background:var(--live);color:#fff;}
+
+  /* the ground the building sits on, surveyed and very slowly shifting light */
+  body::before{
+    content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+    background:
+      radial-gradient(52% 40% at 14% 6%, rgba(255,255,255,.9), transparent 68%),
+      radial-gradient(44% 38% at 88% 92%, rgba(31,95,158,.07), transparent 70%);
+    animation:sun 52s ease-in-out infinite alternate;
+  }
+  @keyframes sun{from{transform:translate3d(-1.5%,-1%,0) scale(1)}to{transform:translate3d(2%,1.4%,0) scale(1.05)}}
+
+  .site{max-width:1140px;margin:0 auto;}
+  header{border-bottom:2px solid var(--wall);padding-bottom:13px;margin-bottom:22px;
+         display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;}
+  h1{font-family:'Archivo',sans-serif;font-weight:700;letter-spacing:-.04em;
+     font-size:clamp(32px,6vw,56px);line-height:.95;}
+  header .scale{font-family:'IBMPlexMono',monospace;font-size:10.5px;letter-spacing:.12em;
+                text-transform:uppercase;color:var(--faint);text-align:right;line-height:1.8;}
+
+  .deck{display:grid;grid-template-columns:minmax(300px,.92fr) minmax(0,1.08fr);
+        gap:clamp(18px,3vw,42px);align-items:start;}
+  @media (max-width:860px){.deck{grid-template-columns:1fr;}}
+
+  /* ---- the plan, which stays put while you walk through the rooms ---- */
+  .plan{position:sticky;top:clamp(14px,3vw,38px);}
+  .plan svg{display:block;width:100%;height:auto;background:var(--floor);
+            border:2px solid var(--wall);}
+  .room-fill{fill:var(--floor);transition:fill 280ms var(--ease);}
+  .room.on .room-fill{fill:var(--live-wash);}
+  .wall{fill:none;stroke:var(--wall);stroke-width:2.6;}
+  .inner{fill:none;stroke:var(--wall);stroke-width:1.6;}
+  .door{fill:none;stroke:var(--wall);stroke-width:1.2;}
+  .hatch{fill:none;stroke:var(--rule);stroke-width:.9;}
+  .rm-no{font-family:'IBMPlexMono',monospace;font-size:9px;fill:var(--faint);letter-spacing:.07em;
+         transition:fill 220ms ease;}
+  .room.on .rm-no{fill:var(--live);font-weight:600;}
+  .room-hit{fill:transparent;cursor:pointer;}
+  .room:hover .room-fill{fill:var(--live-wash);}
+  .you{opacity:0;transition:opacity 260ms var(--ease), transform .46s var(--ease);}
+  .you.lit{opacity:1;}
+
+  .legend{margin-top:11px;font-family:'IBMPlexMono',monospace;font-size:10.5px;
+          letter-spacing:.08em;text-transform:uppercase;color:var(--faint);
+          display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+
+  /* ---- the rooms, as text ---- */
+  .rooms > section{
+    scroll-margin-top:clamp(14px,3vw,38px);
+    border-top:1px solid var(--rule);padding:22px 0 26px;
+  }
+  .rooms > section:first-child{border-top:0;padding-top:0;}
+  .rooms .no{font-family:'IBMPlexMono',monospace;font-size:10.5px;letter-spacing:.12em;
+             text-transform:uppercase;color:var(--faint);}
+  .rooms h2{font-family:'Archivo',sans-serif;font-size:clamp(19px,2.6vw,25px);font-weight:600;
+            letter-spacing:-.022em;margin:3px 0 9px;text-wrap:balance;}
+  .rooms p{font-size:14.5px;color:var(--soft);margin-bottom:10px;max-width:60ch;text-wrap:pretty;}
+  .rooms strong{color:var(--ink);font-weight:600;}
+  .rooms dl{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:13px;
+            margin-top:12px;max-width:34ch;}
+  .rooms dt{color:var(--faint);}
+  .rooms dd{text-align:right;font-variant-numeric:tabular-nums slashed-zero;
+            font-family:'IBMPlexMono',monospace;font-size:12.5px;}
+
+  :focus-visible{outline:2px solid var(--live);outline-offset:3px;border-radius:3px;}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="site">
+
+  <header>
+    <h1>Aedin Lai</h1>
+    <p class="scale">Plan 1:50 &middot; four rooms<br>Electrical &amp; computer engineering</p>
+  </header>
+
+  <div class="deck">
+    <div class="plan">
+      <svg viewBox="0 0 400 330" role="group" aria-label="Floor plan. Each room links to its section.">
+        <!-- rooms, drawn first so the walls sit on top of them -->
+        <g class="room" data-room="bench"><rect class="room-fill" x="6" y="6" width="214" height="152"/></g>
+        <g class="room" data-room="racks"><rect class="room-fill" x="220" y="6" width="174" height="152"/></g>
+        <g class="room" data-room="clinic"><rect class="room-fill" x="6" y="158" width="150" height="166"/></g>
+        <g class="room" data-room="salle"><rect class="room-fill" x="156" y="158" width="238" height="166"/></g>
+
+        <!-- hatching: the bench has a worktop, the salle has a piste -->
+        <g class="hatch">
+          <path d="M16 118h194M16 124h194M16 130h194M16 136h194"/>
+          <path d="M240 24h134M240 40h134M240 56h134M240 72h134M240 88h134M240 104h134"/>
+          <path d="M176 232h198M176 250h198"/>
+        </g>
+
+        <!-- walls -->
+        <rect class="wall" x="6" y="6" width="388" height="318"/>
+        <path class="inner" d="M220 6v152M6 158h388M156 158v166"/>
+        <!-- doorways -->
+        <path class="door" d="M220 70v26M98 158h28M156 236v30"/>
+
+        <g class="rm-no">
+          <text x="16" y="24">01 · BENCH</text>
+          <text x="230" y="24">02 · RACKS</text>
+          <text x="16" y="176">03 · CLINIC</text>
+          <text x="166" y="176">04 · SALLE</text>
+        </g>
+
+        <!-- where you are now -->
+        <g class="you" id="you">
+          <circle r="7" fill="#1f5f9e" opacity=".22"/>
+          <circle r="3.4" fill="#1f5f9e"/>
+        </g>
+
+        <g id="hits"></g>
+      </svg>
+      <p class="legend"><span>North &#8593;</span><span id="now">Room 01</span></p>
+    </div>
+
+    <div class="rooms">
+      <section id="bench">
+        <p class="no">Room 01</p>
+        <h2>The bench</h2>
+        <p>I build the measuring end of things — <strong>instrumentation that has to be right</strong>,
+          and the software that makes sense of what it reads. The appeal is that the work is
+          checkable: either the reading is the reading that happened, or it is not.</p>
+        <p>A number that is quietly wrong is worse than no number at all. Everything downstream
+          inherits it, every chart drawn from it looks confident, and nobody can tell by looking.
+          Almost none of the work that prevents that shows afterwards, which is the trade.</p>
+        <dl><dt>Hardware</dt><dd>Raspberry Pi, embedded</dd>
+            <dt>CAD</dt><dd>SolidWorks, AutoCAD</dd></dl>
+      </section>
+
+      <section id="racks">
+        <p class="no">Room 02</p>
+        <h2>The racks</h2>
+        <p>A season on data centre infrastructure at SingleStore in 2025, where a private cloud
+          platform went from 160 virtual machines to over 300. The count was never the point; the
+          tooling written along the way is what made that growth survivable rather than merely
+          possible.</p>
+        <dl><dt>Virtual machines</dt><dd>160 → 300+</dd>
+            <dt>Year</dt><dd>2025</dd></dl>
+      </section>
+
+      <section id="clinic">
+        <p class="no">Room 03</p>
+        <h2>The clinic</h2>
+        <p>Research hardware built with the Yale School of Medicine and the PEACE Foundation for a
+          neurology study, <strong>co-authored and published in JAMA</strong>. The requirement was
+          not sophistication; it was that a reading taken in a clinic, by somebody with four other
+          things to worry about, be the reading that actually happened.</p>
+        <dl><dt>Published</dt><dd>JAMA, 2025</dd></dl>
+      </section>
+
+      <section id="salle">
+        <p class="no">Room 04</p>
+        <h2>The salle</h2>
+        <p>Fourteen metres of piste. I fence épée, the one weapon where both lights can come on at
+          once — once the first lamp fires, the box gives the other forty milliseconds and then it
+          has made up its mind.</p>
+        <p>Four years at national level, and this season as captain at Northeastern, taking the team
+          into the national championship. Captaincy is mostly logistics and occasionally fencing.</p>
+        <dl><dt>Rating</dt><dd>A25, All-American</dd>
+            <dt>National</dt><dd>#103</dd>
+            <dt>Global</dt><dd>#122</dd>
+            <dt>Piste</dt><dd>14.0 m</dd></dl>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  // Each room is a link into the text, and the text tells the plan where you are. Scroll position
+  // is the one source of truth here, so clicking, scrolling and tabbing all end up agreeing.
+  const ROOMS = {
+    bench:  { x: 113, y: 82,  label: 'Room 01 · bench' },
+    racks:  { x: 307, y: 82,  label: 'Room 02 · racks' },
+    clinic: { x: 81,  y: 241, label: 'Room 03 · clinic' },
+    salle:  { x: 275, y: 241, label: 'Room 04 · salle' },
+  };
+  const NS = 'http://www.w3.org/2000/svg';
+  const hits = document.getElementById('hits');
+  const you = document.getElementById('you');
+  const now = document.getElementById('now');
+  const groups = Object.fromEntries(
+    [...document.querySelectorAll('.room')].map((g) => [g.dataset.room, g]));
+
+  // a hit target per room, as a real link so it works before any of this script runs
+  for (const [key, r] of Object.entries(ROOMS)) {
+    const box = groups[key].querySelector('rect');
+    const a = document.createElementNS(NS, 'a');
+    a.setAttribute('href', '#' + key);
+    a.setAttribute('aria-label', r.label);
+    const hit = document.createElementNS(NS, 'rect');
+    for (const k of ['x', 'y', 'width', 'height']) hit.setAttribute(k, box.getAttribute(k));
+    hit.setAttribute('class', 'room-hit');
+    a.append(hit);
+    a.addEventListener('pointerenter', () => groups[key].classList.add('on'));
+    a.addEventListener('pointerleave', () => groups[key].classList.remove('on'));
+    a.addEventListener('focus', () => mark(key));
+    hits.append(a);
+  }
+
+  function mark(key) {
+    for (const [k, g] of Object.entries(groups)) g.classList.toggle('on', k === key);
+    const r = ROOMS[key];
+    you.setAttribute('transform', `translate(${r.x} ${r.y})`);
+    you.classList.add('lit');
+    now.textContent = r.label.replace(' · ', ' — ');
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    const seen = entries.filter((e) => e.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (seen) mark(seen.target.id);
+  }, { rootMargin: '-25% 0px -45% 0px', threshold: [0, .25, .5, 1] });
+
+  for (const id of Object.keys(ROOMS)) io.observe(document.getElementById(id));
+  mark('bench');
+})();
+</script>
+</body>
+</html>

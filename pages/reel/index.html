@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — reel</title>
+<meta name="description" content="A personal page you scrub through, one year to a frame.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1a1917">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231a1917'/%3E%3Crect x='6' y='9' width='20' height='14' fill='none' stroke='%23e0a33c' stroke-width='1.6'/%3E%3Cg fill='%23e0a33c'%3E%3Crect x='3' y='10' width='2' height='3'/%3E%3Crect x='3' y='15' width='2' height='3'/%3E%3Crect x='3' y='20' width='2' height='3'/%3E%3Crect x='27' y='10' width='2' height='3'/%3E%3Crect x='27' y='15' width='2' height='3'/%3E%3Crect x='27' y='20' width='2' height='3'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'Archivo';src:url('../../fonts/Archivo-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+  @font-face{font-family:'IBMPlexMono';src:url('../../fonts/IBMPlexMono-latin.woff2') format('woff2');font-weight:100 700;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('../../fonts/Inter-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+
+  :root{
+    --dark:#1a1917; --strip:#232220; --frame:#2b2a27; --gate:#f3efe7;
+    --ink:#f3efe7; --soft:#cbc5b9; --quiet:#aea89c; --faint:#9a9488;
+    --rule:#3a3835; --amber:#e0a33c; --amber-deep:#8a5f14;
+    --ease:cubic-bezier(.25,.85,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;color:var(--ink);line-height:1.6;
+    background:var(--dark);min-height:100svh;overflow-x:hidden;
+    padding:clamp(14px,3vw,40px);
+  }
+  ::selection{background:var(--amber);color:#1a1200;}
+
+  /* projector light, thrown from behind and never quite still */
+  body::before{
+    content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+    background:radial-gradient(48% 42% at 50% 112%, rgba(224,163,60,.14), transparent 70%),
+               radial-gradient(60% 50% at 50% -14%, rgba(243,239,231,.06), transparent 68%);
+    animation:gate 31s ease-in-out infinite alternate;
+  }
+  @keyframes gate{from{transform:translate3d(-1%,0,0) scale(1);opacity:.85}
+                  to{transform:translate3d(1.2%,-1%,0) scale(1.06);opacity:1}}
+
+  .reel{max-width:1020px;margin:0 auto;}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;
+         flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:14px;}
+  h1{font-family:'Archivo',sans-serif;font-weight:700;letter-spacing:-.04em;
+     font-size:clamp(32px,6vw,56px);line-height:.95;}
+  header .can{font-family:'IBMPlexMono',monospace;font-size:10.5px;letter-spacing:.13em;
+              text-transform:uppercase;color:var(--faint);text-align:right;line-height:1.8;}
+
+  /* ---- the gate: the frame currently in front of the lamp ---- */
+  .gate{
+    margin:24px 0 0;display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);
+    gap:clamp(18px,3vw,36px);align-items:start;
+  }
+  @media (max-width:760px){.gate{grid-template-columns:1fr;}}
+
+  .window{
+    position:relative;background:var(--frame);border:1px solid var(--rule);border-radius:4px;
+    padding:14px 26px;
+  }
+  /* sprocket holes down both sides, as on real stock */
+  .window::before,.window::after{
+    content:'';position:absolute;top:10px;bottom:10px;width:11px;border-radius:1px;
+    background:repeating-linear-gradient(to bottom, var(--dark) 0 9px, transparent 9px 21px);
+  }
+  .window::before{left:7px;}
+  .window::after{right:7px;}
+  .window svg{display:block;width:100%;height:auto;background:#141311;border:1px solid #000;}
+  .still{fill:none;stroke:var(--amber);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .still-soft{fill:none;stroke:#6f6a60;stroke-width:1.4;}
+  .still-fill{fill:var(--amber);}
+
+  .slate{
+    margin-top:12px;font-family:'IBMPlexMono',monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--faint);display:flex;justify-content:space-between;gap:10px;
+  }
+  .slate b{color:var(--amber);font-weight:400;font-variant-numeric:tabular-nums;}
+
+  .caption h2{
+    font-family:'Archivo',sans-serif;font-weight:600;letter-spacing:-.025em;
+    font-size:clamp(23px,3.4vw,33px);line-height:1.1;margin-bottom:10px;text-wrap:balance;
+  }
+  .caption .yr{font-family:'IBMPlexMono',monospace;font-size:44px;line-height:1;
+               color:var(--amber);font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+               display:block;margin-bottom:8px;}
+  .caption p{font-size:15px;color:var(--soft);margin-bottom:11px;max-width:58ch;text-wrap:pretty;}
+  .caption strong{color:var(--ink);font-weight:600;}
+  .caption dl{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:13px;
+              margin-top:14px;max-width:30ch;border-top:1px solid var(--rule);padding-top:11px;}
+  .caption dt{color:var(--faint);}
+  .caption dd{text-align:right;font-family:'IBMPlexMono',monospace;font-size:12.5px;
+              font-variant-numeric:tabular-nums slashed-zero;}
+
+  /* ---- the strip you scrub ---- */
+  .transport{margin-top:30px;background:var(--strip);border:1px solid var(--rule);
+             border-radius:6px;padding:16px 18px 13px;}
+  .transport label{display:block;font-family:'IBMPlexMono',monospace;font-size:10.5px;
+                   letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;}
+  input[type=range]{
+    width:100%;accent-color:var(--amber);height:28px;cursor:pointer;
+  }
+  .ticks{display:flex;justify-content:space-between;margin-top:2px;
+         font-family:'IBMPlexMono',monospace;font-size:11px;color:var(--faint);
+         font-variant-numeric:tabular-nums;}
+  .ticks span{transition:color 180ms ease;}
+  .ticks span[data-on="true"]{color:var(--amber);}
+
+  .filmstrip{display:flex;gap:4px;margin-top:14px;}
+  .filmstrip i{
+    flex:1;height:5px;border-radius:1px;background:var(--rule);display:block;
+    transition:background 220ms var(--ease), transform 220ms var(--ease);
+  }
+  .filmstrip i[data-on="true"]{background:var(--amber);transform:scaleY(2.1);}
+
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px;}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+    body::before{transform:translate3d(.5%,-.5%,0) scale(1.03);}
+  }
+</style>
+</head>
+<body>
+<div class="reel">
+
+  <header>
+    <h1>Aedin Lai</h1>
+    <p class="can">Reel 1 &middot; five frames &middot; 2021–2026<br>Electrical &amp; computer engineering</p>
+  </header>
+
+  <div class="gate">
+    <div>
+      <div class="window">
+        <svg viewBox="0 0 260 180" id="still" role="img" aria-label="" aria-describedby="capHead"></svg>
+      </div>
+      <p class="slate"><span id="slateL">Frame 01</span><b id="slateR">2021</b></p>
+    </div>
+
+    <div class="caption">
+      <span class="yr" id="capYear">2021</span>
+      <h2 id="capHead">—</h2>
+      <div id="capBody"></div>
+      <dl id="capFacts"></dl>
+    </div>
+  </div>
+
+  <div class="transport">
+    <label for="scrub">Scrub the reel</label>
+    <input type="range" id="scrub" min="0" max="4" step="1" value="0"
+           aria-describedby="capHead">
+    <div class="ticks" id="ticks" aria-hidden="true"></div>
+    <div class="filmstrip" id="strip" aria-hidden="true"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  // One frame per year. The drawing, the slate, the caption and the strip all read from this, so
+  // scrubbing can never land on a frame whose picture and words disagree.
+  const FRAMES = [
+    { year: 2021, head: 'Picking up an épée',
+      alt: 'A fencer on guard at the centre of a piste.',
+      body: ['Starting the four years that ended at <strong>A25 and All-American</strong>. Épée is the one weapon where both lights can come on at once: no right of way to argue about afterwards, just whether you both landed inside forty milliseconds.'],
+      facts: [['Weapon', 'Épée'], ['Piste', '14.0 m']],
+      art: `<path class="still-soft" d="M20 128h220M20 52h220M20 52v76M240 52v76"/>
+            <path class="still-soft" d="M86 56v68M174 56v68" stroke-dasharray="4 5"/>
+            <path class="still" d="M130 60v26l-16 22M130 86l16 20M130 60l-2-8"/>
+            <circle class="still-fill" cx="130" cy="48" r="7"/>
+            <path class="still" d="M130 74l44-14"/>` },
+    { year: 2022, head: 'The bench, and the habit of writing it down',
+      alt: 'A workbench with an instrument and a probe.',
+      body: ['Instrumentation, sensors, and embedded work. The thing that stuck was not any one circuit; it was the habit of recording what was actually done, in order, so that a result could be argued with later.'],
+      facts: [['Hardware', 'Raspberry Pi'], ['Also', 'Embedded, sensors']],
+      art: `<path class="still-soft" d="M18 130h224"/>
+            <rect class="still" x="40" y="58" width="92" height="64" rx="4"/>
+            <path class="still-soft" d="M52 74h68M52 88h68M52 102h44"/>
+            <path class="still" d="M132 96l44-26 32 10"/>
+            <circle class="still-fill" cx="208" cy="80" r="6"/>
+            <path class="still-soft" d="M176 70v52"/>` },
+    { year: 2024, head: 'An arcade machine, built from nothing',
+      alt: 'An upright arcade cabinet.',
+      body: ['Cabinet, wiring, boards and software, all of which had to be persuaded to agree with each other. It taught more about tolerances than any course did, mostly by not fitting.'],
+      facts: [['Built', 'Cabinet and all'], ['Lesson', 'Tolerances']],
+      art: `<path class="still" d="M86 150V58l12-20h64l12 20v92z"/>
+            <rect class="still-soft" x="102" y="54" width="56" height="40" rx="2"/>
+            <circle class="still-fill" cx="118" cy="116" r="6"/>
+            <circle class="still" cx="140" cy="116" r="6"/>
+            <circle class="still" cx="162" cy="116" r="6"/>
+            <path class="still" d="M86 150h88M98 150v12h64v-12"/>` },
+    { year: 2025, head: 'Three hundred machines, and a paper',
+      alt: 'Racks of servers beside a recorded waveform.',
+      body: ['A season on data centre infrastructure at SingleStore: a private cloud from <strong>160 virtual machines to over 300</strong>, and the tooling that made that survivable rather than merely possible.',
+             'The same year, research hardware with the Yale School of Medicine and the PEACE Foundation, <strong>co-authored and published in JAMA</strong>.'],
+      facts: [['VMs', '160 → 300+'], ['Published', 'JAMA']],
+      art: `<rect class="still" x="26" y="40" width="48" height="104" rx="3"/>
+            <rect class="still" x="82" y="40" width="48" height="104" rx="3"/>
+            <g class="still-fill"><rect x="33" y="50" width="34" height="6"/><rect x="33" y="62" width="34" height="6"/>
+            <rect x="33" y="74" width="34" height="6"/><rect x="89" y="50" width="34" height="6"/>
+            <rect x="89" y="62" width="34" height="6"/></g>
+            <path class="still-soft" d="M148 96h94"/>
+            <path class="still" d="M148 96h18l7-24 8 42 7-30 6 14 8-2h22l6-18 7 32 7-22 6 10 8-2h14"/>` },
+    { year: 2026, head: 'Captain, and the national championship',
+      alt: 'A team lined up along a piste.',
+      body: ['Leading Northeastern Club Fencing into the national championship, which is mostly logistics and occasionally fencing.',
+             'Python, Java, C#, SQL, MATLAB, JavaScript. Raspberry Pi, embedded systems, sensor integration, SolidWorks, AutoCAD. Git, Linux, Pandas.'],
+      facts: [['National', '#103'], ['Global', '#122'], ['Rating', 'A25']],
+      art: `<path class="still-soft" d="M18 132h224M18 62h224M18 62v70M242 62v70"/>
+            <g class="still"><path d="M58 76v24l-10 16M58 100l10 14M58 76l-2-6"/>
+            <path d="M108 76v24l-10 16M108 100l10 14M108 76l-2-6"/>
+            <path d="M158 76v24l-10 16M158 100l10 14M158 76l-2-6"/>
+            <path d="M208 76v24l-10 16M208 100l10 14M208 76l-2-6"/></g>
+            <g class="still-fill"><circle cx="58" cy="66" r="6"/><circle cx="108" cy="66" r="6"/>
+            <circle cx="158" cy="66" r="6"/><circle cx="208" cy="66" r="6"/></g>` },
+  ];
+
+  const scrub = document.getElementById('scrub');
+  const still = document.getElementById('still');
+  const ticks = document.getElementById('ticks');
+  const strip = document.getElementById('strip');
+
+  for (const f of FRAMES) {
+    const t = document.createElement('span'); t.textContent = f.year; ticks.append(t);
+    strip.append(document.createElement('i'));
+  }
+  scrub.max = FRAMES.length - 1;
+
+  function show(i) {
+    const f = FRAMES[i];
+    still.innerHTML = f.art;
+    still.setAttribute('aria-label', f.alt);
+    document.getElementById('capYear').textContent = f.year;
+    document.getElementById('capHead').textContent = f.head;
+    document.getElementById('capBody').innerHTML = f.body.map((p) => `<p>${p}</p>`).join('');
+    document.getElementById('capFacts').innerHTML =
+      f.facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+    document.getElementById('slateL').textContent =
+      'Frame ' + String(i + 1).padStart(2, '0');
+    document.getElementById('slateR').textContent = f.year;
+    [...ticks.children].forEach((t, n) => (t.dataset.on = String(n === i)));
+    [...strip.children].forEach((t, n) => (t.dataset.on = String(n === i)));
+  }
+
+  scrub.addEventListener('input', () => show(+scrub.value));
+  show(0);
+})();
+</script>
+</body>
+</html>

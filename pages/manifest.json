@@ -48,5 +48,30 @@
     "slug": "card-index",
     "name": "Card index",
     "idea": "A box of index cards you riffle through, one tab at a time."
+  },
+  {
+    "slug": "plotter",
+    "name": "Plotter",
+    "idea": "Pen-plotter output: every stroke drawn at a constant pen speed, with pens you can lift."
+  },
+  {
+    "slug": "floorplan",
+    "name": "Floor plan",
+    "idea": "Four rooms. The plan tracks where you are as you read through them."
+  },
+  {
+    "slug": "reel",
+    "name": "Reel",
+    "idea": "One frame to a year, scrubbed through on a transport."
+  },
+  {
+    "slug": "specimen",
+    "name": "Specimen",
+    "idea": "A type specimen. No colour at all \u2014 measure and leading are the controls."
+  },
+  {
+    "slug": "memory-map",
+    "name": "Memory map",
+    "idea": "An address space from reset vector to stack, blocks drawn to scale."
   }
 ]

@@ -526,5 +526,77 @@
     "name": "Signal green",
     "note": "The other lamp, on its own for once",
     "tone": "dark"
+  },
+  {
+    "id": "ink-wash",
+    "name": "Ink wash",
+    "note": "One pigment, thinned to many values",
+    "tone": "light"
+  },
+  {
+    "id": "peat",
+    "name": "Peat",
+    "note": "Cut, stacked, and left to dry",
+    "tone": "dark"
+  },
+  {
+    "id": "cathode",
+    "name": "Cathode",
+    "note": "A beam, a phosphor, and some persistence",
+    "tone": "dark"
+  },
+  {
+    "id": "chrome-trim",
+    "name": "Chrome trim",
+    "note": "Polished, and it shows every fingerprint",
+    "tone": "light"
+  },
+  {
+    "id": "ember",
+    "name": "Ember",
+    "note": "What is left when the flame has gone",
+    "tone": "dark"
+  },
+  {
+    "id": "alabaster",
+    "name": "Alabaster",
+    "note": "Stone that lets a little light through",
+    "tone": "light"
+  },
+  {
+    "id": "teal-room",
+    "name": "Teal room",
+    "note": "An institutional green that aged well",
+    "tone": "dark"
+  },
+  {
+    "id": "graph-blue",
+    "name": "Graph blue",
+    "note": "The faint grid on a sheet of plotting paper",
+    "tone": "light"
+  },
+  {
+    "id": "char",
+    "name": "Char",
+    "note": "Burnt timber, brushed clean",
+    "tone": "dark"
+  },
+  {
+    "id": "porcelain",
+    "name": "Porcelain",
+    "note": "Fired twice, and the glaze has crazed",
+    "tone": "light"
+  },
+  {
+    "id": "dynamo",
+    "name": "Dynamo",
+    "note": "Windings, brushes, and a smell of ozone",
+    "tone": "dark"
+  },
+  {
+    "id": "first-light",
+    "name": "First light",
+    "note": "Before anyone else is up",
+    "tone": "dark"
   }
 ]

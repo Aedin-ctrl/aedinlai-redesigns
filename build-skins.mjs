@@ -498,6 +498,70 @@ const SKINS = [
     soft:'#a6cdb5', quiet:'#86ae95', rule:'#1c3327', ruleFirm:'#294634',
     sigA:'#2ecc71', sigB:'#ffd166', radius:'9px', layout:'mirrored', frame:'raised' },
 
+
+  { id:'ink-wash', name:'Ink wash', note:'One pigment, thinned to many values',
+    ground:'#e6e7e6', bezel:'#f0f1f0', panel:'#f8f8f8', ink:'#14181a', scheme:'light',
+    soft:'#42474a', quiet:'#61676a', rule:'#d5d7d6', ruleFirm:'#aeb0af',
+    sigA:'#2b3f4a', sigB:'#6b4a2b', radius:'20px', density:'spacious', layout:'stacked',
+    display:"'InstrumentS', Georgia, serif", displayW:400, track:'-.012em' },
+
+  { id:'peat', name:'Peat', note:'Cut, stacked, and left to dry',
+    ground:'#20180f', bezel:'#2b2015', panel:'#342719', ink:'#f3e8d8', scheme:'dark',
+    soft:'#cfb496', quiet:'#b0947a', rule:'#42321f', ruleFirm:'#5a452c',
+    sigA:'#d9a05b', sigB:'#8fae8a', radius:'6px', layout:'mirrored', density:'compact' },
+
+  { id:'cathode', name:'Cathode', note:'A beam, a phosphor, and some persistence',
+    ground:'#050a07', bezel:'#0a120d', panel:'#0e1a13', ink:'#ddf7e4', scheme:'dark',
+    soft:'#96cfa8', quiet:'#78b08a', rule:'#13271b', ruleFirm:'#1d3b28',
+    sigA:'#54f5a0', sigB:'#f5d354', radius:'24px', frame:'raised', density:'compact',
+    display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.02em' },
+
+  { id:'chrome-trim', name:'Chrome trim', note:'Polished, and it shows every fingerprint',
+    ground:'#d2d6da', bezel:'#e1e5e8', panel:'#eef1f3', ink:'#101418', scheme:'light',
+    soft:'#3e444a', quiet:'#5c636a', rule:'#b9bfc5', ruleFirm:'#949ba2',
+    sigA:'#1f4e79', sigB:'#8c3b1f', radius:'999px', frame:'raised', layout:'mirrored' },
+
+  { id:'ember', name:'Ember', note:'What is left when the flame has gone',
+    ground:'#130a08', bezel:'#1e110d', panel:'#271711', ink:'#ffe3d2', scheme:'dark',
+    soft:'#d8ab93', quiet:'#b88a72', rule:'#3a2118', ruleFirm:'#523024',
+    sigA:'#ff7043', sigB:'#ffca6b', radius:'10px', frame:'raised' },
+
+  { id:'alabaster', name:'Alabaster', note:'Stone that lets a little light through',
+    ground:'#f0ece6', bezel:'#f7f5f1', panel:'#fcfbf9', ink:'#191714', scheme:'light',
+    soft:'#464239', quiet:'#666155', rule:'#e0dad1', ruleFirm:'#b9b2a6',
+    sigA:'#7a5230', sigB:'#2f5a52', radius:'18px', density:'spacious', frame:'etched' },
+
+  { id:'teal-room', name:'Teal room', note:'An institutional green that aged well',
+    ground:'#143835', bezel:'#1b4642', panel:'#21544f', ink:'#e8f6f3', scheme:'dark',
+    soft:'#a6cfc8', quiet:'#86b2aa', rule:'#2a6760', ruleFirm:'#368279',
+    sigA:'#ffd166', sigB:'#ff9f8f', radius:'7px', layout:'stacked', density:'spacious' },
+
+  { id:'graph-blue', name:'Graph blue', note:'The faint grid on a sheet of plotting paper',
+    ground:'#e6ecf4', bezel:'#f0f4f9', panel:'#f8fafc', ink:'#121722', scheme:'light',
+    soft:'#414956', quiet:'#5f6878', rule:'#cfdaea', ruleFirm:'#a5b6cd',
+    sigA:'#1b4f9c', sigB:'#9c4a1b', radius:'1px', density:'compact',
+    texture:'repeating-linear-gradient(0deg, rgba(40,80,150,.07) 0 1px, transparent 1px 14px), repeating-linear-gradient(90deg, rgba(40,80,150,.07) 0 1px, transparent 1px 14px)' },
+
+  { id:'char', name:'Char', note:'Burnt timber, brushed clean',
+    ground:'#0e0d0c', bezel:'#161513', panel:'#1d1b19', ink:'#eceae7', scheme:'dark',
+    soft:'#aeaba6', quiet:'#8e8a85', rule:'#242220', ruleFirm:'#343129',
+    sigA:'#d9a441', sigB:'#7fa9c9', radius:'2px', layout:'stacked', density:'compact' },
+
+  { id:'porcelain', name:'Porcelain', note:'Fired twice, and the glaze has crazed',
+    ground:'#eceef0', bezel:'#f5f6f7', panel:'#fcfcfd', ink:'#14161a', scheme:'light',
+    soft:'#43464c', quiet:'#62666d', rule:'#dde0e3', ruleFirm:'#b4b8bd',
+    sigA:'#2f4f8a', sigB:'#8a4f2f', radius:'22px', density:'spacious', frame:'raised' },
+
+  { id:'dynamo', name:'Dynamo', note:'Windings, brushes, and a smell of ozone',
+    ground:'#1a1512', bezel:'#241d19', panel:'#2d2521', ink:'#f2ebe6', scheme:'dark',
+    soft:'#b9aca3', quiet:'#998d85', rule:'#352c27', ruleFirm:'#483c35',
+    sigA:'#c97b3f', sigB:'#6f9ec9', radius:'4px', layout:'mirrored', frame:'etched' },
+
+  { id:'first-light', name:'First light', note:'Before anyone else is up',
+    ground:'#1b1b2a', bezel:'#24243a', panel:'#2c2c47', ink:'#f0eff8', scheme:'dark',
+    soft:'#b4b2cf', quiet:'#9492b3', rule:'#353458', ruleFirm:'#474677',
+    sigA:'#ffc08a', sigB:'#8ab4ff', radius:'17px', frame:'raised', density:'spacious' },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });

@@ -2,176 +2,211 @@
   {
     "id": "piste",
     "name": "Piste",
-    "note": "A fencing strip: cool steel, and the scoring lights"
+    "note": "A fencing strip: cool steel, and the scoring lights",
+    "tone": "light"
   },
   {
     "id": "cold-aisle",
     "name": "Cold aisle",
-    "note": "A data-centre rack at 18°C"
+    "note": "A data-centre rack at 18°C",
+    "tone": "dark"
   },
   {
     "id": "cabinet",
     "name": "Cabinet",
-    "note": "The arcade machine, built from nothing"
+    "note": "The arcade machine, built from nothing",
+    "tone": "dark"
   },
   {
     "id": "blueprint",
     "name": "Blueprint",
-    "note": "Cyanotype: white rules on engineering blue"
+    "note": "Cyanotype: white rules on engineering blue",
+    "tone": "dark"
   },
   {
     "id": "solder-mask",
     "name": "Solder mask",
-    "note": "A board before assembly: mask green, gold pads"
+    "note": "A board before assembly: mask green, gold pads",
+    "tone": "dark"
   },
   {
     "id": "oscilloscope",
     "name": "Oscilloscope",
-    "note": "Two traces on a graticule"
+    "note": "Two traces on a graticule",
+    "tone": "dark"
   },
   {
     "id": "anodised",
     "name": "Anodised",
-    "note": "Machined aluminium, dyed at the edges"
+    "note": "Machined aluminium, dyed at the edges",
+    "tone": "light"
   },
   {
     "id": "lab-book",
     "name": "Lab book",
-    "note": "Graph paper, pencil, and a blue pen"
+    "note": "Graph paper, pencil, and a blue pen",
+    "tone": "light"
   },
   {
     "id": "control-room",
     "name": "Control room",
-    "note": "Amber, so your eyes stay dark-adapted"
+    "note": "Amber, so your eyes stay dark-adapted",
+    "tone": "dark"
   },
   {
     "id": "lame",
     "name": "Lamé",
-    "note": "The metallic jacket: everything is a conductor"
+    "note": "The metallic jacket: everything is a conductor",
+    "tone": "light"
   },
   {
     "id": "eeg",
     "name": "EEG",
-    "note": "Chart paper and electrode leads, from the neurology work"
+    "note": "Chart paper and electrode leads, from the neurology work",
+    "tone": "light"
   },
   {
     "id": "thermal",
     "name": "Thermal",
-    "note": "A rack through a thermal camera"
+    "note": "A rack through a thermal camera",
+    "tone": "dark"
   },
   {
     "id": "clean-room",
     "name": "Clean room",
-    "note": "Filtered air and a blue cast"
+    "note": "Filtered air and a blue cast",
+    "tone": "light"
   },
   {
     "id": "vacuum-tube",
     "name": "Vacuum tube",
-    "note": "Warm glass, and a heater that takes a moment"
+    "note": "Warm glass, and a heater that takes a moment",
+    "tone": "dark"
   },
   {
     "id": "punch-card",
     "name": "Punch card",
-    "note": "Card stock, red ink, eighty columns"
+    "note": "Card stock, red ink, eighty columns",
+    "tone": "light"
   },
   {
     "id": "husky",
     "name": "Husky",
-    "note": "Northeastern: red, black, and not much else"
+    "note": "Northeastern: red, black, and not much else",
+    "tone": "light"
   },
   {
     "id": "fibre",
     "name": "Fibre",
-    "note": "Light down a glass thread"
+    "note": "Light down a glass thread",
+    "tone": "dark"
   },
   {
     "id": "tape",
     "name": "Tape",
-    "note": "Oxide and a handwritten label"
+    "note": "Oxide and a handwritten label",
+    "tone": "dark"
   },
   {
     "id": "graphite",
     "name": "Graphite",
-    "note": "A 2H pencil on technical paper"
+    "note": "A 2H pencil on technical paper",
+    "tone": "light"
   },
   {
     "id": "night-match",
     "name": "Night match",
-    "note": "A dark hall, one lit strip"
+    "note": "A dark hall, one lit strip",
+    "tone": "dark"
   },
   {
     "id": "blinkenlights",
     "name": "Blinkenlights",
-    "note": "A rack face in the dark, all status LEDs"
+    "note": "A rack face in the dark, all status LEDs",
+    "tone": "dark"
   },
   {
     "id": "whiteboard",
     "name": "Whiteboard",
-    "note": "Marker on a board mid-explanation"
+    "note": "Marker on a board mid-explanation",
+    "tone": "light"
   },
   {
     "id": "multimeter",
     "name": "Multimeter",
-    "note": "An LCD waiting for a reading"
+    "note": "An LCD waiting for a reading",
+    "tone": "light"
   },
   {
     "id": "chalk",
     "name": "Chalk",
-    "note": "A board that has been half rubbed out"
+    "note": "A board that has been half rubbed out",
+    "tone": "dark"
   },
   {
     "id": "copper",
     "name": "Copper",
-    "note": "A ground pour before the mask goes on"
+    "note": "A ground pour before the mask goes on",
+    "tone": "dark"
   },
   {
     "id": "resistor",
     "name": "Resistor",
-    "note": "Beige body, and the bands that tell you the value"
+    "note": "Beige body, and the bands that tell you the value",
+    "tone": "light"
   },
   {
     "id": "rubylith",
     "name": "Rubylith",
-    "note": "Photomask film, cut by hand"
+    "note": "Photomask film, cut by hand",
+    "tone": "dark"
   },
   {
     "id": "sodium",
     "name": "Sodium",
-    "note": "A car park at night, one orange lamp"
+    "note": "A car park at night, one orange lamp",
+    "tone": "dark"
   },
   {
     "id": "kapton",
     "name": "Kapton",
-    "note": "Polyimide film: amber, and you can see through it"
+    "note": "Polyimide film: amber, and you can see through it",
+    "tone": "dark"
   },
   {
     "id": "esd-mat",
     "name": "ESD mat",
-    "note": "The blue bench mat, and a wrist strap to ground"
+    "note": "The blue bench mat, and a wrist strap to ground",
+    "tone": "dark"
   },
   {
     "id": "ferrite",
     "name": "Ferrite",
-    "note": "A core: matte, grey, and heavier than it looks"
+    "note": "A core: matte, grey, and heavier than it looks",
+    "tone": "dark"
   },
   {
     "id": "strip-light",
     "name": "Strip light",
-    "note": "Fluorescent tubes and a faint green cast"
+    "note": "Fluorescent tubes and a faint green cast",
+    "tone": "light"
   },
   {
     "id": "quartz",
     "name": "Quartz",
-    "note": "A crystal can: silver, and exactly on frequency"
+    "note": "A crystal can: silver, and exactly on frequency",
+    "tone": "light"
   },
   {
     "id": "reagent",
     "name": "Reagent",
-    "note": "Amber glass, because the contents mind the light"
+    "note": "Amber glass, because the contents mind the light",
+    "tone": "dark"
   },
   {
     "id": "heat-shrink",
     "name": "Heat shrink",
-    "note": "Sleeving in the three colours you actually have"
+    "note": "Sleeving in the three colours you actually have",
+    "tone": "dark"
   }
 ]

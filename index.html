@@ -17,6 +17,11 @@
 <header class="picker" id="picker">
   <div class="picker-in">
     <span class="picker-label">Skin</span>
+    <div class="picker-filter" role="group" aria-label="Filter by tone">
+      <button type="button" data-tone="all" aria-pressed="true">All</button>
+      <button type="button" data-tone="light" aria-pressed="false">Light</button>
+      <button type="button" data-tone="dark" aria-pressed="false">Dark</button>
+    </div>
     <div class="picker-btns" id="skinButtons" role="group" aria-label="Choose a skin"></div>
   </div>
 </header>
@@ -123,11 +128,16 @@
   try { saved = localStorage.getItem('skin'); } catch {}
   const start = skins.find((s) => s.id === fromUrl) || skins.find((s) => s.id === saved) || skins[0];
 
-  function apply(skin, { push = true } = {}) {
+  let committed = null;
+
+  function apply(skin, { push = true, remember = true } = {}) {
     sheet.href = `skins/${skin.id}.css`;
     document.documentElement.dataset.skin = skin.id;
     now.textContent = skin.name;
-    for (const b of holder.children) b.setAttribute('aria-pressed', String(b.dataset.id === skin.id));
+    // the pressed state follows the committed choice, not a passing preview
+    const marked = remember ? skin : (committed || skin);
+    for (const b of holder.children) b.setAttribute('aria-pressed', String(b.dataset.id === marked.id));
+    if (!remember) return;
     try { localStorage.setItem('skin', skin.id); } catch {}
     if (push) {
       const u = new URL(location.href);
@@ -144,6 +154,7 @@
     b.title = skin.note || '';
     b.setAttribute('aria-pressed', 'false');
     b.addEventListener('click', () => {
+      committed = skin;
       // One orchestrated moment, triggered by the person rather than played at them. Browsers
       // without the API just get the instant swap, which is fine.
       const go = () => apply(skin);
@@ -151,10 +162,36 @@
         document.startViewTransition(go);
       } else { go(); }
     });
+
+    // Preview on hover or keyboard focus, and put it back on the way out. Done with plain events
+    // rather than interest invokers, which are still experimental — a gallery's whole job is
+    // letting you look, so this is not somewhere to depend on a flag.
+    const peek = () => { if (skin !== committed) apply(skin, { push: false, remember: false }); };
+    const unpeek = () => { if (committed && skin !== committed) apply(committed, { push: false, remember: false }); };
+    b.addEventListener('pointerenter', peek);
+    b.addEventListener('pointerleave', unpeek);
+    b.addEventListener('focus', peek);
+    b.addEventListener('blur', unpeek);
+
     holder.append(b);
   }
 
+  committed = start;
   apply(start, { push: false });
+
+  // Tone filter. With this many skins, looking only at the light ones is a real need.
+  for (const f of document.querySelectorAll('.picker-filter button')) {
+    f.addEventListener('click', () => {
+      const tone = f.dataset.tone;
+      for (const o of document.querySelectorAll('.picker-filter button')) {
+        o.setAttribute('aria-pressed', String(o === f));
+      }
+      for (const b of holder.children) {
+        const s = skins.find((x) => x.id === b.dataset.id);
+        b.hidden = tone !== 'all' && s.tone !== tone;
+      }
+    });
+  }
 })();
 </script>
 </body>

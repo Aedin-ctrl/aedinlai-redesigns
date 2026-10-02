@@ -265,7 +265,7 @@ ${note}:root{
 }
 `;
   writeFileSync(join(HERE, 'skins', `${s.id}.css`), css);
-  manifest.push({ id: s.id, name: s.name, note: s.note });
+  manifest.push({ id: s.id, name: s.name, note: s.note, tone: s.scheme });
   const flag = [ink, soft, quiet].some((x) => x.moved) ? ' (corrected)' : '';
   console.log(`  ${s.name.padEnd(14)} ink ${ink.ratio.toFixed(2)}  soft ${soft.ratio.toFixed(2)}  quiet ${quiet.ratio.toFixed(2)}${flag}`);
 }

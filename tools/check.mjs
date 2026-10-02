@@ -161,6 +161,8 @@ for (const r of results) {
   r.nearest = others.length
     ? Math.round(Math.min(...others.map((o) => dist(r.fingerprint, o.fingerprint))))
     : 99;
+  // the full row of distances, so a cull can find the closest PAIR rather than the lowest score
+  r.dists = Object.fromEntries(others.map((o) => [o.slug, Math.round(dist(r.fingerprint, o.fingerprint))]));
   delete r.fingerprint;
 }
 

@@ -3,7 +3,7 @@
 Ten skins for one layout, switchable from the buttons at the top. **Every link is inert** — this is
 a place to look at directions, not a working copy of the site.
 
-**Live:** https://aedin-ctrl.github.io/aedinlai-redesigns/
+**Live:** https://www.aedinlai.com/aedinlai-redesigns/
 
 The chosen skin is in the address bar, so a link points at a specific one —
 `?skin=blueprint` — which is how you look at it on a phone after picking it on a laptop.

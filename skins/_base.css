@@ -35,7 +35,24 @@ body{
 ::selection{background:var(--sigB); color:var(--bezel);}
 
 /* ---- the skin picker, above the device ---- */
-.picker{max-width:1180px; margin:0 auto clamp(10px,1.8vw,18px);}
+.picker{
+  max-width:1180px; margin:0 auto clamp(10px,1.8vw,18px);
+  position:sticky; top:clamp(6px,1.4vw,14px); z-index:20;
+  /* named on purpose: unnamed scroll-state containers collide when nested */
+  container-type:scroll-state; container-name:picker;
+}
+/* With this many skins the picker is two rows tall, which is a lot of screen to keep once you have
+   scrolled into the page. When it sticks, condense it. Progressive — without scroll-state queries
+   it just stays sticky at full height, which is still useful. */
+@container picker scroll-state(stuck: top) {
+  .picker-in{
+    background:color-mix(in srgb, var(--bezel) 88%, transparent);
+    backdrop-filter:blur(8px);
+    padding:5px 10px;
+  }
+  .picker-btns button{padding:3px 9px; font-size:11.5px;}
+  .picker-label{display:none;}
+}
 .picker-in{
   display:flex; align-items:center; gap:12px; flex-wrap:wrap;
   background:var(--bezel); border:var(--rule-w) solid var(--rule-firm);

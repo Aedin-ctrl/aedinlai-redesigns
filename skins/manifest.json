@@ -138,5 +138,40 @@
     "id": "sodium",
     "name": "Sodium",
     "note": "A car park at night, one orange lamp"
+  },
+  {
+    "id": "kapton",
+    "name": "Kapton",
+    "note": "Polyimide film: amber, and you can see through it"
+  },
+  {
+    "id": "esd-mat",
+    "name": "ESD mat",
+    "note": "The blue bench mat, and a wrist strap to ground"
+  },
+  {
+    "id": "ferrite",
+    "name": "Ferrite",
+    "note": "A core: matte, grey, and heavier than it looks"
+  },
+  {
+    "id": "strip-light",
+    "name": "Strip light",
+    "note": "Fluorescent tubes and a faint green cast"
+  },
+  {
+    "id": "quartz",
+    "name": "Quartz",
+    "note": "A crystal can: silver, and exactly on frequency"
+  },
+  {
+    "id": "reagent",
+    "name": "Reagent",
+    "note": "Amber glass, because the contents mind the light"
+  },
+  {
+    "id": "heat-shrink",
+    "name": "Heat shrink",
+    "note": "Sleeving in the three colours you actually have"
   }
 ]

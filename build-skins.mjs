@@ -167,6 +167,42 @@ const SKINS = [
     ground:'#120d06', bezel:'#1c150b', panel:'#241c0f', ink:'#ffeccd', scheme:'dark',
     soft:'#d9bb8e', quiet:'#b89a6e', rule:'#352814', ruleFirm:'#4d3b1d',
     sigA:'#ffa500', sigB:'#7fb3d5', radius:'12px', frame:'raised' },
+
+  { id:'kapton', name:'Kapton', note:'Polyimide film: amber, and you can see through it',
+    ground:'#2a1c05', bezel:'#39270a', panel:'#46310e', ink:'#ffeec9', scheme:'dark',
+    soft:'#dcba82', quiet:'#bd9a61', rule:'#523a13', ruleFirm:'#6d4f1c',
+    sigA:'#ffc14d', sigB:'#6fb3c9', radius:'9px', frame:'raised' },
+
+  { id:'esd-mat', name:'ESD mat', note:'The blue bench mat, and a wrist strap to ground',
+    ground:'#15323f', bezel:'#1c4151', panel:'#214c5e', ink:'#e7f4f9', scheme:'dark',
+    soft:'#a8ccd9', quiet:'#89b4c4', rule:'#2c5f73', ruleFirm:'#397a92',
+    sigA:'#7fe0b0', sigB:'#ffd166', radius:'6px', density:'compact' },
+
+  { id:'ferrite', name:'Ferrite', note:'A core: matte, grey, and heavier than it looks',
+    ground:'#17181a', bezel:'#202224', panel:'#27292c', ink:'#e9eaec', scheme:'dark',
+    soft:'#aeb0b4', quiet:'#8d9095', rule:'#303337', ruleFirm:'#434750',
+    sigA:'#c9d1d9', sigB:'#7ea8c4', radius:'3px', frame:'etched' },
+
+  { id:'strip-light', name:'Strip light', note:'Fluorescent tubes and a faint green cast',
+    ground:'#e8ece6', bezel:'#f3f6f1', panel:'#fbfcf9', ink:'#161815', scheme:'light',
+    soft:'#464a43', quiet:'#666b62', rule:'#d8ddd4', ruleFirm:'#b2b8ad',
+    sigA:'#2f7d4f', sigB:'#9a4f1a', radius:'2px', density:'compact' },
+
+  { id:'quartz', name:'Quartz', note:'A crystal can: silver, and exactly on frequency',
+    ground:'#d9dde2', bezel:'#e8ebee', panel:'#f3f5f7', ink:'#14171b', scheme:'light',
+    soft:'#464c53', quiet:'#666d75', rule:'#c4c9cf', ruleFirm:'#a0a7af',
+    sigA:'#2a6f97', sigB:'#8a5a2b', radius:'999px', density:'spacious', frame:'etched' },
+
+  { id:'reagent', name:'Reagent', note:'Amber glass, because the contents mind the light',
+    ground:'#1d1206', bezel:'#28190a', panel:'#32200d', ink:'#ffeacb', scheme:'dark',
+    soft:'#d9b589', quiet:'#b8946a', rule:'#3e2a12', ruleFirm:'#573c1b',
+    sigA:'#e8a33d', sigB:'#8fbf9a', radius:'11px' },
+
+  { id:'heat-shrink', name:'Heat shrink', note:'Sleeving in the three colours you actually have',
+    ground:'#111113', bezel:'#19191c', panel:'#1f1f23', ink:'#ececed', scheme:'dark',
+    soft:'#aeaeb2', quiet:'#8c8c92', rule:'#27272c', ruleFirm:'#393940',
+    sigA:'#e5484d', sigB:'#3e8fd9', radius:'999px', density:'compact' },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });

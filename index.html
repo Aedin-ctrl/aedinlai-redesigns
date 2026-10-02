@@ -22,6 +22,10 @@
       <button type="button" data-tone="light" aria-pressed="false">Light</button>
       <button type="button" data-tone="dark" aria-pressed="false">Dark</button>
     </div>
+    <div class="picker-step">
+      <button type="button" id="prevSkin" aria-label="Previous skin">&#8249;</button>
+      <button type="button" id="nextSkin" aria-label="Next skin">&#8250;</button>
+    </div>
     <div class="picker-btns" id="skinButtons" role="group" aria-label="Choose a skin"></div>
   </div>
 </header>
@@ -179,6 +183,30 @@
 
   committed = start;
   apply(start, { push: false });
+  scrollSelectedIntoView();
+
+  function scrollSelectedIntoView() {
+    const el = holder.querySelector('button[aria-pressed="true"]');
+    el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+  }
+
+  // Stepping, for when you want to walk the whole set rather than hunt for one.
+  function step(by) {
+    const visible = [...holder.children].filter((b) => !b.hidden);
+    const here = visible.findIndex((b) => b.dataset.id === committed.id);
+    const next = visible[(here + by + visible.length) % visible.length];
+    next?.click();
+    requestAnimationFrame(scrollSelectedIntoView);
+  }
+  document.getElementById('prevSkin').addEventListener('click', () => step(-1));
+  document.getElementById('nextSkin').addEventListener('click', () => step(1));
+  addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea') return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+  });
 
   // Tone filter. With this many skins, looking only at the light ones is a real need.
   for (const f of document.querySelectorAll('.picker-filter button')) {

@@ -49,6 +49,22 @@ before the build started checking it.
   pair for colourblindness — a scoring box uses left/right position too.
 - Display type varies per skin, so a switch is legible at a glance rather than a recolour.
 
+## Browser support, measured rather than assumed
+
+Checked in WebKit 26.6 as well as Chrome, because a phone means Safari:
+
+| | Chrome | WebKit |
+|---|---|---|
+| Container **style** queries (`--density`, `--frame`) | yes | **yes** |
+| Anchor positioning (the sliding selection indicator) | yes | **yes** |
+| View transitions (the skin switch) | yes | **yes** |
+| `light-dark()`, `color-mix()` | yes | **yes** |
+| Container **scroll-state** queries (picker condensing when stuck) | yes | **no** |
+
+Only the last one is missing, and it degrades to a sticky picker at full height — which is why it
+was built as an enhancement rather than a dependency. All 48 skins are clean in WebKit at phone
+width, with no overflow and no script errors.
+
 ## Checked
 
 Every skin is checked against WCAG 2.0/2.1 A and AA at desktop and phone widths, with no horizontal

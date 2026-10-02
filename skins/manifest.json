@@ -598,5 +598,77 @@
     "name": "First light",
     "note": "Before anyone else is up",
     "tone": "dark"
+  },
+  {
+    "id": "saltwater",
+    "name": "Saltwater",
+    "note": "Everything corrodes eventually",
+    "tone": "dark"
+  },
+  {
+    "id": "bronze-age",
+    "name": "Bronze age",
+    "note": "An alloy somebody worked out a long time ago",
+    "tone": "dark"
+  },
+  {
+    "id": "paper-tape",
+    "name": "Paper tape",
+    "note": "Holes punched in a long thin strip",
+    "tone": "light"
+  },
+  {
+    "id": "indigo-dye",
+    "name": "Indigo dye",
+    "note": "Dipped once, then again, then again",
+    "tone": "dark"
+  },
+  {
+    "id": "terrace",
+    "name": "Terrace",
+    "note": "Concrete that has weathered into something softer",
+    "tone": "light"
+  },
+  {
+    "id": "moth",
+    "name": "Moth",
+    "note": "Dull wings and an unreasonable attraction to lamps",
+    "tone": "dark"
+  },
+  {
+    "id": "kiln",
+    "name": "Kiln",
+    "note": "Loaded cold, opened hot",
+    "tone": "dark"
+  },
+  {
+    "id": "sea-glass",
+    "name": "Sea glass",
+    "note": "Broken, then tumbled until it is kind",
+    "tone": "light"
+  },
+  {
+    "id": "static",
+    "name": "Static",
+    "note": "No signal, which is its own kind of signal",
+    "tone": "dark"
+  },
+  {
+    "id": "meadow",
+    "name": "Meadow",
+    "note": "Left alone for one summer",
+    "tone": "light"
+  },
+  {
+    "id": "cold-forge",
+    "name": "Cold forge",
+    "note": "Worked without heat, which takes longer",
+    "tone": "dark"
+  },
+  {
+    "id": "lantern",
+    "name": "Lantern",
+    "note": "One small light carried from room to room",
+    "tone": "dark"
   }
 ]

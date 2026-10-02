@@ -562,6 +562,70 @@ const SKINS = [
     soft:'#b4b2cf', quiet:'#9492b3', rule:'#353458', ruleFirm:'#474677',
     sigA:'#ffc08a', sigB:'#8ab4ff', radius:'17px', frame:'raised', density:'spacious' },
 
+
+  { id:'saltwater', name:'Saltwater', note:'Everything corrodes eventually',
+    ground:'#10292e', bezel:'#17373d', panel:'#1d434a', ink:'#e6f5f7', scheme:'dark',
+    soft:'#a4cbd1', quiet:'#84aeb5', rule:'#255259', ruleFirm:'#306a73',
+    sigA:'#e8a87c', sigB:'#9fd8c8', radius:'12px', layout:'stacked' },
+
+  { id:'bronze-age', name:'Bronze age', note:'An alloy somebody worked out a long time ago',
+    ground:'#2b2419', bezel:'#372f21', panel:'#433a29', ink:'#f6ecd9', scheme:'dark',
+    soft:'#d4bd97', quiet:'#b49d79', rule:'#514632', ruleFirm:'#6b5c42',
+    sigA:'#d8a24a', sigB:'#7fae9e', radius:'3px', layout:'mirrored', frame:'etched' },
+
+  { id:'paper-tape', name:'Paper tape', note:'Holes punched in a long thin strip',
+    ground:'#e9e4d6', bezel:'#f2eee3', panel:'#f9f6ef', ink:'#1a1813', scheme:'light',
+    soft:'#474235', quiet:'#676150', rule:'#d6cfbc', ruleFirm:'#b2a98f',
+    sigA:'#7a2e1e', sigB:'#2e5a6b', radius:'0px', density:'compact', layout:'stacked',
+    display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.02em',
+    texture:'repeating-linear-gradient(90deg, rgba(120,100,60,.1) 0 2px, transparent 2px 10px)' },
+
+  { id:'indigo-dye', name:'Indigo dye', note:'Dipped once, then again, then again',
+    ground:'#101b36', bezel:'#172545', panel:'#1d2e53', ink:'#e9eefb', scheme:'dark',
+    soft:'#aab8da', quiet:'#8a9bc2', rule:'#263a66', ruleFirm:'#344d85',
+    sigA:'#f2b872', sigB:'#7fd4e0', radius:'8px', density:'spacious' },
+
+  { id:'terrace', name:'Terrace', note:'Concrete that has weathered into something softer',
+    ground:'#d8d5cf', bezel:'#e4e2dd', panel:'#eeedea', ink:'#17161a', scheme:'light',
+    soft:'#45444a', quiet:'#64636a', rule:'#c2bfb8', ruleFirm:'#9e9b94',
+    sigA:'#8a4a2a', sigB:'#2a5a6b', radius:'9px', layout:'mirrored', density:'spacious' },
+
+  { id:'moth', name:'Moth', note:'Dull wings and an unreasonable attraction to lamps',
+    ground:'#1c1a19', bezel:'#252322', panel:'#2d2b29', ink:'#eeebe8', scheme:'dark',
+    soft:'#b2aca6', quiet:'#938d87', rule:'#343230', ruleFirm:'#474340',
+    sigA:'#e8c66a', sigB:'#9bb4c9', radius:'15px', frame:'raised', layout:'stacked' },
+
+  { id:'kiln', name:'Kiln', note:'Loaded cold, opened hot',
+    ground:'#241310', bezel:'#311b16', panel:'#3d231c', ink:'#ffe6da', scheme:'dark',
+    soft:'#d9ab9c', quiet:'#b98c7d', rule:'#4b2b22', ruleFirm:'#653b2f',
+    sigA:'#ff8552', sigB:'#ffd6a5', radius:'5px', density:'compact' },
+
+  { id:'sea-glass', name:'Sea glass', note:'Broken, then tumbled until it is kind',
+    ground:'#dfeae6', bezel:'#eaf2ef', panel:'#f4f9f7', ink:'#141a18', scheme:'light',
+    soft:'#424946', quiet:'#616967', rule:'#cadcd6', ruleFirm:'#a3bbb3',
+    sigA:'#2a6b5f', sigB:'#8a5230', radius:'999px', density:'spacious', frame:'etched' },
+
+  { id:'static', name:'Static', note:'No signal, which is its own kind of signal',
+    ground:'#121212', bezel:'#1a1a1a', panel:'#222222', ink:'#ededed', scheme:'dark',
+    soft:'#b0b0b0', quiet:'#909090', rule:'#2a2a2a', ruleFirm:'#3b3b3b',
+    sigA:'#ffffff', sigB:'#9a9a9a', radius:'0px', density:'compact', layout:'stacked',
+    display:"'PlexMono', ui-monospace, monospace", displayW:600, track:'-.03em' },
+
+  { id:'meadow', name:'Meadow', note:'Left alone for one summer',
+    ground:'#e3e8d8', bezel:'#edf1e4', panel:'#f5f8ee', ink:'#181b13', scheme:'light',
+    soft:'#45493a', quiet:'#656a56', rule:'#ced7bf', ruleFirm:'#a9b598',
+    sigA:'#6b7a1f', sigB:'#8a3b5a', radius:'16px', density:'spacious', layout:'mirrored' },
+
+  { id:'cold-forge', name:'Cold forge', note:'Worked without heat, which takes longer',
+    ground:'#191b1e', bezel:'#222529', panel:'#2a2e33', ink:'#eceef1', scheme:'dark',
+    soft:'#b0b6bd', quiet:'#90979e', rule:'#31353b', ruleFirm:'#434950',
+    sigA:'#b8c4ce', sigB:'#c98f5a', radius:'1px', layout:'mirrored', density:'compact' },
+
+  { id:'lantern', name:'Lantern', note:'One small light carried from room to room',
+    ground:'#17120a', bezel:'#211a0f', panel:'#2a2214', ink:'#ffeed0', scheme:'dark',
+    soft:'#d9bd91', quiet:'#b99d71', rule:'#372c19', ruleFirm:'#4d3e24',
+    sigA:'#ffc96b', sigB:'#8fb7c9', radius:'21px', frame:'raised', density:'spacious' },
+
 ];
 
 const hex = (c) => c.to('srgb').toString({ format: 'hex' });

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All skins — Aedin Lai design variations</title>
+<meta name="description" content="Every skin at a glance. Tap one to open it full size.">
+<meta name="color-scheme" content="light dark">
+<style>
+  /* Deliberately neutral: the thumbnails carry all the colour, so the page around them must not
+     compete. light-dark() rather than a media query, so there is one value per token. */
+  :root{
+    --bg:light-dark(#f4f5f6, #0c0e11);
+    --fg:light-dark(#14171b, #e9eef3);
+    --dim:light-dark(#5c636c, #98a2ad);
+    --line:light-dark(#dcdfe3, #222932);
+    --card:light-dark(#ffffff, #141921);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter', system-ui, sans-serif; background:var(--bg); color:var(--fg);
+    line-height:1.5; padding:clamp(16px,3vw,34px); color-scheme:light dark;
+  }
+  header{max-width:1240px; margin:0 auto clamp(18px,2.6vw,30px);}
+  h1{font-size:clamp(22px,3.4vw,32px); letter-spacing:-.03em; font-weight:650;}
+  .sub{color:var(--dim); font-size:14px; margin-top:5px;}
+  .sub a{color:inherit;}
+  .tools{display:flex; gap:6px; flex-wrap:wrap; margin-top:14px;}
+  .tools button{
+    font:inherit; font-size:12.5px; cursor:pointer; background:var(--card); color:var(--dim);
+    border:1px solid var(--line); border-radius:999px; padding:5px 13px;
+  }
+  .tools button[aria-pressed="true"]{color:var(--fg); border-color:currentColor;}
+
+  .grid{
+    max-width:1240px; margin:0 auto;
+    display:grid; gap:clamp(12px,1.8vw,20px);
+    grid-template-columns:repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  }
+  .card{
+    border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--card);
+    display:flex; flex-direction:column; text-decoration:none; color:inherit;
+    transition:border-color .16s ease;
+  }
+  .card:hover,.card:focus-visible{border-color:currentColor;}
+  .card img{
+    width:100%; aspect-ratio:1200/670; object-fit:cover; object-position:top;
+    display:block; border-bottom:1px solid var(--line); background:var(--bg);
+  }
+  .meta{padding:10px 13px 12px;}
+  .name{font-size:14.5px; font-weight:600; letter-spacing:-.01em;}
+  .note{font-size:12.5px; color:var(--dim); margin-top:2px;}
+  .tone{
+    font-size:10.5px; color:var(--dim); border:1px solid var(--line);
+    border-radius:999px; padding:1px 7px; margin-left:6px; vertical-align:1px;
+  }
+  :focus-visible{outline:2px solid currentColor; outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>All skins</h1>
+  <p class="sub">One layout, <span id="count">—</span> ways of dressing it. Tap one to open it full
+    size, or go back to <a href="./">the switcher</a>.</p>
+  <div class="tools" role="group" aria-label="Filter by tone">
+    <button type="button" data-tone="all" aria-pressed="true">All</button>
+    <button type="button" data-tone="light" aria-pressed="false">Light</button>
+    <button type="button" data-tone="dark" aria-pressed="false">Dark</button>
+  </div>
+</header>
+
+<main class="grid" id="grid"></main>
+
+<script>
+(async () => {
+  const grid = document.getElementById('grid');
+  let skins = [];
+  try { skins = await (await fetch('skins/manifest.json', { cache: 'no-store' })).json(); }
+  catch { grid.textContent = 'Could not load skins/manifest.json'; return; }
+
+  document.getElementById('count').textContent = skins.length;
+
+  for (const [i, s] of skins.entries()) {
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.href = `./?skin=${encodeURIComponent(s.id)}`;
+    a.dataset.tone = s.tone;
+    a.innerHTML = `
+      <img src="thumbs/${s.id}.webp" alt="" width="560" height="313"
+           loading="${i < 6 ? 'eager' : 'lazy'}" decoding="async">
+      <div class="meta">
+        <div class="name">${s.name}<span class="tone">${s.tone}</span></div>
+        <div class="note">${s.note || ''}</div>
+      </div>`;
+    grid.append(a);
+  }
+
+  for (const b of document.querySelectorAll('.tools button')) {
+    b.addEventListener('click', () => {
+      const tone = b.dataset.tone;
+      for (const o of document.querySelectorAll('.tools button')) {
+        o.setAttribute('aria-pressed', String(o === b));
+      }
+      let shown = 0;
+      for (const card of grid.children) {
+        const hide = tone !== 'all' && card.dataset.tone !== tone;
+        card.hidden = hide;
+        if (!hide) shown++;
+      }
+      document.getElementById('count').textContent = shown;
+    });
+  }
+})();
+</script>
+</body>
+</html>

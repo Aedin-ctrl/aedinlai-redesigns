@@ -1,102 +1,37 @@
 [
   {
-    "slug": "piste",
-    "name": "Piste",
-    "idea": "An \u00e9p\u00e9e scoring box you can set off \u2014 both lamps, with the real 40ms lockout."
+    "slug": "blinds",
+    "name": "Through the blinds",
+    "idea": "Late morning. Sun through venetian blinds lays slow stripes across the wall and over the top of the screen."
   },
   {
-    "slug": "scope",
-    "name": "Scope",
-    "idea": "A bench oscilloscope. Four real signals, a timebase and a gain that do what they say."
+    "slug": "deep",
+    "name": "Deep",
+    "idea": "Nothing holding it up. Three fields of colour drift past at three depths and the edges of the frame dissolve into them."
   },
   {
-    "slug": "notebook",
-    "name": "Notebook",
-    "idea": "A bound lab notebook on a desk: ruled paper, dated entries, one open at a time."
+    "slug": "desk-night",
+    "name": "Desk at night",
+    "idea": "On a desk, late. A lamp off to one side, the screen throwing its light back onto the wood, a mug going cold."
   },
   {
-    "slug": "silkscreen",
-    "name": "Silkscreen",
-    "idea": "A circuit board with layers you can turn off, the way a CAD tool does it."
+    "slug": "greenhouse",
+    "name": "In the greenhouse",
+    "idea": "Glass overhead and leaves pressing in. Dappled green light moves across everything, slowly."
   },
   {
-    "slug": "wall-label",
-    "name": "Wall label",
-    "idea": "An exhibition hung sideways \u2014 one object to a wall, with its label."
+    "slug": "rain-window",
+    "name": "Rain on the window",
+    "idea": "A grey afternoon behind the glass. Drops gather on the pane, run, and the light outside keeps shifting."
   },
   {
-    "slug": "drift",
-    "name": "Drift",
-    "idea": "A screen suspended in a space with three depths, its edges fading into it."
+    "slug": "workshop",
+    "name": "On the bench",
+    "idea": "A workshop: pegboard behind, tools hung in silhouette, a strip light overhead and dust in the air."
   },
   {
-    "slug": "datasheet",
-    "name": "Datasheet",
-    "idea": "A component datasheet: title block, abs-max ratings, and a pin map you can poke."
-  },
-  {
-    "slug": "broadsheet",
-    "name": "Broadsheet",
-    "idea": "A newspaper in real columns, with a measure control that changes the layout."
-  },
-  {
-    "slug": "bout-sheet",
-    "name": "Bout sheet",
-    "idea": "Mostly a results table, sortable, with the totals recomputed from the rows."
-  },
-  {
-    "slug": "card-index",
-    "name": "Card index",
-    "idea": "A box of index cards you riffle through, one tab at a time."
-  },
-  {
-    "slug": "plotter",
-    "name": "Plotter",
-    "idea": "Pen-plotter output: every stroke drawn at a constant pen speed, with pens you can lift."
-  },
-  {
-    "slug": "floorplan",
-    "name": "Floor plan",
-    "idea": "Four rooms. The plan tracks where you are as you read through them."
-  },
-  {
-    "slug": "reel",
-    "name": "Reel",
-    "idea": "One frame to a year, scrubbed through on a transport."
-  },
-  {
-    "slug": "specimen",
-    "name": "Specimen",
-    "idea": "A type specimen. No colour at all \u2014 measure and leading are the controls."
-  },
-  {
-    "slug": "memory-map",
-    "name": "Memory map",
-    "idea": "An address space from reset vector to stack, blocks drawn to scale."
-  },
-  {
-    "slug": "blueprint",
-    "name": "Blueprint",
-    "idea": "A dimensioned drawing with a title block, and line types you can switch off."
-  },
-  {
-    "slug": "receipt",
-    "name": "Receipt",
-    "idea": "A till slip, printed. Serrated at both ends, barcode encoded from the name."
-  },
-  {
-    "slug": "transit",
-    "name": "Transit",
-    "idea": "Three lines and one interchange; each stop is a real anchor into its entry."
-  },
-  {
-    "slug": "poster",
-    "name": "Poster",
-    "idea": "One screen, two inks, slightly out of register \u2014 and the register follows you."
-  },
-  {
-    "slug": "punchcard",
-    "name": "Punch card",
-    "idea": "Four 80-column cards in real IBM 029 keypunch code."
+    "slug": "salle",
+    "name": "In the salle",
+    "idea": "A fencing hall after hours. The piste runs away under the screen and a scoring box stands on the floor beside it, still live."
   }
 ]

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedin Lai — through the blinds</title>
+<meta name="description" content="Late morning. Sun through venetian blinds lays slow stripes across the wall and over the top of the screen.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#e4dccb">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e8dfc9'/%3E%3Cg stroke='%23c2ae85' stroke-width='2'%3E%3Cpath d='M0 5h32M0 12h32M0 19h32M0 26h32'/%3E%3C/g%3E%3Crect x='8' y='11' width='16' height='11' rx='2' fill='%23fff' stroke='%238a7a58'/%3E%3C/svg%3E">
+<style>
+  @font-face{font-family:'Archivo';src:url('../../fonts/Archivo-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('../../fonts/Inter-latin.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+  @property --sun{syntax:'<percentage>';inherits:true;initial-value:28%;}
+  @property --tilt{syntax:'<angle>';inherits:true;initial-value:-9deg;}
+  :root{
+    /* the machine. these are the real site's colours and rooms rarely touch them. */
+    --page:#fdfdfd; --panel:#f6f6f7; --addr:#fff; --hover:#eeeef1;
+    --ink:#101114; --soft:#3f434b; --quiet:#53585f; --faint:#62666d;
+    --rule:#e2e2e5; --lamp-off:#dcdce0; --red:#a8102a; --green:#00603a;
+    --t:140ms; --ease:cubic-bezier(.22,1,.36,1);
+    --wall:#e4dccb; --wall-lo:#cfc4ad; --warm:#ffe6b4;
+    --desk-h:clamp(86px,14vh,150px);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;line-height:1.55;color:var(--ink);
+    min-height:100svh;overflow-x:hidden;
+    /* minmax(0,1fr) matters: an auto grid column resolves a child's 100% against the column, and
+       an auto column sized from max-content can come out WIDER than the viewport. */
+    display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:1fr auto;
+    align-items:center;
+  }
+  .machine{
+    position:relative;z-index:2;width:min(930px,100%);margin:0 auto;justify-self:center;
+    transform:translate3d(calc(var(--px,0) * -4px), calc(var(--py,0) * -4px), 0);
+    animation:settle .9s var(--ease) both;
+  }
+  @keyframes settle{from{opacity:0;transform:translateY(14px) scale(.99);}to{opacity:1;}}
+  .screen{position:relative;overflow:hidden;will-change:rotate, translate;
+          animation:breathe 24s ease-in-out infinite alternate;}
+  /* rotate and translate are their own properties, so the float composes with the pointer lean
+     on .machine instead of fighting it for the transform declaration */
+  @keyframes breathe{from{rotate:-.18deg;translate:0 -3px;}to{rotate:.18deg;translate:0 3px;}}
+
+  :focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:5px;}
+  ::selection{background:var(--green);color:#fff;}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+    .machine{transform:none;}
+  }
+
+  /* ================= Through the blinds ================= */
+
+  body{background:var(--wall);padding:clamp(18px,3.4vw,52px) clamp(12px,4vw,58px) 0;}
+  .machine{margin-bottom:calc(var(--desk-h) + clamp(14px,2.5vh,32px));}
+
+  /* the wall: plaster, with the sun creeping across it over a minute */
+  .room{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+        background:linear-gradient(165deg, #efe8d9, var(--wall) 42%, var(--wall-lo));}
+  .room .plaster{
+    position:absolute;inset:0;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23p)' opacity='.2'/%3E%3C/svg%3E");
+  }
+  .room .sunpool{
+    position:absolute;inset:-20%;
+    background:radial-gradient(40% 50% at var(--sun) 10%, rgba(255,230,180,.5), transparent 64%);
+    animation:creep 64s ease-in-out infinite alternate;
+  }
+  @keyframes creep{from{--sun:20%;}to{--sun:46%;}}
+
+  /* ---- the blinds ----
+     Stripes that sit over the wall AND over the machine, because light does not stop at the
+     bezel. The slats open a little and close again, which changes the width of the light bands
+     rather than merely sliding them. */
+  /* The hard stripes fall on the WALL, behind the machine. Light landing on a screen does not
+     make the screen harder to read, and axe cannot see a blend-mode layer sitting over text — so
+     this is a contrast bug the gate would have passed. */
+  .slats{
+    position:fixed;inset:-30%;z-index:1;pointer-events:none;mix-blend-mode:multiply;opacity:.55;
+    background:repeating-linear-gradient(var(--tilt),
+      rgba(90,70,38,.46) 0 22px, rgba(255,246,228,0) 22px 64px);
+    animation:open 58s ease-in-out infinite alternate, sway 29s ease-in-out infinite alternate;
+  }
+  /* the warm counterpart, added back where the light gets through */
+  .slats-warm{
+    position:fixed;inset:-30%;z-index:1;pointer-events:none;mix-blend-mode:screen;opacity:.45;
+    background:repeating-linear-gradient(var(--tilt),
+      rgba(255,228,170,0) 0 22px, rgba(255,228,170,.5) 30px 56px, rgba(255,228,170,0) 64px);
+    animation:open 58s ease-in-out infinite alternate, sway 29s ease-in-out infinite alternate;
+  }
+  @keyframes open{from{--tilt:-11deg;}to{--tilt:-6.5deg;}}
+  @keyframes sway{from{transform:translate3d(0,-1.4%,0)}to{transform:translate3d(0,1.4%,0)}}
+
+  /* the same stripes again over the machine, at a sixth of the strength: enough that the light
+     reads as continuous across the bezel, not enough to touch legibility */
+  .slats-over{
+    position:fixed;inset:-30%;z-index:3;pointer-events:none;mix-blend-mode:multiply;opacity:.09;
+    background:repeating-linear-gradient(var(--tilt),
+      rgba(90,70,38,.5) 0 22px, rgba(255,246,228,0) 22px 64px);
+    animation:open 58s ease-in-out infinite alternate, sway 29s ease-in-out infinite alternate;
+  }
+
+  /* the cord, hanging at the left, swinging barely at all */
+  .cord{position:fixed;left:clamp(16px,6vw,86px);top:0;z-index:4;pointer-events:none;
+        width:30px;height:min(58vh,440px);transform-origin:50% 0;
+        animation:swing 17s ease-in-out infinite alternate;}
+  @keyframes swing{from{rotate:-.9deg}to{rotate:.9deg}}
+  .cord path{fill:none;stroke:rgba(96,78,48,.5);stroke-width:1.6;}
+  .cord circle{fill:rgba(96,78,48,.6);}
+
+  /* the shelf it stands on */
+  .shelf{position:fixed;left:0;right:0;bottom:0;height:var(--desk-h);z-index:4;pointer-events:none;
+         background:linear-gradient(to bottom,#d9cdb2,#bfb193 36%,#9a8d72);
+         border-top:1px solid #efe6d2;
+         box-shadow:0 -12px 26px -16px rgba(60,44,20,.55);}
+  .shelf::before{content:'';position:absolute;inset:0;opacity:.4;
+    background:repeating-linear-gradient(92deg, rgba(90,70,40,.22) 0 1px, transparent 1px 9px);}
+  /* the machine's own shadow, thrown onto the shelf away from the window */
+  .shelf::after{content:'';position:absolute;left:50%;top:0;width:min(820px,84vw);height:56%;
+    transform:translateX(-46%) skewX(-12deg);
+    background:radial-gradient(ellipse at 50% 0%, rgba(74,56,26,.3), transparent 66%);
+    filter:blur(9px);}
+
+  /* a plant on the shelf, leaves turning a few degrees in the draught */
+  .plant{position:fixed;right:clamp(14px,7vw,124px);bottom:calc(var(--desk-h) - 10px);z-index:5;
+         width:clamp(58px,8vw,104px);pointer-events:none;transform-origin:50% 100%;
+         animation:draught 23s ease-in-out infinite alternate;}
+  @keyframes draught{from{rotate:-1.3deg}to{rotate:1.3deg}}
+  .leaf{fill:#5f7a4e;}
+  .leaf-2{fill:#50683f;}
+  .pot{fill:#a8755a;}
+  .pot-2{fill:#8d604a;}
+
+  /* the machine: a pale, matt-bezel panel that the stripes fall across */
+  .screen{
+    background:#f7f6f3;border:1px solid #c9c2b2;border-radius:12px;
+    box-shadow:0 1px 0 rgba(255,255,255,.95) inset, 0 0 0 5px #e6e0d2, 0 0 0 6px #b6ad99,
+               0 30px 54px -30px rgba(70,54,26,.75);
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    /* the light stays where it fell — the stripes are the design, not an effect over it */
+    .room .sunpool{--sun:32%;}
+    .slats,.slats-warm,.slats-over{--tilt:-9deg;}
+  }
+
+  /* ================= the site inside it ================= */
+
+  .bar{display:flex;align-items:center;gap:12px;padding:10px 14px;
+       background:var(--panel);border-bottom:1px solid var(--rule);}
+  .lamps{display:flex;gap:7px;}
+  .lamps i{width:11px;height:11px;border-radius:50%;background:var(--lamp-off);
+           box-shadow:0 0 0 1px rgba(0,0,0,.07) inset;}
+  .addr{flex:1;min-width:0;display:flex;align-items:center;gap:8px;
+        background:var(--addr);border:1px solid var(--rule);border-radius:999px;
+        padding:5px 13px;font-size:12.5px;color:var(--quiet);}
+  .addr .host{color:var(--ink);font-weight:500;}
+  .lock{display:inline-flex;align-items:center;justify-content:center;flex:none;
+        width:19px;height:19px;border:0;border-radius:50%;background:none;cursor:pointer;
+        color:var(--faint);
+        transition:color var(--t) ease, background var(--t) ease, transform 70ms ease;}
+  .lock:hover{color:var(--ink);background:var(--hover);}
+  .lock:active{transform:scale(.9);}
+  .lock[aria-pressed="true"]{color:var(--green);}
+
+  nav{display:flex;gap:2px;padding:0 10px;background:var(--panel);
+      border-bottom:1px solid var(--rule);overflow-x:auto;scrollbar-width:none;}
+  nav::-webkit-scrollbar{display:none;}
+  nav button{font:inherit;font-size:13px;cursor:pointer;background:none;border:0;color:var(--quiet);
+             padding:10px 13px;border-bottom:2px solid transparent;white-space:nowrap;
+             transition:color var(--t) ease, border-color var(--t) ease;}
+  nav button:hover{color:var(--ink);}
+  nav button[aria-current="page"]{color:var(--ink);border-bottom-color:var(--ink);}
+
+  main{background:var(--page);padding:clamp(20px,3vw,38px);}
+  .top{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(240px,.9fr);
+       gap:clamp(18px,3vw,42px);align-items:start;}
+  @media (max-width:800px){.top{grid-template-columns:minmax(0,1fr);}}
+
+  h1{font-family:'Archivo',sans-serif;font-weight:700;letter-spacing:-.042em;
+     font-size:clamp(36px,5.4vw,60px);line-height:.92;margin-bottom:.2em;text-wrap:balance;}
+  .role{font-family:'Archivo',sans-serif;font-weight:500;font-size:clamp(15px,1.8vw,19px);
+        color:var(--soft);max-width:33ch;letter-spacing:-.013em;margin-bottom:16px;text-wrap:pretty;}
+  .body p{font-size:14.5px;color:var(--soft);max-width:60ch;margin-bottom:11px;text-wrap:pretty;}
+  .body strong{color:var(--ink);font-weight:600;}
+  .acts{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px;}
+  .acts button{font:inherit;font-size:13.5px;font-weight:500;cursor:pointer;border-radius:8px;
+               padding:9px 16px;border:1px solid var(--ink);background:var(--ink);color:var(--page);
+               transition:opacity var(--t) ease, transform 70ms ease;}
+  .acts button:hover{opacity:.86;}
+  .acts button:active{transform:translateY(1px);}
+  .acts .ghost{background:none;color:var(--ink);border-color:var(--rule);}
+  .acts .ghost:hover{border-color:var(--ink);opacity:1;}
+
+  .rail h2{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);
+           margin-bottom:11px;}
+  .entry{display:grid;grid-template-columns:60px minmax(0,1fr);gap:12px;padding:9px 0;
+         align-items:baseline;border-top:1px solid var(--rule);}
+  .entry .when{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;
+               display:flex;align-items:center;gap:6px;}
+  .entry .mark{width:7px;height:7px;border-radius:50%;flex:none;}
+  .entry[data-state="a"] .mark{background:var(--red);}
+  .entry[data-state="b"] .mark{background:var(--green);}
+  .entry[data-state="both"] .mark{background:linear-gradient(90deg,var(--red) 50%,var(--green) 50%);}
+  .entry .what{font-size:14px;font-weight:600;letter-spacing:-.011em;}
+  .entry .where{font-size:12.5px;color:var(--quiet);margin-top:1px;}
+
+  .kit{margin-top:24px;border-top:1px solid var(--rule);padding-top:16px;
+       display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:16px;}
+  .kit dt{font-size:13px;font-weight:600;margin-bottom:5px;}
+  .kit dd{display:flex;flex-wrap:wrap;gap:5px 10px;font-size:13px;color:var(--quiet);}
+
+  .foot{display:flex;gap:16px;padding:10px 16px;background:var(--panel);
+        border-top:1px solid var(--rule);font-size:12px;}
+  .foot button{font:inherit;font-size:12px;background:none;border:0;cursor:pointer;color:var(--quiet);}
+  .foot button:hover{color:var(--ink);}
+
+</style>
+</head>
+<body>
+<div class="room" aria-hidden="true">
+  <span class="plaster"></span><span class="sunpool"></span>
+</div>
+<div class="slats" aria-hidden="true"></div>
+<div class="slats-warm" aria-hidden="true"></div>
+<div class="machine" id="machine">
+  <div class="screen" id="screen">
+
+    <div class="bar">
+      <div class="lamps" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="addr">
+        <button type="button" class="lock" id="lock" aria-pressed="false" aria-label="Site information">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.4" aria-hidden="true">
+            <rect x="4" y="11" width="16" height="10" rx="2"/>
+            <path id="shackle" d="M8 11V7a4 4 0 0 1 8 0v4"/>
+          </svg>
+        </button>
+        <span><span class="host">aedinlai.com</span></span>
+      </div>
+    </div>
+
+    <nav aria-label="Sections">
+      <button type="button" aria-current="page">general</button>
+      <button type="button">projects</button>
+      <button type="button">resume</button>
+      <button type="button">news</button>
+      <button type="button">contact</button>
+    </nav>
+
+    <main>
+      <div class="top">
+        <div>
+          <h1>Aedin Lai</h1>
+          <p class="role">Electrical &amp; computer engineering, where the hardware and the software
+            have to agree.</p>
+          <div class="body">
+            <p>I build the measuring end of things — <strong>instrumentation that has to be
+              right</strong>, and the software that makes sense of what it reads. Recent work runs
+              from data centre infrastructure to research hardware for a neurology study, by way of
+              an arcade machine built from nothing.</p>
+            <p>I fence épée for Northeastern, which is the only weapon where both lights can come on
+              at once. That turns out to be a reasonable description of the work as well.</p>
+          </div>
+          <div class="acts">
+            <button type="button">See the work</button>
+            <button type="button" class="ghost">Get in touch</button>
+          </div>
+        </div>
+
+        <section class="rail" aria-label="Recent work">
+          <h2>Where I've been</h2>
+          <div class="entry" data-state="a">
+            <span class="when"><i class="mark"></i>2025</span>
+            <div><div class="what">Data Center Infrastructure Intern</div>
+              <div class="where">SingleStore — scaled a private cloud from 160 to over 300 VMs</div></div>
+          </div>
+          <div class="entry" data-state="b">
+            <span class="when"><i class="mark"></i>2025</span>
+            <div><div class="what">Co-authored research published in JAMA</div>
+              <div class="where">Yale School of Medicine, PEACE Foundation</div></div>
+          </div>
+          <div class="entry" data-state="both">
+            <span class="when"><i class="mark"></i>2021–25</span>
+            <div><div class="what">USA Fencing A25, All-American</div>
+              <div class="where">#103 national, #122 global</div></div>
+          </div>
+          <div class="entry" data-state="both">
+            <span class="when"><i class="mark"></i>2026</span>
+            <div><div class="what">Captain, Northeastern Club Fencing</div>
+              <div class="where">Leading the team into the national championship</div></div>
+          </div>
+        </section>
+      </div>
+
+      <dl class="kit">
+        <div><dt>Writing code</dt>
+          <dd><span>Python</span><span>Java</span><span>C#</span><span>SQL</span><span>MATLAB</span><span>JavaScript</span></dd></div>
+        <div><dt>Building hardware</dt>
+          <dd><span>Raspberry Pi</span><span>Embedded systems</span><span>Sensor integration</span><span>SolidWorks</span></dd></div>
+        <div><dt>Everything else</dt>
+          <dd><span>Git</span><span>Linux</span><span>Pandas</span><span>VS Code</span></dd></div>
+      </dl>
+    </main>
+
+    <div class="foot">
+      <button type="button">Privacy</button>
+      <button type="button">Terms</button>
+    </div>
+  </div>
+</div>
+<div class="slats-over" aria-hidden="true"></div>
+<svg class="cord" viewBox="0 0 30 440" aria-hidden="true" preserveAspectRatio="none">
+  <path d="M13 0v402"/><path d="M19 0v372"/>
+  <circle cx="13" cy="408" r="4"/><circle cx="19" cy="378" r="4"/>
+</svg>
+<div class="shelf" aria-hidden="true"></div>
+<svg class="plant" viewBox="0 0 100 120" aria-hidden="true">
+  <path class="leaf" d="M50 74C34 66 24 48 30 30c16 2 26 20 20 44z"/>
+  <path class="leaf-2" d="M50 74c16-8 26-26 20-44-16 2-26 20-20 44z"/>
+  <path class="leaf" d="M50 76C38 70 22 70 14 58c14-8 30-2 36 18z"/>
+  <path class="leaf-2" d="M50 76c12-6 28-6 36-18-14-8-30-2-36 18z"/>
+  <path class="pot" d="M30 78h40l-6 36H36z"/>
+  <path class="pot-2" d="M27 74h46v8H27z"/>
+</svg>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const root = document.documentElement;
+  let want = [0, 0], have = [0, 0], raf = 0;
+  function tick() {
+    const dx = want[0] - have[0], dy = want[1] - have[1];
+    have[0] += dx * 0.08; have[1] += dy * 0.08;
+    root.style.setProperty('--px', have[0].toFixed(4));
+    root.style.setProperty('--py', have[1].toFixed(4));
+    raf = (Math.abs(dx) > 0.002 || Math.abs(dy) > 0.002) ? requestAnimationFrame(tick) : 0;
+  }
+  addEventListener('pointermove', (e) => {
+    if (reduce.matches) return;
+    want = [(e.clientX / innerWidth) * 2 - 1, (e.clientY / innerHeight) * 2 - 1];
+    if (!raf) raf = requestAnimationFrame(tick);
+  }, { passive: true });
+  addEventListener('pointerleave', () => { want = [0, 0]; if (!raf) raf = requestAnimationFrame(tick); });
+
+  const lock = document.getElementById('lock');
+  const shackle = document.getElementById('shackle');
+  lock.addEventListener('click', () => {
+    const open = lock.getAttribute('aria-pressed') !== 'true';
+    lock.setAttribute('aria-pressed', String(open));
+    lock.setAttribute('aria-label', open ? 'Site information, open' : 'Site information');
+    shackle.setAttribute('d', open ? 'M8 11V7a4 4 0 0 1 7.9-.8' : 'M8 11V7a4 4 0 0 1 8 0v4');
+  });
+})();
+
+</script>
+</body>
+</html>
